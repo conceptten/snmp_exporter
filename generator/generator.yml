@@ -521,6 +521,138 @@ modules:
         scale: 0.01
         help: The input energy usage of the UPS in kWh. - 1.3.6.1.4.1.318.1.1.1.3.3.5
 
+# Eaton UPS Network Management Cards
+# Renames to match the apc ups module as close as possible
+# When enum values differ between APC and Eaton, we keep the xups name
+# MIB: https://www.eaton.com/content/dam/eaton/products/backup-power-ups-surge-it-power-distribution/Firmware/connectivity/eaton-network-connectivity-mib-files.zip
+# Guide: https://www.eaton.com/content/dam/eaton/products/backup-power-ups-surge-it-power-distribution/power-management-software-connectivity/eaton-gigabit-network-card/network-m3/resources/eaton-network-m3-user-guide.pdf
+# Supported MIBs: MIBs: xUPS MIB | ATS2 MIB | Standard IETF UPS MIB (RFC 1628) | Sensor MIB
+  eatonups:
+    walk:
+      - XUPS-MIB::xupsIdent
+      - XUPS-MIB::xupsBattery
+      - XUPS-MIB::xupsEnvAmbientTemp
+      - XUPS-MIB::xupsInput
+      - XUPS-MIB::xupsOutput
+      - XUPS-MIB::xupsBypass
+      - XUPS-MIB::xupsTest
+      - XUPS-MIB::xupsInputTotal
+      - XUPS-MIB::xupsOutputTotal
+      - XUPS-MIB::xupsBypassTotal
+    overrides:
+      # Battery
+      xupsBatCapacity:
+        name: upsAdvBatteryCapacity
+        help: The remaining battery capacity expressed in percent of full capacity. - 1.3.6.1.4.1.534.1.2.4
+      xupsBatteryLowCapacity:
+        name: upsAdvBatteryCapacityLow
+      xupsBatteryNotPresent:
+        name: upsAdvBatteryBatteryNotPresent
+      xupsBatTimeRemaining:
+        name: upsAdvBatteryRunTimeRemaining_seconds
+        help: The UPS battery run time remaining before battery exhaustion. - 1.3.6.1.4.1.534.1.2.1
+      xupsBatVoltage:
+        name: upsAdvBatteryActualVoltage
+      xupsBatteryAbmStatus:
+        name: upsAdvBatteryAbmStatus
+      xupsBatteryAged:
+        name: upsBatteryAged
+      xupsBatteryFailure:
+        name: upsBatteryFailure
+      xupsBatteryLastReplacedDate:
+        name: upsBasicBatteryLastReplaceDate
+      # Ident
+      xupsIdentManufacturer:
+        name: upsAdvIdentManufacturer
+      xupsIdentModel:
+        name: upsAdvIdentModel
+      xupsIdentPartNumber:
+        name: upsAdvIdentPartNumber
+      xupsIdentSerialNumber:
+        name: upsAdvIdentSerialNumber
+      xupsIdentSoftwareVersion:
+        name: upsAdvIdentSoftwareVersion
+      xupsIdentOemCode:
+        name: upsAdvIdentOemCode
+      # Input
+      xupsInputStatus:
+        name: upsBasicInputStatus 
+      xupsInputSource:
+        name: upsAdvInputSource
+      xupsInputCurrent:
+        name: upsAdvInputCurrentForPhase
+      xupsInputTotalCurrent:
+        name: upsAdvInputCurrent
+        help: The measured input current from the UPS meters in amps - 1.3.6.1.4.1.534.1.3.8.2
+      xupsInputCurrentHighPrecision:
+        name: upsHighPrecInputCurrent
+        scale: 0.1
+        help: The measured input current from the UPS meters in amps. - 1.3.6.1.4.1.534.1.3.4.1.7
+      xupsInputNumPhases:
+        name: upsAdvInputPhaseCount
+      xupsInputPhases:
+        name: upsAdvInputPhases
+      xupsInputPhase:
+        name: upsAdvInputPhase
+      xupsInputFrequency:
+        name: upsAdvInputFrequency
+        scale: 0.1
+        help: The current input frequency to the UPS system in Hz. - 1.3.6.1.4.1.534.1.3.1
+      xupsInputId:
+        name: upsAdvInputId
+      xupsInputName:
+        name: upsAdvInputName
+      xupsInputVoltage:
+        name: upsAdvInputLineVoltage
+      xupsInputAverageVoltage:
+        name: upsAdvInputLineVoltageAvg
+      # Output
+      xupsOutputStatus:
+        name: upsBasicOutputStatus
+        type: EnumAsStateSet
+      xupsOutputNumPhases:
+        name: upsAdvOutputPhaseCount
+      xupsOutputPhase:
+        name: upsAdvOutputPhase
+      xupsOutputSource:
+        name: upsAdvOutputSource
+      xupsOutputFrequency:
+        name: upsAdvOutputFrequency 
+        scale: 0.1
+        help: The current output frequency of the UPS system in Hz. - 1.3.6.1.4.1.534.1.4.2
+      xupsOutputId:
+        name: upsAdvOutputId
+      xupsOutputName:
+        name: upsAdvOutputName
+      xupsOutputLoad:
+        name: upsAdvOutputLoad
+      xupsOutputPercentLoad:
+        name: upsAdvOutputPercLoad
+      xupsOutputVoltage:
+        name: upsAdvOutputVoltage
+      xupsOutputAverageVoltage:
+        name: upsAdvOutputVoltageAvg
+      xupsOutputTotalCurrent:
+        name: upsAdvOutputCurrent
+      xupsOutputCurrent:
+        name: upsAdvOutputCurrentForPhase
+      xupsOutputCurrentHighPrecision:
+        name: upsAdvHighPrecOutputCurrent
+        scale: 0.1
+        help: The measured output current from the UPS meters in amps. - 1.3.6.1.4.1.534.1.4.4.1.7
+      xupsOutputVA:
+        name: upsAdvOutputPhaseApparentPower
+      xupsOutputTotalVA:
+        name: upsAdvOutputApparentPower
+      xupsOutputWatts:
+        name: upsAdvOutputPhaseActivePower
+      xupsOutputTotalWatts:
+        name: upsAdvOutputActivePower
+      xupsOutputAveragePowerFactor:
+        name: upsAdvOutputPowerFactor
+      xupsOutputCumulativePowerUsage:
+        name: upsAdvOutputCumulativePowerUsage
+
 # ServerTech Sentry 3 MIB
 #
 # Used by ServerTech PDUs

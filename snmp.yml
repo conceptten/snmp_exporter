@@ -14723,6 +14723,551 @@ modules:
       oid: 1.3.6.1.4.1.11863.10.1.1.1
       type: gauge
       help: this used to get the count of clients - 1.3.6.1.4.1.11863.10.1.1.1
+  eatonups:
+    walk:
+    - 1.3.6.1.4.1.534.1.1
+    - 1.3.6.1.4.1.534.1.2
+    - 1.3.6.1.4.1.534.1.3
+    - 1.3.6.1.4.1.534.1.4
+    - 1.3.6.1.4.1.534.1.5
+    - 1.3.6.1.4.1.534.1.8
+    get:
+    - 1.3.6.1.4.1.534.1.6.1.0
+    metrics:
+    - name: upsAdvIdentManufacturer
+      oid: 1.3.6.1.4.1.534.1.1.1
+      type: DisplayString
+      help: The UPS Manufacturer Name (e.g - 1.3.6.1.4.1.534.1.1.1
+    - name: upsAdvIdentModel
+      oid: 1.3.6.1.4.1.534.1.1.2
+      type: DisplayString
+      help: The UPS Model (e.g - 1.3.6.1.4.1.534.1.1.2
+    - name: upsAdvIdentSoftwareVersion
+      oid: 1.3.6.1.4.1.534.1.1.3
+      type: DisplayString
+      help: The firmware revision level(s) of the UPS microcontroller(s). - 1.3.6.1.4.1.534.1.1.3
+    - name: upsAdvIdentOemCode
+      oid: 1.3.6.1.4.1.534.1.1.4
+      type: gauge
+      help: A binary code indicating who the UPS was manufactured or labeled for -
+        1.3.6.1.4.1.534.1.1.4
+    - name: upsAdvIdentPartNumber
+      oid: 1.3.6.1.4.1.534.1.1.5
+      type: OctetString
+      help: The catalog part number of the UPS device. - 1.3.6.1.4.1.534.1.1.5
+    - name: upsAdvIdentSerialNumber
+      oid: 1.3.6.1.4.1.534.1.1.6
+      type: OctetString
+      help: The serial number of the UPS device. - 1.3.6.1.4.1.534.1.1.6
+    - name: upsAdvBatteryRunTimeRemaining_seconds
+      oid: 1.3.6.1.4.1.534.1.2.1
+      type: gauge
+      help: The UPS battery run time remaining before battery exhaustion. - 1.3.6.1.4.1.534.1.2.1
+    - name: upsAdvBatteryActualVoltage
+      oid: 1.3.6.1.4.1.534.1.2.2
+      type: gauge
+      help: Battery voltage as reported by the UPS meters. - 1.3.6.1.4.1.534.1.2.2
+    - name: xupsBatCurrent
+      oid: 1.3.6.1.4.1.534.1.2.3
+      type: gauge
+      help: Battery Current as reported by the UPS metering - 1.3.6.1.4.1.534.1.2.3
+    - name: upsAdvBatteryCapacity
+      oid: 1.3.6.1.4.1.534.1.2.4
+      type: gauge
+      help: The remaining battery capacity expressed in percent of full capacity.
+        - 1.3.6.1.4.1.534.1.2.4
+    - name: upsAdvBatteryAbmStatus
+      oid: 1.3.6.1.4.1.534.1.2.5
+      type: gauge
+      help: Gives the status of the Advanced Battery Management and Battery state;
+        batteryFloating(3) status means that the charger is temporarily charging the
+        battery to its float voltage; batteryResting(4) is the state when the battery
+        is fully charged and none of the other actions (charging/discharging/floating)
+        is being done - 1.3.6.1.4.1.534.1.2.5
+      enum_values:
+        1: batteryCharging
+        2: batteryDischarging
+        3: batteryFloating
+        4: batteryResting
+        5: unknown
+        6: batteryDisconnected
+        7: batteryUnderTest
+        8: checkBattery
+    - name: upsBasicBatteryLastReplaceDate
+      oid: 1.3.6.1.4.1.534.1.2.6
+      type: DisplayString
+      help: The date when the Batteries in this UPS were last replaced - 1.3.6.1.4.1.534.1.2.6
+    - name: upsBatteryFailure
+      oid: 1.3.6.1.4.1.534.1.2.7
+      type: gauge
+      help: Indicates if a battery fault detected or battery tests failed. - 1.3.6.1.4.1.534.1.2.7
+      enum_values:
+        1: "yes"
+        2: "no"
+    - name: upsAdvBatteryBatteryNotPresent
+      oid: 1.3.6.1.4.1.534.1.2.8
+      type: gauge
+      help: Indicates if the UPS has no battery either internal or external. - 1.3.6.1.4.1.534.1.2.8
+      enum_values:
+        1: "yes"
+        2: "no"
+    - name: upsBatteryAged
+      oid: 1.3.6.1.4.1.534.1.2.9
+      type: gauge
+      help: Indicates if the battery is over aged. - 1.3.6.1.4.1.534.1.2.9
+      enum_values:
+        1: "yes"
+        2: "no"
+    - name: upsAdvBatteryCapacityLow
+      oid: 1.3.6.1.4.1.534.1.2.10
+      type: gauge
+      help: Indicates if the battery capacity is below the threshold set in the UPS.
+        - 1.3.6.1.4.1.534.1.2.10
+      enum_values:
+        1: "yes"
+        2: "no"
+    - name: upsAdvInputFrequency
+      oid: 1.3.6.1.4.1.534.1.3.1
+      type: gauge
+      help: The current input frequency to the UPS system in Hz. - 1.3.6.1.4.1.534.1.3.1
+      scale: 0.1
+    - name: xupsInputLineBads
+      oid: 1.3.6.1.4.1.534.1.3.2
+      type: counter
+      help: The number of times the Input was out of tolerance in voltage or frequency.
+        - 1.3.6.1.4.1.534.1.3.2
+    - name: upsAdvInputPhaseCount
+      oid: 1.3.6.1.4.1.534.1.3.3
+      type: gauge
+      help: The number of input phases (normally 1 to 3). - 1.3.6.1.4.1.534.1.3.3
+    - name: upsAdvInputPhase
+      oid: 1.3.6.1.4.1.534.1.3.4.1.1
+      type: gauge
+      help: The number of the phase - 1.3.6.1.4.1.534.1.3.4.1.1
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+    - name: upsAdvInputLineVoltage
+      oid: 1.3.6.1.4.1.534.1.3.4.1.2
+      type: gauge
+      help: The measured input voltage from the UPS meters in volts. - 1.3.6.1.4.1.534.1.3.4.1.2
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+    - name: upsAdvInputCurrentForPhase
+      oid: 1.3.6.1.4.1.534.1.3.4.1.3
+      type: gauge
+      help: The measured input current from the UPS meters in amps. - 1.3.6.1.4.1.534.1.3.4.1.3
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+    - name: xupsInputWatts
+      oid: 1.3.6.1.4.1.534.1.3.4.1.4
+      type: gauge
+      help: The measured input real power in watts. - 1.3.6.1.4.1.534.1.3.4.1.4
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+    - name: upsAdvInputId
+      oid: 1.3.6.1.4.1.534.1.3.4.1.5
+      type: gauge
+      help: 'value indicates what measurement is being stored in this table row :
+        phase1 to neutral, phase2 to neutral, phase3 to neutral, phase1 to phase2,
+        phase2 to phase3, phase3 to phase1. - 1.3.6.1.4.1.534.1.3.4.1.5'
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+      enum_values:
+        1: phase1toN
+        2: phase2toN
+        3: phase3toN
+        4: phase1to2
+        5: phase2to3
+        6: phase3to1
+    - name: upsAdvInputName
+      oid: 1.3.6.1.4.1.534.1.3.4.1.6
+      type: OctetString
+      help: 'A descriptive name for the phase, example : L1/A for the phase 1. - 1.3.6.1.4.1.534.1.3.4.1.6'
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+    - name: upsHighPrecInputCurrent
+      oid: 1.3.6.1.4.1.534.1.3.4.1.7
+      type: gauge
+      help: The measured input current from the UPS meters in amps. - 1.3.6.1.4.1.534.1.3.4.1.7
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+      scale: 0.1
+    - name: xupsInputVoltagePhaseToPhase
+      oid: 1.3.6.1.4.1.534.1.3.4.1.8
+      type: gauge
+      help: The measured input phase to phase voltage from the UPS meters in volts,
+        For the phase n, it is the measure of phase n to phase n+1 voltage. - 1.3.6.1.4.1.534.1.3.4.1.8
+      indexes:
+      - labelname: xupsInputPhase
+        type: gauge
+    - name: upsAdvInputSource
+      oid: 1.3.6.1.4.1.534.1.3.5
+      type: gauge
+      help: The present external source of input power - 1.3.6.1.4.1.534.1.3.5
+      enum_values:
+        1: other
+        2: none
+        3: primaryUtility
+        4: bypassFeed
+        5: secondaryUtility
+        6: generator
+        7: flywheel
+        8: fuelcell
+    - name: xupsDualInputStatus
+      oid: 1.3.6.1.4.1.534.1.3.6
+      type: gauge
+      help: The present status of the sources of input power in a dual source UPS
+        - 1.3.6.1.4.1.534.1.3.6
+      enum_values:
+        1: bothSourcesBad
+        2: primarySourceGood
+        3: secondarySourceGood
+        4: bothSourcesGood
+    - name: xupsSecondaryInputWatch
+      oid: 1.3.6.1.4.1.534.1.3.7
+      type: gauge
+      help: This object enables(2) or disables(1) the alarms and traps related to
+        the availability and use of the secondary input of a dual-input UPS (i.e.,
+        OnAlternatePowerSource and AltPowerNotAvailable) - 1.3.6.1.4.1.534.1.3.7
+      enum_values:
+        1: disabled
+        2: enabled
+    - name: upsAdvInputLineVoltageAvg
+      oid: 1.3.6.1.4.1.534.1.3.8.1
+      type: gauge
+      help: The measured input voltage from the UPS meters in volts - 1.3.6.1.4.1.534.1.3.8.1
+    - name: upsAdvInputCurrent
+      oid: 1.3.6.1.4.1.534.1.3.8.2
+      type: gauge
+      help: The measured input current from the UPS meters in amps - 1.3.6.1.4.1.534.1.3.8.2
+    - name: xupsInputTotalWatts
+      oid: 1.3.6.1.4.1.534.1.3.8.3
+      type: gauge
+      help: The measured input active power in watts - 1.3.6.1.4.1.534.1.3.8.3
+    - name: xupsInputTotalVA
+      oid: 1.3.6.1.4.1.534.1.3.8.4
+      type: gauge
+      help: The measured input apparent power in VA - 1.3.6.1.4.1.534.1.3.8.4
+    - name: xupsInputAveragePowerFactor
+      oid: 1.3.6.1.4.1.534.1.3.8.5
+      type: gauge
+      help: Indicates the total power factor of the input in hundredths - 1.3.6.1.4.1.534.1.3.8.5
+    - name: upsBasicInputStatus
+      oid: 1.3.6.1.4.1.534.1.3.9
+      type: gauge
+      help: The present status of the primary AC input of the UPS - 1.3.6.1.4.1.534.1.3.9
+      enum_values:
+        1: inputBad
+        2: inputGood
+    - name: upsAdvOutputLoad
+      oid: 1.3.6.1.4.1.534.1.4.1
+      type: gauge
+      help: The UPS output load in percent of rated capacity. - 1.3.6.1.4.1.534.1.4.1
+    - name: upsAdvOutputFrequency
+      oid: 1.3.6.1.4.1.534.1.4.2
+      type: gauge
+      help: The current output frequency of the UPS system in Hz. - 1.3.6.1.4.1.534.1.4.2
+      scale: 0.1
+    - name: upsAdvOutputPhaseCount
+      oid: 1.3.6.1.4.1.534.1.4.3
+      type: gauge
+      help: The number of metered output phases. - 1.3.6.1.4.1.534.1.4.3
+    - name: upsAdvOutputPhase
+      oid: 1.3.6.1.4.1.534.1.4.4.1.1
+      type: gauge
+      help: The number of the phase - 1.3.6.1.4.1.534.1.4.4.1.1
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: upsAdvOutputVoltage
+      oid: 1.3.6.1.4.1.534.1.4.4.1.2
+      type: gauge
+      help: The measured output voltage from the UPS metering in volts. - 1.3.6.1.4.1.534.1.4.4.1.2
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: upsAdvOutputCurrentForPhase
+      oid: 1.3.6.1.4.1.534.1.4.4.1.3
+      type: gauge
+      help: The measured UPS output current in amps. - 1.3.6.1.4.1.534.1.4.4.1.3
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: upsAdvOutputPhaseActivePower
+      oid: 1.3.6.1.4.1.534.1.4.4.1.4
+      type: gauge
+      help: The measured real output power in watts. - 1.3.6.1.4.1.534.1.4.4.1.4
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: upsAdvOutputId
+      oid: 1.3.6.1.4.1.534.1.4.4.1.5
+      type: gauge
+      help: 'value indicates what measurement is being stored in this table row :
+        phase1 to neutral, phase2 to neutral, phase3 to neutral, phase1 to phase2,
+        phase2 to phase3, phase3 to phase1. - 1.3.6.1.4.1.534.1.4.4.1.5'
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+      enum_values:
+        1: phase1toN
+        2: phase2toN
+        3: phase3toN
+        4: phase1to2
+        5: phase2to3
+        6: phase3to1
+    - name: upsAdvOutputName
+      oid: 1.3.6.1.4.1.534.1.4.4.1.6
+      type: OctetString
+      help: A descriptive name for the phase. - 1.3.6.1.4.1.534.1.4.4.1.6
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: upsAdvHighPrecOutputCurrent
+      oid: 1.3.6.1.4.1.534.1.4.4.1.7
+      type: gauge
+      help: The measured output current from the UPS meters in amps. - 1.3.6.1.4.1.534.1.4.4.1.7
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+      scale: 0.1
+    - name: upsAdvOutputPercLoad
+      oid: 1.3.6.1.4.1.534.1.4.4.1.8
+      type: gauge
+      help: The percentage of the UPS power capacity presently being used on this
+        output line - 1.3.6.1.4.1.534.1.4.4.1.8
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: upsAdvOutputPhaseApparentPower
+      oid: 1.3.6.1.4.1.534.1.4.4.1.9
+      type: gauge
+      help: The measured apparent output power in VA. - 1.3.6.1.4.1.534.1.4.4.1.9
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: xupsOutputVoltagePhaseToPhase
+      oid: 1.3.6.1.4.1.534.1.4.4.1.10
+      type: gauge
+      help: The measured output phase to phase voltage from the UPS meters in volts,
+        For the phase n, it is the measure of phase n to phase n+1 voltage. - 1.3.6.1.4.1.534.1.4.4.1.10
+      indexes:
+      - labelname: xupsOutputPhase
+        type: gauge
+    - name: upsAdvOutputSource
+      oid: 1.3.6.1.4.1.534.1.4.5
+      type: gauge
+      help: The present source of output power - 1.3.6.1.4.1.534.1.4.5
+      enum_values:
+        1: other
+        2: none
+        3: normal
+        4: bypass
+        5: battery
+        6: booster
+        7: reducer
+        8: parallelCapacity
+        9: parallelRedundant
+        10: highEfficiencyMode
+        11: maintenanceBypass
+        12: essMode
+    - name: xupsOutputHourlyPowerUsage
+      oid: 1.3.6.1.4.1.534.1.4.6
+      type: gauge
+      help: Units are Watt-hours.This is the energy consumed during the last hour.
+        - 1.3.6.1.4.1.534.1.4.6
+    - name: upsAdvOutputCumulativePowerUsage
+      oid: 1.3.6.1.4.1.534.1.4.7
+      type: gauge
+      help: Units are Watt-hours.This is the energy consumed since the last reset
+        - 1.3.6.1.4.1.534.1.4.7
+    - name: xupsOutputCumulativePowerUsageTimer
+      oid: 1.3.6.1.4.1.534.1.4.8
+      type: counter
+      help: Time in seconds since the cumulative power usage was last reset. - 1.3.6.1.4.1.534.1.4.8
+    - name: upsAdvOutputVoltageAvg
+      oid: 1.3.6.1.4.1.534.1.4.9.1
+      type: gauge
+      help: The measured output voltage from the UPS meters in volts - 1.3.6.1.4.1.534.1.4.9.1
+    - name: upsAdvOutputCurrent
+      oid: 1.3.6.1.4.1.534.1.4.9.2
+      type: gauge
+      help: The measured output current from the UPS meters in tenth of amps - 1.3.6.1.4.1.534.1.4.9.2
+    - name: upsAdvOutputActivePower
+      oid: 1.3.6.1.4.1.534.1.4.9.3
+      type: gauge
+      help: The measured output active power in watts - 1.3.6.1.4.1.534.1.4.9.3
+    - name: upsAdvOutputApparentPower
+      oid: 1.3.6.1.4.1.534.1.4.9.4
+      type: gauge
+      help: The measured output apparent power in VA - 1.3.6.1.4.1.534.1.4.9.4
+    - name: upsAdvOutputPowerFactor
+      oid: 1.3.6.1.4.1.534.1.4.9.5
+      type: gauge
+      help: Indicates the total power factor of the output in hundredths - 1.3.6.1.4.1.534.1.4.9.5
+    - name: upsBasicOutputStatus
+      oid: 1.3.6.1.4.1.534.1.4.10
+      type: EnumAsStateSet
+      help: The present status of the AC output of the UPS - 1.3.6.1.4.1.534.1.4.10
+      enum_values:
+        0: unknown
+        1: "off"
+        2: notProtected
+        3: onLine
+        4: poweredNoContinuity
+    - name: xupsBypassFrequency
+      oid: 1.3.6.1.4.1.534.1.5.1
+      type: gauge
+      help: The bypass frequency in tenths of Hz. - 1.3.6.1.4.1.534.1.5.1
+    - name: xupsBypassNumPhases
+      oid: 1.3.6.1.4.1.534.1.5.2
+      type: gauge
+      help: The number of lines in the UPS bypass table. - 1.3.6.1.4.1.534.1.5.2
+    - name: xupsBypassPhase
+      oid: 1.3.6.1.4.1.534.1.5.3.1.1
+      type: gauge
+      help: The Bypass Phase, index for the table. - 1.3.6.1.4.1.534.1.5.3.1.1
+      indexes:
+      - labelname: xupsBypassPhase
+        type: gauge
+    - name: xupsBypassVoltage
+      oid: 1.3.6.1.4.1.534.1.5.3.1.2
+      type: gauge
+      help: The measured UPS bypass voltage in volts. - 1.3.6.1.4.1.534.1.5.3.1.2
+      indexes:
+      - labelname: xupsBypassPhase
+        type: gauge
+    - name: xupsBypassId
+      oid: 1.3.6.1.4.1.534.1.5.3.1.3
+      type: gauge
+      help: 'value indicates what measurement is being stored in this table row :
+        phase1 to neutral, phase2 to neutral, phase3 to neutral, phase1 to phase2,
+        phase2 to phase3, phase3 to phase1. - 1.3.6.1.4.1.534.1.5.3.1.3'
+      indexes:
+      - labelname: xupsBypassPhase
+        type: gauge
+      enum_values:
+        1: phase1toN
+        2: phase2toN
+        3: phase3toN
+        4: phase1to2
+        5: phase2to3
+        6: phase3to1
+    - name: xupsBypassName
+      oid: 1.3.6.1.4.1.534.1.5.3.1.4
+      type: OctetString
+      help: A descriptive name for the phase. - 1.3.6.1.4.1.534.1.5.3.1.4
+      indexes:
+      - labelname: xupsBypassPhase
+        type: gauge
+    - name: xupsBypassCurrentHighPrecision
+      oid: 1.3.6.1.4.1.534.1.5.3.1.5
+      type: gauge
+      help: The measured bypass current from the UPS meters in tenth of amps. - 1.3.6.1.4.1.534.1.5.3.1.5
+      indexes:
+      - labelname: xupsBypassPhase
+        type: gauge
+    - name: xupsBypassWatts
+      oid: 1.3.6.1.4.1.534.1.5.3.1.6
+      type: gauge
+      help: The measured real bypass power in watts. - 1.3.6.1.4.1.534.1.5.3.1.6
+      indexes:
+      - labelname: xupsBypassPhase
+        type: gauge
+    - name: xupsBypassVoltagePhaseToPhase
+      oid: 1.3.6.1.4.1.534.1.5.3.1.7
+      type: gauge
+      help: The measured bypass phase to phase voltage from the UPS meters in volts,
+        For the phase n, it is the measure of phase n to phase n+1 voltage. - 1.3.6.1.4.1.534.1.5.3.1.7
+      indexes:
+      - labelname: xupsBypassPhase
+        type: gauge
+    - name: xupsBypassAverageVoltage
+      oid: 1.3.6.1.4.1.534.1.5.4.1
+      type: gauge
+      help: The measured bypass voltage from the UPS meters in volts - 1.3.6.1.4.1.534.1.5.4.1
+    - name: xupsBypassTotalCurrent
+      oid: 1.3.6.1.4.1.534.1.5.4.2
+      type: gauge
+      help: The measured bypass current from the UPS meters in tenth of amps - 1.3.6.1.4.1.534.1.5.4.2
+    - name: xupsBypassTotalWatts
+      oid: 1.3.6.1.4.1.534.1.5.4.3
+      type: gauge
+      help: The measured bypass active power in watts - 1.3.6.1.4.1.534.1.5.4.3
+    - name: xupsBypassTotalVA
+      oid: 1.3.6.1.4.1.534.1.5.4.4
+      type: gauge
+      help: The measured output apparent power in VA - 1.3.6.1.4.1.534.1.5.4.4
+    - name: xupsBypassAveragePowerFactor
+      oid: 1.3.6.1.4.1.534.1.5.4.5
+      type: gauge
+      help: Indicates the total power factor of the input in hundredths - 1.3.6.1.4.1.534.1.5.4.5
+    - name: xupsEnvAmbientTemp
+      oid: 1.3.6.1.4.1.534.1.6.1
+      type: gauge
+      help: The reading of the ambient temperature in the vicinity of the UPS or SNMP
+        agent. - 1.3.6.1.4.1.534.1.6.1
+    - name: xupsTestStart
+      oid: 1.3.6.1.4.1.534.1.8.1
+      type: gauge
+      help: Setting this object initiates the requested Test - 1.3.6.1.4.1.534.1.8.1
+      enum_values:
+        1: testBattery
+        2: noTestStarted
+        3: testSystem
+        4: testSecondarySource
+        5: flashLightsTest
+        6: cancelTest
+    - name: xupsTestBatteryStatus
+      oid: 1.3.6.1.4.1.534.1.8.2
+      type: gauge
+      help: Reading this enumerated value gives an indication of the (last) UPS Battery
+        test status - 1.3.6.1.4.1.534.1.8.2
+      enum_values:
+        1: unknown
+        2: passed
+        3: failed
+        4: inProgress
+        5: notSupported
+        6: inhibited
+        7: scheduled
+    - name: xupsLastGeneralTest
+      oid: 1.3.6.1.4.1.534.1.8.3
+      type: gauge
+      help: Indicates the last UPS test requested via xupsTestStart or by other non-SNMP
+        means, other than for the testBattery (1) case - 1.3.6.1.4.1.534.1.8.3
+      enum_values:
+        2: noTestStarted
+        3: testSystem
+        4: testSecondarySource
+        5: flashLightsTest
+    - name: xupsLastGeneralTestResult
+      oid: 1.3.6.1.4.1.534.1.8.4
+      type: gauge
+      help: Reading this enumerated value gives the result of the test indicated in
+        xupsLastGeneralTest. - 1.3.6.1.4.1.534.1.8.4
+      enum_values:
+        1: unknown
+        2: passed
+        3: failed
+        4: inProgress
+        5: notSupported
+        6: inhibited
+        7: scheduled
+    - name: xupsTestTrap
+      oid: 1.3.6.1.4.1.534.1.8.5
+      type: gauge
+      help: Setting startTestTrap to 1 will initiate a test trap to be sent out from
+        the agent - 1.3.6.1.4.1.534.1.8.5
+      enum_values:
+        1: startTestTrap
   eltex_mes:
     get:
     - 1.3.6.1.4.1.2076.81.1.73.0
