@@ -37,6 +37,8 @@ CISCO_URL         := https://raw.githubusercontent.com/cisco/cisco-mibs/f55dc443
 DELL_URL          := https://dl.dell.com/FOLDER11196144M/1/Dell-OM-MIBS-11010_A00.zip
 DLINK_URL         := https://ftp.dlink.de/des/des-3200-18/driver_software/DES-3200-18_mib_revC_4-04_all_en_20130603.zip
 ELTEX_MES_URL     := https://api.prod.eltex-co.ru/storage/upload_center/files/51/mibs_10.4.3.1.zip
+# hint: https://eltex-co.com/download/?product=337 if you need to update the ELTEX_MES_URL
+EATON_UPS_URL     := https://www.eaton.com/content/dam/eaton/products/backup-power-ups-surge-it-power-distribution/Firmware/connectivity/eaton-network-connectivity-mib-files.zip
 DELL_NETWORK_URL  := https://supportkb.dell.com/attachment/ka02R000000I7TFQA0/Current_MIBs_pkb_en_US_1.zip
 HPE_URL           := https://downloads.hpe.com/pub/softlib2/software1/pubsw-linux/p1580676047/v229101/upd11.85mib.tar.gz
 IANA_CHARSET_URL  := https://www.iana.org/assignments/ianacharset-mib/ianacharset-mib
@@ -99,6 +101,7 @@ clean:
 		$(MIBDIR)/.dell \
 		$(MIBDIR)/.dlink-mibs \
 		$(MIBDIR)/.dell-network \
+		$(MIBDIR)/.eaton-ups \
 		$(MIBDIR)/.hpe-mib \
 		$(MIBDIR)/.net-snmp \
 		$(MIBDIR)/.paloalto_panos \
@@ -150,6 +153,8 @@ mibs: \
   $(MIBDIR)/ARISTA-SMI-MIB \
   $(MIBDIR)/ARISTA-SW-IP-FORWARDING-MIB \
   $(MIBDIR)/iDRAC-SMIv2.mib \
+  $(MIBDIR)/.dell-om-mibs \
+  $(MIBDIR)/.eaton-ups \
   $(MIBDIR)/.hpe-mib \
   $(MIBDIR)/IANA-CHARSET-MIB.txt \
   $(MIBDIR)/IANA-IFTYPE-MIB.txt \
@@ -236,6 +241,35 @@ $(MIBDIR)/iDRAC-SMIv2.mib:
 	@curl $(CURL_OPTS) $(CURL_USER_AGENT) -o $(TMP) $(DELL_URL)
 	@unzip -j -d $(MIBDIR) $(TMP) support/station/mibs/iDRAC-SMIv2.mib
 	@rm -v $(TMP)
+
+$(MIBDIR)/.eaton-ups:
+	$(eval TMP := $(shell mktemp))
+	@echo ">> Downloading eaton to $(TMP)"
+	@curl $(CURL_OPTS) $(CURL_USER_AGENT) -H "Accept-Encoding: gzip, deflate, br, zstd" -o $(TMP) $(EATON_UPS_URL)
+	@unzip -j -d $(MIBDIR) $(TMP) \
+		eaton-network-connectivity-mib-files/XUPS-MIB.txt \
+		eaton-network-connectivity-mib-files/UPS-MIB.txt \
+		eaton-network-connectivity-mib-files/EATON-ATS2-MIB.txt \
+		eaton-network-connectivity-mib-files/EATON-EMP-MIB.txt \
+		eaton-network-connectivity-mib-files/EATON-OIDS.txt \
+		eaton-network-connectivity-mib-files/EATON-SENSOR-MIB.txt
+	@mv $(MIBDIR)/XUPS-MIB.txt $(MIBDIR)/eaton-xups.mib
+	# match apc
+	@sed -i.bak -E 's/outputNotPowered/off/' $(MIBDIR)/eaton-xups.mib
+	@rm $(MIBDIR)/eaton-xups.mib.bak
+	@sed -i.bak -E 's/outputNotProtected/notProtected/' $(MIBDIR)/eaton-xups.mib
+	@rm $(MIBDIR)/eaton-xups.mib.bak
+	@sed -i.bak -E 's/outputProtected/onLine/' $(MIBDIR)/eaton-xups.mib
+	@rm $(MIBDIR)/eaton-xups.mib.bak
+	@sed -i.bak -E 's/outputPoweredNoContinuity/poweredNoContinuity/' $(MIBDIR)/eaton-xups.mib
+	@rm $(MIBDIR)/eaton-xups.mib.bak
+	@mv $(MIBDIR)/UPS-MIB.txt $(MIBDIR)/eaton-ups.mib
+	@mv $(MIBDIR)/EATON-ATS2-MIB.txt $(MIBDIR)/eaton-ats2.mib
+	@mv $(MIBDIR)/EATON-EMP-MIB.txt $(MIBDIR)/eaton-emp.mib
+	@mv $(MIBDIR)/EATON-OIDS.txt $(MIBDIR)/eaton-oids.mib
+	@mv $(MIBDIR)/EATON-SENSOR-MIB.txt $(MIBDIR)/eaton-sensor.mib
+	@rm -v $(TMP)
+	@touch $(MIBDIR)/.eaton-ups
 
 $(MIBDIR)/.hpe-mib:
 	$(eval TMP := $(shell mktemp))
