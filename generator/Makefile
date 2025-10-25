@@ -53,6 +53,7 @@ MIKROTIK_URL      := https://download.mikrotik.com/routeros/7.22/mikrotik.mib
 NEC_URL           := https://jpn.nec.com/univerge/ix/Manual/MIB
 NET_SNMP_URL      := https://raw.githubusercontent.com/net-snmp/net-snmp/v5.9/mibs
 PALOALTO_URL      := https://docs.paloaltonetworks.com/content/dam/techdocs/en_US/zip/snmp-mib/pan-10-0-snmp-mib-modules.zip
+POWERSOFT_URL     := https://www.powersoft.com/wp-content/uploads/2021/10/powersoftMib.mib_.zip
 PRINTER_URL       := https://ftp.pwg.org/pub/pwg/pmp/mibs/rfc3805b.mib
 SERVERTECH_URL    := 'https://cdn10.servertech.com/assets/documents/documents/817/original/Sentry3.mib'
 SERVERTECH4_URL   := 'https://cdn10.servertech.com/assets/documents/documents/815/original/Sentry4.mib'
@@ -104,6 +105,7 @@ clean:
 		$(MIBDIR)/.hpe-mib \
 		$(MIBDIR)/.net-snmp \
 		$(MIBDIR)/.paloalto_panos \
+		$(MIBDIR)/powersoftMib.mib \
 		$(MIBDIR)/.synology \
 		$(MIBDIR)/.sophos_xg \
 		$(MIBDIR)/.kemp-lm \
@@ -163,6 +165,7 @@ mibs: \
   $(MIBDIR)/MIKROTIK-MIB \
   $(MIBDIR)/.net-snmp \
   $(MIBDIR)/.paloalto_panos \
+  $(MIBDIR)/powersoftMib.mib \
   $(MIBDIR)/PICO-IPSEC-FLOW-MONITOR-MIB.txt \
   $(MIBDIR)/PICO-SMI-ID-MIB.txt \
   $(MIBDIR)/PICO-SMI-MIB.txt \
@@ -342,6 +345,13 @@ $(MIBDIR)/.paloalto_panos:
 	@unzip -j -d $(MIBDIR) $(TMP)
 	@rm -v $(TMP)
 	@touch $(MIBDIR)/.paloalto_panos
+
+$(MIBDIR)/powersoftMib.mib:
+	$(eval TMP := $(shell mktemp))
+	@echo ">> Downloading powersoft to $(TMP)"
+	@curl $(CURL_OPTS) -o $(TMP) $(POWERSOFT_URL)
+	@unzip -j -d $(MIBDIR) $(TMP) powersoftMib.mib
+	@rm -v $(TMP)
 
 $(MIBDIR)/PRINTER-MIB-V2.txt:
 	@echo ">> Downloading Printer MIB v2"
