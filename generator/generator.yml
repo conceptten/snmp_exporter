@@ -767,10 +767,47 @@ modules:
       - 1.3.6.1.4.1.25461.2.1.2.3 # panSession
       - 1.3.6.1.4.1.25461.2.1.2.5 # panGlobalProtect
 
-
   powersoft:
     walk:
-      - 1.3.6.1.4.1.55933
+      - 1.3.6.1.4.1.55933.1
+    overrides:
+      standby:
+        type: gauge
+        help: 0 = Normal operation (machine fully powered, ready); 1 = low power (output
+          disabled but analog input are on, rail at minimum); 2 = SLEEP, lowest consumption
+          state, no analog in/out and rails
+      overTemperature:
+        type: gauge
+        help: 1 if the amplifier temperature exceeds safe operating conditions, else 0.
+      mainsAlarm:
+        type: gauge
+        help: 1 if the mains voltage is out of range, else 0.
+      hwProtection:
+        type: gauge
+        help: 1 if one or more channels exceed safe operation conditions, else 0.
+      hwFault:
+        type: gauge
+        help: 1 if the amplifier detected a fault condition on its status, else 0.
+
+  powersoft-nova:
+    walk:
+      - 1.3.6.1.4.1.55933.2
+    overrides:
+      standby:
+        help: 0 = Normal operation (machine fully powered, ready); 1 = low power (output
+          disabled but analog input are on, rail at minimum); 2 = SLEEP, lowest consumption
+          state, no analog in/out and rails
+      overTemperature:
+        help: 1 if the amplifier temperature exceeds safe operating conditions, else 0.
+      mainsNotGood:
+        name: mainsAlarm # to be compatible with `powersoft::mainsAlarm`
+        type: gauge
+        help: 1 if the mains voltage is out of range, else 0.
+      # hwProtection does not seem to have an equivalent
+      sumHardwareFault:
+        name: hwFault # to be compatible with `powersoft::hwFault`
+        type: gauge
+        help: 1 if the amplifier detected a fault condition on its status, else 0.
 
 # Arista Networks
 #

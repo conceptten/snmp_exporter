@@ -38527,31 +38527,503 @@ modules:
         value. - 1.3.6.1.4.1.935.1.1.1.9.2.4
   powersoft:
     walk:
-    - 1.3.6.1.4.1.55933
+    - 1.3.6.1.4.1.55933.1
     metrics:
     - name: standby
       oid: 1.3.6.1.4.1.55933.1.1.1
       type: counter
-      help: Value is 1 if amplifier is in standby, else 0. - 1.3.6.1.4.1.55933.1.1.1
+      help: 0 = Normal operation (machine fully powered, ready); 1 = low power (output
+        disabled but analog input are on, rail at minimum); 2 = SLEEP, lowest consumption
+        state, no analog in/out and rails
     - name: overTemperature
       oid: 1.3.6.1.4.1.55933.1.1.2
       type: counter
-      help: Value is 1 if the temperature of the amplifier overcomes the safe operating
-        threshold, else 0. - 1.3.6.1.4.1.55933.1.1.2
+      help: 1 if the amplifier temperature exceeds safe operating conditions, else
+        0.
     - name: mainsAlarm
       oid: 1.3.6.1.4.1.55933.1.1.3
-      type: counter
-      help: Value is 1 if mains are out of the accepted range, else 0. - 1.3.6.1.4.1.55933.1.1.3
+      type: gauge
+      help: 1 if the mains voltage is out of range, else 0.
     - name: hwProtection
       oid: 1.3.6.1.4.1.55933.1.1.4
-      type: counter
-      help: Value is 1 if amplifier protected one or more channels due to unsafe operating
-        conditions, else 0. - 1.3.6.1.4.1.55933.1.1.4
+      type: gauge
+      help: 1 if one or more channels exceed safe operation conditions, else 0.
     - name: hwFault
       oid: 1.3.6.1.4.1.55933.1.1.5
+      type: gauge
+      help: 1 if the amplifier detected a fault condition on its status, else 0.
+  powersoft-nova:
+    walk:
+    - 1.3.6.1.4.1.55933.2
+    metrics:
+    - name: standby
+      oid: 1.3.6.1.4.1.55933.2.1.1
+      type: gauge
+      help: 0 = Normal operation (machine fully powered, ready); 1 = low power (output
+        disabled but analog input are on, rail at minimum); 2 = SLEEP, lowest consumption
+        state, no analog in/out and rails
+    - name: overTemperature
+      oid: 1.3.6.1.4.1.55933.2.1.2
+      type: gauge
+      help: 1 if the amplifier temperature exceeds safe operating conditions, else
+        0.
+    - name: fuse
+      oid: 1.3.6.1.4.1.55933.2.1.10
+      type: gauge
+      help: 0 = Fuse OK; 1 = Fuse blown; 2 = Unknown fuse state - 1.3.6.1.4.1.55933.2.1.10
+    - name: mainsAlarm
+      oid: 1.3.6.1.4.1.55933.2.1.11
+      type: gauge
+      help: 1 if the mains voltage is out of range, else 0.
+    - name: tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.1.12
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken - 1.3.6.1.4.1.55933.2.1.12
+    - name: powerNotGood
+      oid: 1.3.6.1.4.1.55933.2.1.13
+      type: gauge
+      help: This value is true if the machine has overcome temperature safe operating
+        conditions. - 1.3.6.1.4.1.55933.2.1.13
+    - name: convertersNotReady
+      oid: 1.3.6.1.4.1.55933.2.1.14
+      type: gauge
+      help: This value is true if ADC and DAC are not ready to operate. - 1.3.6.1.4.1.55933.2.1.14
+    - name: hwConfigMismatch
+      oid: 1.3.6.1.4.1.55933.2.1.15
+      type: gauge
+      help: This value is true if there is an hardware configuration mismatch (e.g
+        - 1.3.6.1.4.1.55933.2.1.15
+    - name: powerStates
+      oid: 1.3.6.1.4.1.55933.2.1.16
+      type: gauge
+      help: This value is 1 if the running power state require that machine is muted
+        (outputs are forced muted). - 1.3.6.1.4.1.55933.2.1.16
+    - name: poeFault
+      oid: 1.3.6.1.4.1.55933.2.1.17
+      type: gauge
+      help: This value is 1 if the poe is in fault and require that machine is muted
+        (outputs are forced muted). - 1.3.6.1.4.1.55933.2.1.17
+    - name: safetyMute
+      oid: 1.3.6.1.4.1.55933.2.1.18
+      type: gauge
+      help: This value is true if there is a sofware safety mute active. - 1.3.6.1.4.1.55933.2.1.18
+    - name: clkSyncFault
+      oid: 1.3.6.1.4.1.55933.2.1.19
+      type: gauge
+      help: This value is true if clock used to sync PSU stages is missing (outputs
+        are forced muted). - 1.3.6.1.4.1.55933.2.1.19
+    - name: supplyType
+      oid: 1.3.6.1.4.1.55933.2.1.20
+      type: gauge
+      help: 0 = Line (AC) powered; 1 = Battery (DC) powered; 2 = PoE powered - 1.3.6.1.4.1.55933.2.1.20
+    - name: fanBroken
+      oid: 1.3.6.1.4.1.55933.2.1.21
+      type: gauge
+      help: 1 = fan broken - 1.3.6.1.4.1.55933.2.1.21
+    - name: hwFault
+      oid: 1.3.6.1.4.1.55933.2.1.22
+      type: gauge
+      help: 1 if the amplifier detected a fault condition on its status, else 0.
+    - name: sumHighTemperature
+      oid: 1.3.6.1.4.1.55933.2.1.23
       type: counter
-      help: Value is 1 if amplifier detected a fault condition in its status, else
-        0. - 1.3.6.1.4.1.55933.1.1.5
+      help: 1 = High Temperature - 1.3.6.1.4.1.55933.2.1.23
+    - name: sumOverTemperatureFault
+      oid: 1.3.6.1.4.1.55933.2.1.24
+      type: counter
+      help: 1 = Over Temperature Fault - 1.3.6.1.4.1.55933.2.1.24
+    - name: sumMainsFault
+      oid: 1.3.6.1.4.1.55933.2.1.25
+      type: counter
+      help: 1 = Mains Fault - 1.3.6.1.4.1.55933.2.1.25
+    - name: sumMainsWarning
+      oid: 1.3.6.1.4.1.55933.2.1.26
+      type: counter
+      help: 1 = Mains Warning - 1.3.6.1.4.1.55933.2.1.26
+    - name: sumNoMains
+      oid: 1.3.6.1.4.1.55933.2.1.27
+      type: counter
+      help: 1 = No Mains - 1.3.6.1.4.1.55933.2.1.27
+    - name: sumStandby
+      oid: 1.3.6.1.4.1.55933.2.1.28
+      type: counter
+      help: 1 = Standby - 1.3.6.1.4.1.55933.2.1.28
+    - name: ch0tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.1.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.1.1
+    - name: ch0shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.1.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.1.2
+    - name: ch0highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.1.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.1.3
+    - name: ch0softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.1.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.1.4
+    - name: ch0coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.1.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.1.5
+    - name: ch0muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.1.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.1.6
+    - name: ch0sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.1.7
+      type: counter
+      help: CH1 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.1.7
+    - name: ch0sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.1.8
+      type: counter
+      help: CH1 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.1.8
+    - name: ch0dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.1.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.1.10
+    - name: ch0pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.1.100
+      type: counter
+      help: CH1 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.1.100
+    - name: ch0outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.1.101
+      type: counter
+      help: CH1 Out Impedence - 1.3.6.1.4.1.55933.2.2.1.101
+    - name: ch1tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.2.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.2.1
+    - name: ch1shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.2.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.2.2
+    - name: ch1highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.2.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.2.3
+    - name: ch1softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.2.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.2.4
+    - name: ch1coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.2.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.2.5
+    - name: ch1muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.2.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.2.6
+    - name: ch1sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.2.7
+      type: counter
+      help: CH2 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.2.7
+    - name: ch1sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.2.8
+      type: counter
+      help: CH2 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.2.8
+    - name: ch1dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.2.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.2.10
+    - name: ch1pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.2.100
+      type: counter
+      help: CH2 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.2.100
+    - name: ch1outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.2.101
+      type: counter
+      help: CH2 Out Impedence - 1.3.6.1.4.1.55933.2.2.2.101
+    - name: ch2tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.3.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.3.1
+    - name: ch2shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.3.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.3.2
+    - name: ch2highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.3.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.3.3
+    - name: ch2softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.3.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.3.4
+    - name: ch2coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.3.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.3.5
+    - name: ch2muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.3.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.3.6
+    - name: ch2sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.3.7
+      type: counter
+      help: CH3 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.3.7
+    - name: ch2sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.3.8
+      type: counter
+      help: CH3 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.3.8
+    - name: ch2dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.3.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.3.10
+    - name: ch2pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.3.100
+      type: counter
+      help: CH3 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.3.100
+    - name: ch2outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.3.101
+      type: counter
+      help: CH3 Out Impedence - 1.3.6.1.4.1.55933.2.2.3.101
+    - name: ch3tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.4.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.4.1
+    - name: ch3shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.4.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.4.2
+    - name: ch3highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.4.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.4.3
+    - name: ch3softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.4.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.4.4
+    - name: ch3coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.4.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.4.5
+    - name: ch3muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.4.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.4.6
+    - name: ch3sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.4.7
+      type: counter
+      help: CH4 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.4.7
+    - name: ch3sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.4.8
+      type: counter
+      help: CH4 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.4.8
+    - name: ch3dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.4.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.4.10
+    - name: ch3pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.4.100
+      type: counter
+      help: CH4 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.4.100
+    - name: ch3outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.4.101
+      type: counter
+      help: CH4 Out Impedence - 1.3.6.1.4.1.55933.2.2.4.101
+    - name: ch4tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.5.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.5.1
+    - name: ch4shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.5.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.5.2
+    - name: ch4highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.5.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.5.3
+    - name: ch4softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.5.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.5.4
+    - name: ch4coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.5.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.5.5
+    - name: ch4muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.5.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.5.6
+    - name: ch4sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.5.7
+      type: counter
+      help: CH5 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.5.7
+    - name: ch4sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.5.8
+      type: counter
+      help: CH5 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.5.8
+    - name: ch4dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.5.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.5.10
+    - name: ch4pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.5.100
+      type: counter
+      help: CH5 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.5.100
+    - name: ch4outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.5.101
+      type: counter
+      help: CH5 Out Impedence - 1.3.6.1.4.1.55933.2.2.5.101
+    - name: ch5tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.6.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.6.1
+    - name: ch5shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.6.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.6.2
+    - name: ch5highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.6.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.6.3
+    - name: ch5softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.6.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.6.4
+    - name: ch5coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.6.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.6.5
+    - name: ch5muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.6.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.6.6
+    - name: ch5sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.6.7
+      type: counter
+      help: CH6 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.6.7
+    - name: ch5sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.6.8
+      type: counter
+      help: CH6 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.6.8
+    - name: ch5dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.6.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.6.10
+    - name: ch5pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.6.100
+      type: counter
+      help: CH6 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.6.100
+    - name: ch5outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.6.101
+      type: counter
+      help: CH6 Out Impedence - 1.3.6.1.4.1.55933.2.2.6.101
+    - name: ch6tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.7.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.7.1
+    - name: ch6shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.7.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.7.2
+    - name: ch6highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.7.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.7.3
+    - name: ch6softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.7.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.7.4
+    - name: ch6coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.7.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.7.5
+    - name: ch6muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.7.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.7.6
+    - name: ch6sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.7.7
+      type: counter
+      help: CH7 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.7.7
+    - name: ch6sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.7.8
+      type: counter
+      help: CH7 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.7.8
+    - name: ch6dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.7.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.7.10
+    - name: ch6pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.7.100
+      type: counter
+      help: CH7 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.7.100
+    - name: ch6outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.7.101
+      type: counter
+      help: CH7 Out Impedence - 1.3.6.1.4.1.55933.2.2.7.101
+    - name: ch7tempSensBroken
+      oid: 1.3.6.1.4.1.55933.2.2.8.1
+      type: gauge
+      help: This value is 1 if any of the channel temperature sensor is broken. -
+        1.3.6.1.4.1.55933.2.2.8.1
+    - name: ch7shortCircuit
+      oid: 1.3.6.1.4.1.55933.2.2.8.2
+      type: gauge
+      help: This value is 1 if a short circuit is detected on the channel. - 1.3.6.1.4.1.55933.2.2.8.2
+    - name: ch7highFrequency
+      oid: 1.3.6.1.4.1.55933.2.2.8.3
+      type: gauge
+      help: This value is 1 if a voltage signal with high frequency contribution is
+        detected on the channel. - 1.3.6.1.4.1.55933.2.2.8.3
+    - name: ch7softwareMute
+      oid: 1.3.6.1.4.1.55933.2.2.8.4
+      type: gauge
+      help: This value is 1 if the channel is muted by software. - 1.3.6.1.4.1.55933.2.2.8.4
+    - name: ch7coherencyError
+      oid: 1.3.6.1.4.1.55933.2.2.8.5
+      type: gauge
+      help: This value is 1 if the coherency controller has been engaged. - 1.3.6.1.4.1.55933.2.2.8.5
+    - name: ch7muteAllEnabled
+      oid: 1.3.6.1.4.1.55933.2.2.8.6
+      type: gauge
+      help: This value is 1 if a machine mute is engaged. - 1.3.6.1.4.1.55933.2.2.8.6
+    - name: ch7sumHardwareFaultOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.8.7
+      type: counter
+      help: CH8 Hardware Fault. - 1.3.6.1.4.1.55933.2.2.8.7
+    - name: ch7sumloadAlarmOnOut
+      oid: 1.3.6.1.4.1.55933.2.2.8.8
+      type: counter
+      help: CH8 Load Alarm On Out. - 1.3.6.1.4.1.55933.2.2.8.8
+    - name: ch7dampingAlarm
+      oid: 1.3.6.1.4.1.55933.2.2.8.10
+      type: gauge
+      help: This value is 1 if there is a dampingAlarm. - 1.3.6.1.4.1.55933.2.2.8.10
+    - name: ch7pilotToneImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.8.100
+      type: counter
+      help: CH8 Pilot Tone Impedence - 1.3.6.1.4.1.55933.2.2.8.100
+    - name: ch7outImpedence
+      oid: 1.3.6.1.4.1.55933.2.2.8.101
+      type: counter
+      help: CH8 Out Impedence - 1.3.6.1.4.1.55933.2.2.8.101
+    - name: cpuP
+      oid: 1.3.6.1.4.1.55933.2.10.1
+      type: counter
+      help: realtime CPU peak usage - 1.3.6.1.4.1.55933.2.10.1
+    - name: cpuM
+      oid: 1.3.6.1.4.1.55933.2.10.2
+      type: counter
+      help: realtime CPU mean usage - 1.3.6.1.4.1.55933.2.10.2
   printer_mib:
     walk:
     - 1.3.6.1.2.1.43.10.2.1.4

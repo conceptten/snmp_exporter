@@ -55,6 +55,8 @@ NEC_URL           := https://jpn.nec.com/univerge/ix/Manual/MIB
 NET_SNMP_URL      := https://raw.githubusercontent.com/net-snmp/net-snmp/v5.9/mibs
 PALOALTO_URL      := https://docs.paloaltonetworks.com/content/dam/techdocs/en_US/zip/snmp-mib/pan-10-0-snmp-mib-modules.zip
 POWERSOFT_URL     := https://www.powersoft.com/wp-content/uploads/2021/10/powersoftMib.mib_.zip
+# powersoft nova: Unica series
+POWERSOFT_NOV_URL := https://www.powersoft.com/wp-content/uploads/2024/10/NET-SNMP-POWERSOFT-MIB.zip
 PRINTER_URL       := https://ftp.pwg.org/pub/pwg/pmp/mibs/rfc3805b.mib
 SERVERTECH_URL    := 'https://cdn10.servertech.com/assets/documents/documents/817/original/Sentry3.mib'
 SERVERTECH4_URL   := 'https://cdn10.servertech.com/assets/documents/documents/815/original/Sentry4.mib'
@@ -107,7 +109,7 @@ clean:
 		$(MIBDIR)/.hpe-mib \
 		$(MIBDIR)/.net-snmp \
 		$(MIBDIR)/.paloalto_panos \
-		$(MIBDIR)/powersoftMib.mib \
+		$(MIBDIR)/.powersoft \
 		$(MIBDIR)/.synology \
 		$(MIBDIR)/.sophos_xg \
 		$(MIBDIR)/.kemp-lm \
@@ -168,7 +170,7 @@ mibs: \
   $(MIBDIR)/MIKROTIK-MIB \
   $(MIBDIR)/.net-snmp \
   $(MIBDIR)/.paloalto_panos \
-  $(MIBDIR)/powersoftMib.mib \
+  $(MIBDIR)/.powersoft \
   $(MIBDIR)/PICO-IPSEC-FLOW-MONITOR-MIB.txt \
   $(MIBDIR)/PICO-SMI-ID-MIB.txt \
   $(MIBDIR)/PICO-SMI-MIB.txt \
@@ -250,7 +252,14 @@ $(MIBDIR)/.dell-om-mibs:
 $(MIBDIR)/.eaton-ups:
 	$(eval TMP := $(shell mktemp))
 	@echo ">> Downloading eaton to $(TMP)"
-	@curl $(CURL_OPTS) $(CURL_USER_AGENT) -H "Accept-Encoding: gzip, deflate, br, zstd" -o $(TMP) $(EATON_UPS_URL)
+	@curl $(CURL_OPTS) $(CURL_USER_AGENT) \
+		-H "Accept-Encoding: gzip, deflate, br, zstd" \
+		-H "sec-ch-ua-platform: "Linux"" \
+		-H "sec-fetch-dest: document" \
+		-H "sec-fetch-mode: navigate" \
+		-H "sec-fetch-site: none" \
+		-H "sec-fetch-user: ?1" \
+		-o $(TMP) $(EATON_UPS_URL)
 	@unzip -j -d $(MIBDIR) $(TMP) \
 		eaton-network-connectivity-mib-files/XUPS-MIB.txt \
 		eaton-network-connectivity-mib-files/UPS-MIB.txt \
@@ -378,12 +387,18 @@ $(MIBDIR)/.paloalto_panos:
 	@rm -v $(TMP)
 	@touch $(MIBDIR)/.paloalto_panos
 
-$(MIBDIR)/powersoftMib.mib:
+$(MIBDIR)/.powersoft:
 	$(eval TMP := $(shell mktemp))
 	@echo ">> Downloading powersoft to $(TMP)"
 	@curl $(CURL_OPTS) -o $(TMP) $(POWERSOFT_URL)
 	@unzip -j -d $(MIBDIR) $(TMP) powersoftMib.mib
+	@mv $(MIBDIR)/powersoftMib.mib $(MIBDIR)/powersoft.mib
+	@curl $(CURL_OPTS) -o $(TMP) $(POWERSOFT_NOV_URL)
+	@unzip -j -d $(MIBDIR) $(TMP) NET-SNMP-POWERSOFT-MIB.mib
+	@mv $(MIBDIR)/NET-SNMP-POWERSOFT-MIB.mib $(MIBDIR)/powersoftNova.mib
+	@sed -i -E -z 's/(NET-SNMP-POWERSOFT)/\1-NOVA/' $(MIBDIR)/powersoftNova.mib
 	@rm -v $(TMP)
+	@touch $(MIBDIR)/.powersoft
 
 $(MIBDIR)/PRINTER-MIB-V2.txt:
 	@echo ">> Downloading Printer MIB v2"
