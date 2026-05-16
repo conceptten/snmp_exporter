@@ -1477,6 +1477,8 @@ modules:
         lookup: ifName
         drop_source_indexes: true
     overrides:
+      mtxrCtTotalEntries:
+        ignore: true # returns multiple entries instead of 1, needs mib update
       mtxrRemoteCapIdentity:
         ignore: true # information is redundant
       mtxrWifiInterfacesName:
