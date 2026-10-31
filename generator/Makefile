@@ -630,6 +630,8 @@ $(MIBDIR)/.ciscosb-device:
 	@echo ">> Copy CiscoSB device mibs"
 	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-mib.mib $(MIBDIR)/
 	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-mng.mib $(MIBDIR)/
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-env_mib.mib $(MIBDIR)/
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-deviceparams-mib.mib $(MIBDIR)/
 	@touch $(MIBDIR)/.ciscosb-device
 
 $(MIBDIR)/.yamaha-rt:

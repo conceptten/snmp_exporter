@@ -6520,6 +6520,247 @@ modules:
       oid: 1.3.6.1.4.1.9.6.1.101.1.9
       type: gauge
       help: Percentage of the device CPU utilization during the last 5 minutes - 1.3.6.1.4.1.9.6.1.101.1.9
+  ciscosb_env:
+    walk:
+    - 1.3.6.1.4.1.9.6.1.101.2.13
+    - 1.3.6.1.4.1.9.6.1.101.83.1
+    - 1.3.6.1.4.1.9.6.1.101.83.5
+    - 1.3.6.1.4.1.9.6.1.101.83.6
+    get:
+    - 1.3.6.1.4.1.9.6.1.101.83.7.0
+    - 1.3.6.1.4.1.9.6.1.101.83.8.0
+    metrics:
+    - name: rndUnitNumber
+      oid: 1.3.6.1.4.1.9.6.1.101.2.13.1.1.1
+      type: gauge
+      help: The unit number (for stackable devices) or 1 for 'stand alone' device.
+        - 1.3.6.1.4.1.9.6.1.101.2.13.1.1.1
+      indexes:
+      - labelname: rndUnitNumber
+        type: gauge
+    - name: rndActiveSoftwareFile
+      oid: 1.3.6.1.4.1.9.6.1.101.2.13.1.1.2
+      type: gauge
+      help: Indicates the current active software file, image1 or image2. - 1.3.6.1.4.1.9.6.1.101.2.13.1.1.2
+      indexes:
+      - labelname: rndUnitNumber
+        type: gauge
+      enum_values:
+        1: image1
+        2: image2
+    - name: rndActiveSoftwareFileAfterReset
+      oid: 1.3.6.1.4.1.9.6.1.101.2.13.1.1.3
+      type: gauge
+      help: Indicates the software file that will be active after reset (image1 or
+        image2) - 1.3.6.1.4.1.9.6.1.101.2.13.1.1.3
+      indexes:
+      - labelname: rndUnitNumber
+        type: gauge
+      enum_values:
+        1: image1
+        2: image2
+        3: invalidImage
+    - name: rlResetStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.2.13.2
+      type: Bits
+      help: A bit mask that specifies system status before reset action is preformed
+        - 1.3.6.1.4.1.9.6.1.101.2.13.2
+      enum_values:
+        0: ok
+        1: no-stack-integrity
+        2: downgrade
+    - name: rlEnvMonFanStatusIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.1.1.1
+      type: gauge
+      help: Unique index for the fan being instrumented - 1.3.6.1.4.1.9.6.1.101.83.1.1.1.1
+      indexes:
+      - labelname: rlEnvMonFanStatusIndex
+        type: gauge
+    - name: rlEnvMonFanStatusDescr
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.1.1.2
+      type: DisplayString
+      help: Textual description of the fan being instrumented - 1.3.6.1.4.1.9.6.1.101.83.1.1.1.2
+      indexes:
+      - labelname: rlEnvMonFanStatusIndex
+        type: gauge
+    - name: rlEnvMonFanState
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.1.1.3
+      type: gauge
+      help: The mandatory state of the fan being instrumented. - 1.3.6.1.4.1.9.6.1.101.83.1.1.1.3
+      indexes:
+      - labelname: rlEnvMonFanStatusIndex
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlEnvMonSupplyStatusIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.2.1.1
+      type: gauge
+      help: Unique index for the power supply being instrumented - 1.3.6.1.4.1.9.6.1.101.83.1.2.1.1
+      indexes:
+      - labelname: rlEnvMonSupplyStatusIndex
+        type: gauge
+    - name: rlEnvMonSupplyStatusDescr
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.2.1.2
+      type: DisplayString
+      help: Textual description of the power supply being instrumented - 1.3.6.1.4.1.9.6.1.101.83.1.2.1.2
+      indexes:
+      - labelname: rlEnvMonSupplyStatusIndex
+        type: gauge
+    - name: rlEnvMonSupplyState
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.2.1.3
+      type: gauge
+      help: The mandatory state of the power supply being instrumented. - 1.3.6.1.4.1.9.6.1.101.83.1.2.1.3
+      indexes:
+      - labelname: rlEnvMonSupplyStatusIndex
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlEnvMonSupplySource
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.2.1.4
+      type: gauge
+      help: The power supply source - 1.3.6.1.4.1.9.6.1.101.83.1.2.1.4
+      indexes:
+      - labelname: rlEnvMonSupplyStatusIndex
+        type: gauge
+      enum_values:
+        1: unknown
+        2: ac
+        3: dc
+        4: externalPowerSupply
+        5: internalRedundant
+    - name: rlEnvMonSupplyFanDirection
+      oid: 1.3.6.1.4.1.9.6.1.101.83.1.2.1.5
+      type: gauge
+      help: The direction of the power supply's fan. - 1.3.6.1.4.1.9.6.1.101.83.1.2.1.5
+      indexes:
+      - labelname: rlEnvMonSupplyStatusIndex
+        type: gauge
+      enum_values:
+        1: unKnown
+        2: frontToBack
+        3: backToFront
+        4: clockwise
+        5: unClockwise
+        6: insideOut
+        7: outsideIn
+        8: rightToLeft
+        9: leftToRight
+    - name: rlEnvFanDataStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.83.5.1.1.1
+      type: gauge
+      help: The number of the stack unit - 1.3.6.1.4.1.9.6.1.101.83.5.1.1.1
+      indexes:
+      - labelname: rlEnvFanDataStackUnit
+        type: gauge
+    - name: rlEnvFanDataTemp
+      oid: 1.3.6.1.4.1.9.6.1.101.83.5.1.1.2
+      type: gauge
+      help: The unit temperature - 1.3.6.1.4.1.9.6.1.101.83.5.1.1.2
+      indexes:
+      - labelname: rlEnvFanDataStackUnit
+        type: gauge
+    - name: rlEnvFanDataSpeed
+      oid: 1.3.6.1.4.1.9.6.1.101.83.5.1.1.3
+      type: gauge
+      help: Fan speed in RPM - 1.3.6.1.4.1.9.6.1.101.83.5.1.1.3
+      indexes:
+      - labelname: rlEnvFanDataStackUnit
+        type: gauge
+    - name: rlEnvFanDataOperLevel
+      oid: 1.3.6.1.4.1.9.6.1.101.83.5.1.1.4
+      type: gauge
+      help: Fan speed operative level - 1.3.6.1.4.1.9.6.1.101.83.5.1.1.4
+      indexes:
+      - labelname: rlEnvFanDataStackUnit
+        type: gauge
+    - name: rlEnvFanDataAdminLevel
+      oid: 1.3.6.1.4.1.9.6.1.101.83.5.1.1.5
+      type: gauge
+      help: Configured fan speed level - 1.3.6.1.4.1.9.6.1.101.83.5.1.1.5
+      indexes:
+      - labelname: rlEnvFanDataStackUnit
+        type: gauge
+    - name: rlEnvFanDataDirection
+      oid: 1.3.6.1.4.1.9.6.1.101.83.5.1.1.6
+      type: gauge
+      help: The direction of the system's fan. - 1.3.6.1.4.1.9.6.1.101.83.5.1.1.6
+      indexes:
+      - labelname: rlEnvFanDataStackUnit
+        type: gauge
+      enum_values:
+        1: unKnown
+        2: frontToBack
+        3: backToFront
+        4: clockwise
+        5: unClockwise
+        6: insideOut
+        7: outsideIn
+        8: rightToLeft
+        9: leftToRight
+    - name: rlEnvRedundantFanUnitId
+      oid: 1.3.6.1.4.1.9.6.1.101.83.6.1.1
+      type: gauge
+      help: The number of the stack unit - 1.3.6.1.4.1.9.6.1.101.83.6.1.1
+      indexes:
+      - labelname: rlEnvRedundantFanUnitId
+        type: gauge
+      - labelname: rlEnvRedundantFanIndex
+        type: gauge
+    - name: rlEnvRedundantFanIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.83.6.1.2
+      type: gauge
+      help: The fan index - 1.3.6.1.4.1.9.6.1.101.83.6.1.2
+      indexes:
+      - labelname: rlEnvRedundantFanUnitId
+        type: gauge
+      - labelname: rlEnvRedundantFanIndex
+        type: gauge
+    - name: rlEnvRedundantFanStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.83.6.1.3
+      type: gauge
+      help: The fan status - 1.3.6.1.4.1.9.6.1.101.83.6.1.3
+      indexes:
+      - labelname: rlEnvRedundantFanUnitId
+        type: gauge
+      - labelname: rlEnvRedundantFanIndex
+        type: gauge
+      enum_values:
+        1: ready
+        2: active
+        3: failure
+        4: notPresent
+    - name: rlEnvRedundantFanSupported
+      oid: 1.3.6.1.4.1.9.6.1.101.83.7
+      type: gauge
+      help: Defines whether Redundant Fan feature is supported - 1.3.6.1.4.1.9.6.1.101.83.7
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: rlEnvSystemLed
+      oid: 1.3.6.1.4.1.9.6.1.101.83.8
+      type: gauge
+      help: Defines the color of system led - 1.3.6.1.4.1.9.6.1.101.83.8
+      enum_values:
+        1: none
+        2: green
+        3: amber
+        4: blue
   cyberpower:
     walk:
     - 1.3.6.1.4.1.3808.1.1.1
@@ -36951,14 +37192,6 @@ modules:
         type: DisplayString
       - labels: []
         labelname: mtxrWifiInterfacesId
-    - name: mtxrCtIP4Entries
-      oid: 1.3.6.1.4.1.14988.1.1.22.2
-      type: counter
-      help: Total number of ipv4 connections - 1.3.6.1.4.1.14988.1.1.22.2
-    - name: mtxrCtIP6Entries
-      oid: 1.3.6.1.4.1.14988.1.1.22.3
-      type: counter
-      help: Total number of ipv6 connections - 1.3.6.1.4.1.14988.1.1.22.3
   nec_ix:
     walk:
     - 1.3.6.1.2.1.2.2.1.2
