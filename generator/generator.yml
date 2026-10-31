@@ -69,6 +69,7 @@ modules:
       - CISCOSB-HWENVIROMENT::rlEnvRedundantFanSupported
       - CISCOSB-HWENVIROMENT::rlEnvSystemLed
       - CISCOSB-DEVICEPARAMS-MIB::rndSoftwareFile
+      - rlPhysicalDescription
 
 # Cisco Wireless LAN Controller
   cisco_wlc:

@@ -4423,6 +4423,7 @@ modules:
   ciscosb_env:
     walk:
     - 1.3.6.1.4.1.9.6.1.101.2.13
+    - 1.3.6.1.4.1.9.6.1.101.53
     - 1.3.6.1.4.1.9.6.1.101.83.1
     - 1.3.6.1.4.1.9.6.1.101.83.5
     - 1.3.6.1.4.1.9.6.1.101.83.6
@@ -4469,6 +4470,1061 @@ modules:
         0: ok
         1: no-stack-integrity
         2: downgrade
+    - name: rlPhdMibVersion
+      oid: 1.3.6.1.4.1.9.6.1.101.53.1
+      type: gauge
+      help: MIB's version, the current version is 3 - 1.3.6.1.4.1.9.6.1.101.53.1
+    - name: rlPhdModuleStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.1
+      type: gauge
+      help: The number of the stack unit - 1.3.6.1.4.1.9.6.1.101.53.2.1.1
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+    - name: rlPhdModuleIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.2
+      type: gauge
+      help: The number of the module in its stack unit - 1.3.6.1.4.1.9.6.1.101.53.2.1.2
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+    - name: rlPhdModuleType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.3
+      type: gauge
+      help: The index for each module type - 1.3.6.1.4.1.9.6.1.101.53.2.1.3
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+    - name: rlPhdModuleStartingPort
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.4
+      type: gauge
+      help: The minimal number of the port residing on this module. - 1.3.6.1.4.1.9.6.1.101.53.2.1.4
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+    - name: rlPhdModuleNumberOfPorts
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.5
+      type: gauge
+      help: The number of ports residing on this module. - 1.3.6.1.4.1.9.6.1.101.53.2.1.5
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+    - name: rlPhdModuleRow
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.6
+      type: gauge
+      help: On which row (the uppermost being numbered 1 and the highest row number
+        asigned to the lowest row) this module resides within the chassis of its stack
+        unit. - 1.3.6.1.4.1.9.6.1.101.53.2.1.6
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+    - name: rlPhdModuleColumn
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.7
+      type: gauge
+      help: On which column (the leftmost being numbered 1 and the highest column
+        number asigned to the rightmost column) this module resides within the chassis
+        of its stack unit. - 1.3.6.1.4.1.9.6.1.101.53.2.1.7
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+    - name: rlPhdModuleRole
+      oid: 1.3.6.1.4.1.9.6.1.101.53.2.1.8
+      type: gauge
+      help: The module role in the stack. - 1.3.6.1.4.1.9.6.1.101.53.2.1.8
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+      enum_values:
+        1: standalone
+        2: controller
+        3: backup
+        4: member
+    - name: rlPhdPortsIfIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.1
+      type: gauge
+      help: The L2 interface number associated with this port. - 1.3.6.1.4.1.9.6.1.101.53.3.1.1
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+    - name: rlPhdPortsIfIndexName
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.2
+      type: DisplayString
+      help: The L2 interface number associated with this port, in string format based
+        on the overall hardware architecture of the device (i.e., for monolithic devices
+        just numbers, devices composed of modules (boards, cards) or stackable devices
+        composed of monolithic units in form <module /stack unit number> - <port number
+        on current module /stack unit number>, stackable devices in which each unit
+        is composed of modules <stack unit number> - <module number> - <port number>
+        - 1.3.6.1.4.1.9.6.1.101.53.3.1.2
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+    - name: rlPhdPortsMediaType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.3
+      type: gauge
+      help: The media type of this port. - 1.3.6.1.4.1.9.6.1.101.53.3.1.3
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+      enum_values:
+        1: copper
+        2: optic-fiber
+        3: combo
+    - name: rlPhdPortsStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.4
+      type: gauge
+      help: The number of the slot to which this port belongs. - 1.3.6.1.4.1.9.6.1.101.53.3.1.4
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+    - name: rlPhdPortsModuleNumber
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.5
+      type: gauge
+      help: The number of the stack unit to which this port resides in. - 1.3.6.1.4.1.9.6.1.101.53.3.1.5
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+    - name: rlPhdPortsRow
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.6
+      type: gauge
+      help: On which row (the uppermost being numbered 1 and the highest row number
+        asigned to the lowest row) this port resides within its module. - 1.3.6.1.4.1.9.6.1.101.53.3.1.6
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+    - name: rlPhdPortsColumn
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.7
+      type: gauge
+      help: On which column (the leftmost being numbered 1 and the highest column
+        number asigned to the rightmost column) this this port resides within its
+        module. - 1.3.6.1.4.1.9.6.1.101.53.3.1.7
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+    - name: rlPhdConnectorType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.8
+      type: gauge
+      help: Type of connector. - 1.3.6.1.4.1.9.6.1.101.53.3.1.8
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+      enum_values:
+        1: other
+        2: rj45
+        3: rj45S
+        4: db9
+        5: bnc
+        6: fAUI
+        7: mAUI
+        8: fiberSC
+        9: fiberMIC
+        10: fiberST
+        11: telco
+        12: mtrj
+        13: hssdc
+    - name: rlPhdPortHaul
+      oid: 1.3.6.1.4.1.9.6.1.101.53.3.1.9
+      type: gauge
+      help: Distance supported by this port. - 1.3.6.1.4.1.9.6.1.101.53.3.1.9
+      indexes:
+      - labelname: rlPhdPortsIfIndex
+        type: gauge
+      enum_values:
+        1: not-relevant
+        2: short
+        3: long
+    - name: rlPhdStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.4.1.1
+      type: gauge
+      help: The stack unit described by this entry. - 1.3.6.1.4.1.9.6.1.101.53.4.1.1
+      indexes:
+      - labelname: rlPhdStackUnit
+        type: gauge
+    - name: rlPhdStackType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.4.1.2
+      type: gauge
+      help: 'The type of the stack unit described by this entry: 1 - box 3202 2 -
+        box LG 3 - bcm 4 - prestera - 1.3.6.1.4.1.9.6.1.101.53.4.1.2'
+      indexes:
+      - labelname: rlPhdStackUnit
+        type: gauge
+    - name: rlPhdStackConnect1
+      oid: 1.3.6.1.4.1.9.6.1.101.53.4.1.3
+      type: gauge
+      help: The unit number connected to the Hyper GLink left side connection - 0
+        means not connected; other integer indicates the unit number. - 1.3.6.1.4.1.9.6.1.101.53.4.1.3
+      indexes:
+      - labelname: rlPhdStackUnit
+        type: gauge
+    - name: rlPhdStackConnect2
+      oid: 1.3.6.1.4.1.9.6.1.101.53.4.1.4
+      type: gauge
+      help: The unit number connected to the Hyper GLink right side connection - 0
+        means not connected; other integer indicates the unit number. - 1.3.6.1.4.1.9.6.1.101.53.4.1.4
+      indexes:
+      - labelname: rlPhdStackUnit
+        type: gauge
+    - name: rlPhdStackSofrwareVer
+      oid: 1.3.6.1.4.1.9.6.1.101.53.4.1.5
+      type: DisplayString
+      help: The Software version of the unit. - 1.3.6.1.4.1.9.6.1.101.53.4.1.5
+      indexes:
+      - labelname: rlPhdStackUnit
+        type: gauge
+    - name: rlPhdStackProductID
+      oid: 1.3.6.1.4.1.9.6.1.101.53.4.1.6
+      type: DisplayString
+      help: The Product ID of the unit. - 1.3.6.1.4.1.9.6.1.101.53.4.1.6
+      indexes:
+      - labelname: rlPhdStackUnit
+        type: gauge
+    - name: rlPhdStackMacAddr
+      oid: 1.3.6.1.4.1.9.6.1.101.53.4.1.7
+      type: PhysAddress48
+      help: The physical (MAC) address of the unit. - 1.3.6.1.4.1.9.6.1.101.53.4.1.7
+      indexes:
+      - labelname: rlPhdStackUnit
+        type: gauge
+    - name: rlPhdModuleHotSwapAdminStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.5.1.1
+      type: gauge
+      help: The desired state of the module - 1.3.6.1.4.1.9.6.1.101.53.5.1.1
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+      enum_values:
+        1: "on"
+        2: "off"
+    - name: rlPhdModuleHotSwapOperStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.5.1.2
+      type: gauge
+      help: The current Hot Swap state of the module - 1.3.6.1.4.1.9.6.1.101.53.5.1.2
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: rlPhdModuleIndex
+        type: gauge
+      enum_values:
+        1: "on"
+        2: "off"
+    - name: rlPhdStackOrderCurrentUnitPosition
+      oid: 1.3.6.1.4.1.9.6.1.101.53.6.1.1
+      type: gauge
+      help: The current stack unit position. - 1.3.6.1.4.1.9.6.1.101.53.6.1.1
+      indexes:
+      - labelname: rlPhdStackOrderCurrentUnitPosition
+        type: gauge
+    - name: rlPhdStackOrderDesiredUnitPosition
+      oid: 1.3.6.1.4.1.9.6.1.101.53.6.1.2
+      type: gauge
+      help: The desired stack unit position - 1.3.6.1.4.1.9.6.1.101.53.6.1.2
+      indexes:
+      - labelname: rlPhdStackOrderCurrentUnitPosition
+        type: gauge
+    - name: rlPhdStackOrderUnitIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.53.6.1.3
+      type: gauge
+      help: This is the original unit index, i.e - 1.3.6.1.4.1.9.6.1.101.53.6.1.3
+      indexes:
+      - labelname: rlPhdStackOrderCurrentUnitPosition
+        type: gauge
+    - name: rlPhdStackOrderUnitType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.6.1.4
+      type: gauge
+      help: The type of the stack unit described by this entry - 1.3.6.1.4.1.9.6.1.101.53.6.1.4
+      indexes:
+      - labelname: rlPhdStackOrderCurrentUnitPosition
+        type: gauge
+    - name: rlPhdStackReorder
+      oid: 1.3.6.1.4.1.9.6.1.101.53.7
+      type: gauge
+      help: Setting this MIB object will cause the settings of the rlPhdStackOrderDesiredUnitPosition
+        MIB object instances to take effect - 1.3.6.1.4.1.9.6.1.101.53.7
+      enum_values:
+        1: reorder
+    - name: rlPhdNumberOfUnits
+      oid: 1.3.6.1.4.1.9.6.1.101.53.8
+      type: gauge
+      help: Shows the current number of units in the stack. - 1.3.6.1.4.1.9.6.1.101.53.8
+    - name: rlPhdMaxNumberOfUnits
+      oid: 1.3.6.1.4.1.9.6.1.101.53.9
+      type: gauge
+      help: Shows the maximum number of units in the stack. - 1.3.6.1.4.1.9.6.1.101.53.9
+    - name: rlPhdForceControllerUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.10
+      type: gauge
+      help: Force unit to be controller. - 1.3.6.1.4.1.9.6.1.101.53.10
+    - name: rlPhdStackFixedUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.11
+      type: gauge
+      help: Determine which unit will be on bottom/top of list on Show-List command(see
+        . - 1.3.6.1.4.1.9.6.1.101.53.11
+    - name: rlPhdStackFixedUnitLocation
+      oid: 1.3.6.1.4.1.9.6.1.101.53.12
+      type: gauge
+      help: Determine the bottom/top object in the stack table. - 1.3.6.1.4.1.9.6.1.101.53.12
+      enum_values:
+        1: bottom
+        2: top
+    - name: rlPhdStackReloadUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.13
+      type: gauge
+      help: Reset a specific unit. - 1.3.6.1.4.1.9.6.1.101.53.13
+    - name: rlPhdUnitGenParamStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.1
+      type: gauge
+      help: The index of the stack unit to which this conceptual row corresponds.
+        - 1.3.6.1.4.1.9.6.1.101.53.14.1.1
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamSoftwareVersion
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.2
+      type: DisplayString
+      help: Serial number of the product. - 1.3.6.1.4.1.9.6.1.101.53.14.1.2
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamFirmwareVersion
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.3
+      type: DisplayString
+      help: Serial number of the product. - 1.3.6.1.4.1.9.6.1.101.53.14.1.3
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamHardwareVersion
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.4
+      type: DisplayString
+      help: Serial number of the product. - 1.3.6.1.4.1.9.6.1.101.53.14.1.4
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamSerialNum
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.5
+      type: DisplayString
+      help: Serial number of the product. - 1.3.6.1.4.1.9.6.1.101.53.14.1.5
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamAssetTag
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.6
+      type: DisplayString
+      help: Serial number of the product. - 1.3.6.1.4.1.9.6.1.101.53.14.1.6
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamServiceTag
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.7
+      type: DisplayString
+      help: Asset tag of the product. - 1.3.6.1.4.1.9.6.1.101.53.14.1.7
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamSoftwareDate
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.8
+      type: DisplayString
+      help: Date of product's software. - 1.3.6.1.4.1.9.6.1.101.53.14.1.8
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamFirmwareDate
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.9
+      type: DisplayString
+      help: Date of product's firmware. - 1.3.6.1.4.1.9.6.1.101.53.14.1.9
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamManufacturer
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.10
+      type: DisplayString
+      help: Product's Manufacturer. - 1.3.6.1.4.1.9.6.1.101.53.14.1.10
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamModelName
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.11
+      type: DisplayString
+      help: Model Name. - 1.3.6.1.4.1.9.6.1.101.53.14.1.11
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamMd5ChksumBoot
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.12
+      type: DisplayString
+      help: MD5 Checksum for Boot - 1.3.6.1.4.1.9.6.1.101.53.14.1.12
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamMd5ChksumImage1
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.13
+      type: DisplayString
+      help: MD5 Checksum for Image 1 - 1.3.6.1.4.1.9.6.1.101.53.14.1.13
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamMd5ChksumImage2
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.14
+      type: DisplayString
+      help: MD5 Checksum for Image 2 - 1.3.6.1.4.1.9.6.1.101.53.14.1.14
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamRegistrationDone
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.15
+      type: gauge
+      help: Registration Done. - 1.3.6.1.4.1.9.6.1.101.53.14.1.15
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: rlPhdUnitGenParamRegistrationSuppressed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.16
+      type: gauge
+      help: Registration Suppressed. - 1.3.6.1.4.1.9.6.1.101.53.14.1.16
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: rlPhdUnitGenParamCpldVersion
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.17
+      type: DisplayString
+      help: CPLD version - 1.3.6.1.4.1.9.6.1.101.53.14.1.17
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitGenParamMcuVersion
+      oid: 1.3.6.1.4.1.9.6.1.101.53.14.1.18
+      type: DisplayString
+      help: MCU version - 1.3.6.1.4.1.9.6.1.101.53.14.1.18
+      indexes:
+      - labelname: rlPhdUnitGenParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.1
+      type: gauge
+      help: The index of the stack unit to which this conceptual row corresponds -
+        1.3.6.1.4.1.9.6.1.101.53.15.1.1
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamMainPSStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.2
+      type: gauge
+      help: The mandatory state of the main PS being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.2
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamRedundantPSStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.3
+      type: gauge
+      help: The mandatory state of the redundant PS being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.3
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamFan1Status
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.4
+      type: gauge
+      help: The mandatory state of the FAN 1 being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.4
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamFan2Status
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.5
+      type: gauge
+      help: The mandatory state of the FAN 2 being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.5
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamFan3Status
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.6
+      type: gauge
+      help: The mandatory state of the FAN 3 being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.6
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamFan4Status
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.7
+      type: gauge
+      help: The mandatory state of the FAN 4 being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.7
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamFan5Status
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.8
+      type: gauge
+      help: The mandatory state of the FAN 5 being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.8
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamFan6Status
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.9
+      type: gauge
+      help: The mandatory state of the FAN 6 being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.9
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: normal
+        2: warning
+        3: critical
+        4: shutdown
+        5: notPresent
+        6: notFunctioning
+        7: notAvailable
+        8: backingUp
+        9: readingFailed
+    - name: rlPhdUnitEnvParamTempSensorValue
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.10
+      type: gauge
+      help: Current value for the Sensor being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.10
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamTempSensorStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.11
+      type: gauge
+      help: Status value for the Sensor being instrumented. - 1.3.6.1.4.1.9.6.1.101.53.15.1.11
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: ok
+        2: unavailable
+        3: nonoperational
+    - name: rlPhdUnitEnvParamTempSensorWarningThresholdValue
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.12
+      type: gauge
+      help: Temperature warning threshold value for the Sensor being instrumented.
+        - 1.3.6.1.4.1.9.6.1.101.53.15.1.12
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamTempSensorCriticalThresholdValue
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.13
+      type: gauge
+      help: Temperature critical threshold value for the Sensor being instrumented.
+        - 1.3.6.1.4.1.9.6.1.101.53.15.1.13
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamUpTime
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.14
+      type: gauge
+      help: Up time of the unit in 100th of second (sec/100). - 1.3.6.1.4.1.9.6.1.101.53.15.1.14
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamMonitorAutoRecoveryEnable
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.15
+      type: gauge
+      help: Disable environment automatic recovery option - 1.3.6.1.4.1.9.6.1.101.53.15.1.15
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: rlPhdUnitEnvParamMonitorTemperatureStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.16
+      type: gauge
+      help: Display environment monitoring chassis temperature status - 1.3.6.1.4.1.9.6.1.101.53.15.1.16
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: ok
+        2: overTemperatureThreshold
+        3: overCriticalTemperatureThreshold
+    - name: rlPhdUnitEnvParamMonitorOperStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.17
+      type: gauge
+      help: Display environment automatic recovery current status (active/not active)
+        - 1.3.6.1.4.1.9.6.1.101.53.15.1.17
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: rlPhdUnitEnvParamFan1Speed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.18
+      type: gauge
+      help: Rotation speed of FAN 1 in RPM - 1.3.6.1.4.1.9.6.1.101.53.15.1.18
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan2Speed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.19
+      type: gauge
+      help: Rotation speed of FAN 2 in RPM - 1.3.6.1.4.1.9.6.1.101.53.15.1.19
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan3Speed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.20
+      type: gauge
+      help: Rotation speed of FAN 3 in RPM - 1.3.6.1.4.1.9.6.1.101.53.15.1.20
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan4Speed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.21
+      type: gauge
+      help: Rotation speed of FAN 4 in RPM - 1.3.6.1.4.1.9.6.1.101.53.15.1.21
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan5Speed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.22
+      type: gauge
+      help: Rotation speed of FAN 5 in RPM - 1.3.6.1.4.1.9.6.1.101.53.15.1.22
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan6Speed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.23
+      type: gauge
+      help: Rotation speed of FAN 6 in RPM - 1.3.6.1.4.1.9.6.1.101.53.15.1.23
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamLedColor
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.24
+      type: gauge
+      help: Informs the color of the LED on the Unit. - 1.3.6.1.4.1.9.6.1.101.53.15.1.24
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan1SpeedDutyCycle
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.25
+      type: gauge
+      help: Rotation speed of FAN 1 in Duty Cycle - 1.3.6.1.4.1.9.6.1.101.53.15.1.25
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan2SpeedDutyCycle
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.26
+      type: gauge
+      help: Rotation speed of FAN 2 in Duty Cycle - 1.3.6.1.4.1.9.6.1.101.53.15.1.26
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan3SpeedDutyCycle
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.27
+      type: gauge
+      help: Rotation speed of FAN 3 in Duty Cycle - 1.3.6.1.4.1.9.6.1.101.53.15.1.27
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan4SpeedDutyCycle
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.28
+      type: gauge
+      help: Rotation speed of FAN 4 in Duty Cycle - 1.3.6.1.4.1.9.6.1.101.53.15.1.28
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan5SpeedDutyCycle
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.29
+      type: gauge
+      help: Rotation speed of FAN 5 in Duty Cycle - 1.3.6.1.4.1.9.6.1.101.53.15.1.29
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdUnitEnvParamFan6SpeedDutyCycle
+      oid: 1.3.6.1.4.1.9.6.1.101.53.15.1.30
+      type: gauge
+      help: Rotation speed of FAN 6 in Duty Cycle - 1.3.6.1.4.1.9.6.1.101.53.15.1.30
+      indexes:
+      - labelname: rlPhdUnitEnvParamStackUnit
+        type: gauge
+    - name: rlPhdStackOrderTopUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.16
+      type: gauge
+      help: This scalar mib holds the Top unit for the stack order command - 1.3.6.1.4.1.9.6.1.101.53.16
+    - name: rlPhdStackOrderBottomUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.17
+      type: gauge
+      help: This scalar mib holds the Bottom unit for the stack order command - 1.3.6.1.4.1.9.6.1.101.53.17
+    - name: rlPhdStackOrderPermutation
+      oid: 1.3.6.1.4.1.9.6.1.101.53.18
+      type: OctetString
+      help: This scalar mib holds stack permutation - 1.3.6.1.4.1.9.6.1.101.53.18
+    - name: rlPhdNumberOfPoeUnits
+      oid: 1.3.6.1.4.1.9.6.1.101.53.19
+      type: gauge
+      help: Shows the current number of poe units in the stack. - 1.3.6.1.4.1.9.6.1.101.53.19
+    - name: rlPhdPoeStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.20.1.1
+      type: gauge
+      help: The stack unit to which this module belongs. - 1.3.6.1.4.1.9.6.1.101.53.20.1.1
+      indexes:
+      - labelname: rlPhdPoeStackUnit
+        type: gauge
+    - name: rlPhdPoePresent
+      oid: 1.3.6.1.4.1.9.6.1.101.53.20.1.2
+      type: gauge
+      help: The present state of the PoE module - 1.3.6.1.4.1.9.6.1.101.53.20.1.2
+      indexes:
+      - labelname: rlPhdPoeStackUnit
+        type: gauge
+      enum_values:
+        1: "no"
+        2: "yes"
+    - name: rlPhdPhyLedStackUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.21
+      type: gauge
+      help: This scalar mib holds the unit number for the stack light command - 1.3.6.1.4.1.9.6.1.101.53.21
+    - name: rlPhdPhyLedTimeout
+      oid: 1.3.6.1.4.1.9.6.1.101.53.22
+      type: gauge
+      help: This scalar mib holds the timeout for the stack light command - 1.3.6.1.4.1.9.6.1.101.53.22
+    - name: rlCascadeNeighborIfIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.1
+      type: gauge
+      help: The ifIndex of a stacking port in the neighbor unit - 0 means not connected;
+        other integer indicates the IfIndex. - 1.3.6.1.4.1.9.6.1.101.53.23.1.1
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+    - name: rlCascadeNeighborUnit
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.2
+      type: gauge
+      help: The unit number of the neighbor unit - 0 means not connected; other integer
+        indicates the unit number. - 1.3.6.1.4.1.9.6.1.101.53.23.1.2
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+    - name: rlCascadeTrunkId
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.3
+      type: gauge
+      help: The id of the trunk, the stacking port is member, zero if the port is
+        not member of trunk. - 1.3.6.1.4.1.9.6.1.101.53.23.1.3
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+    - name: rlCascadeUnitId
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.4
+      type: gauge
+      help: The unit number matching the current ifIndex - 1.3.6.1.4.1.9.6.1.101.53.23.1.4
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+    - name: rlCascadePortSpeed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.5
+      type: gauge
+      help: Port speed - 1.3.6.1.4.1.9.6.1.101.53.23.1.5
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      enum_values:
+        0: port-speed-unknown
+        1: port-speed-100M
+        2: port-speed-1G
+        3: port-speed-10G
+        6: port-speed-5G
+        8: port-speed-20G
+        9: port-speed-40G
+        13: port-speed-100G
+        14: port-speed-auto
+        21: port-speed-25G
+    - name: rlCascadePortState
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.6
+      type: gauge
+      help: Port state according to cascade LAG state machine - 1.3.6.1.4.1.9.6.1.101.53.23.1.6
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      enum_values:
+        0: error
+        1: init
+        2: down
+        3: active
+        4: standby
+    - name: rlCascadePortRow
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.7
+      type: gauge
+      help: The port row number - 1.3.6.1.4.1.9.6.1.101.53.23.1.7
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+    - name: rlCascadePortColumn
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.8
+      type: gauge
+      help: The port column number - 1.3.6.1.4.1.9.6.1.101.53.23.1.8
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+    - name: rlCascadePortMediaType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.23.1.9
+      type: gauge
+      help: The media type of this port. - 1.3.6.1.4.1.9.6.1.101.53.23.1.9
+      indexes:
+      - labelname: ifIndex
+        type: gauge
+      enum_values:
+        1: copper
+        2: optic-fiber
+        3: combo
+    - name: rlCascadeAdminUnitId
+      oid: 1.3.6.1.4.1.9.6.1.101.53.24.1.1
+      type: gauge
+      help: The active unit number - 1.3.6.1.4.1.9.6.1.101.53.24.1.1
+      indexes:
+      - labelname: rlCascadeAdminUnitId
+        type: gauge
+    - name: rlCascadeAdminIndexList
+      oid: 1.3.6.1.4.1.9.6.1.101.53.24.1.2
+      type: OctetString
+      help: Indicates the stack ports indexes list - 1.3.6.1.4.1.9.6.1.101.53.24.1.2
+      indexes:
+      - labelname: rlCascadeAdminUnitId
+        type: gauge
+    - name: rlCascadeAdminSpeed
+      oid: 1.3.6.1.4.1.9.6.1.101.53.24.1.3
+      type: gauge
+      help: Cascade port speed - 1.3.6.1.4.1.9.6.1.101.53.24.1.3
+      indexes:
+      - labelname: rlCascadeAdminUnitId
+        type: gauge
+      enum_values:
+        0: port-speed-unknown
+        1: port-speed-100M
+        2: port-speed-1G
+        3: port-speed-10G
+        6: port-speed-5G
+        8: port-speed-20G
+        9: port-speed-40G
+        13: port-speed-100G
+        14: port-speed-auto
+        21: port-speed-25G
+    - name: rlCascadeSupportedPortList
+      oid: 1.3.6.1.4.1.9.6.1.101.53.24.1.4
+      type: OctetString
+      help: Indicates which ports can be configured as stack ports. - 1.3.6.1.4.1.9.6.1.101.53.24.1.4
+      indexes:
+      - labelname: rlCascadeAdminUnitId
+        type: gauge
+    - name: rlPhdUnitStackPortName
+      oid: 1.3.6.1.4.1.9.6.1.101.53.25.1.1
+      type: DisplayString
+      help: Stack port name - 1.3.6.1.4.1.9.6.1.101.53.25.1.1
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: ifIndex
+        type: gauge
+    - name: rlPhdUnitStackPortType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.25.1.2
+      type: gauge
+      help: Stack port type - 1.3.6.1.4.1.9.6.1.101.53.25.1.2
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: ifIndex
+        type: gauge
+      enum_values:
+        0: port-type-100M
+        1: port-type-1G
+        2: port-type-5G
+        3: port-type-10G
+        4: port-type-25G
+    - name: rlPhdUnitStackPortConnectionType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.25.1.3
+      type: gauge
+      help: Operational connection type (copper(1), combo-copper(2), combo-fiber(3),
+        fiber(4), direct-Attached(5)) - 1.3.6.1.4.1.9.6.1.101.53.25.1.3
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: ifIndex
+        type: gauge
+      enum_values:
+        1: copper
+        2: combo-copper
+        3: combo-fiber
+        4: fiber
+        5: direct-attached
+    - name: rlPhdUnitStackPortRow
+      oid: 1.3.6.1.4.1.9.6.1.101.53.25.1.4
+      type: gauge
+      help: On which row (the uppermost being numbered 1 and the highest row number
+        assigned to the lowest row) this actual/candidate cascade port resides within
+        the chassis of its stack unit. - 1.3.6.1.4.1.9.6.1.101.53.25.1.4
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: ifIndex
+        type: gauge
+    - name: rlPhdUnitStackPortColumn
+      oid: 1.3.6.1.4.1.9.6.1.101.53.25.1.5
+      type: gauge
+      help: On which column (the leftmost being numbered 1 and the highest column
+        number assigned to the rightmost column) this actual/candidate cascade port
+        resides within the chassis of its stack unit. - 1.3.6.1.4.1.9.6.1.101.53.25.1.5
+      indexes:
+      - labelname: rlPhdModuleStackUnit
+        type: gauge
+      - labelname: ifIndex
+        type: gauge
+    - name: rlPhdUnitIfsMappingUnitId
+      oid: 1.3.6.1.4.1.9.6.1.101.53.26.1.1
+      type: gauge
+      help: Unit Id - 1.3.6.1.4.1.9.6.1.101.53.26.1.1
+      indexes:
+      - labelname: rlPhdUnitIfsMappingUnitId
+        type: gauge
+    - name: rlPhdUnitIfsMappingUnitType
+      oid: 1.3.6.1.4.1.9.6.1.101.53.26.1.2
+      type: gauge
+      help: Actual unit type used for interface mapping. - 1.3.6.1.4.1.9.6.1.101.53.26.1.2
+      indexes:
+      - labelname: rlPhdUnitIfsMappingUnitId
+        type: gauge
+    - name: rlPhdPhyLedTimeRemaining
+      oid: 1.3.6.1.4.1.9.6.1.101.53.27
+      type: gauge
+      help: This scalar mib holds the time remaining for the stack light command timout
+        to expire - 1.3.6.1.4.1.9.6.1.101.53.27
+    - name: rlPhdPhyLedPattern
+      oid: 1.3.6.1.4.1.9.6.1.101.53.28
+      type: gauge
+      help: This scalar mib holds the pattern configuration required for the stack
+        light command. - 1.3.6.1.4.1.9.6.1.101.53.28
+      enum_values:
+        0: pattern-unknown
+        1: pattern-blink
+        2: pattern-alternating
+        3: pattern-system
+    - name: rlPhdResetButtonStatus
+      oid: 1.3.6.1.4.1.9.6.1.101.53.29
+      type: gauge
+      help: This scalar mib holds the Reset button status configuration. - 1.3.6.1.4.1.9.6.1.101.53.29
+      enum_values:
+        0: enabled
+        1: disabled
+    - name: rlPhdBeaconLightIndex
+      oid: 1.3.6.1.4.1.9.6.1.101.53.30.1.1
+      type: gauge
+      help: Index in the table - 1.3.6.1.4.1.9.6.1.101.53.30.1.1
+      indexes:
+      - labelname: rlPhdBeaconLightIndex
+        type: gauge
+    - name: rlPhdBeaconLightPortList
+      oid: 1.3.6.1.4.1.9.6.1.101.53.30.1.2
+      type: OctetString
+      help: Beacon light Port List. - 1.3.6.1.4.1.9.6.1.101.53.30.1.2
+      indexes:
+      - labelname: rlPhdBeaconLightIndex
+        type: gauge
+    - name: rlPhdBeaconLightMode
+      oid: 1.3.6.1.4.1.9.6.1.101.53.30.1.3
+      type: gauge
+      help: Beacon light LED mode. - 1.3.6.1.4.1.9.6.1.101.53.30.1.3
+      indexes:
+      - labelname: rlPhdBeaconLightIndex
+        type: gauge
+      enum_values:
+        1: mode-blink
+        2: mode-solid
+    - name: rlPhdBeaconLightDuration
+      oid: 1.3.6.1.4.1.9.6.1.101.53.30.1.4
+      type: gauge
+      help: Beacon light duration in seconds - 1.3.6.1.4.1.9.6.1.101.53.30.1.4
+      indexes:
+      - labelname: rlPhdBeaconLightIndex
+        type: gauge
     - name: rlEnvMonFanStatusIndex
       oid: 1.3.6.1.4.1.9.6.1.101.83.1.1.1.1
       type: gauge

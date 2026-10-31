@@ -628,6 +628,10 @@ $(MIBDIR)/.ciscosb-device:
 	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-mng.mib $(MIBDIR)/
 	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-env_mib.mib $(MIBDIR)/
 	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-deviceparams-mib.mib $(MIBDIR)/
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-physdescription.mib $(MIBDIR)/
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-traps-mib.mib $(MIBDIR)/
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/rfc2668.mib $(MIBDIR)/
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-bridgemibobjects-mib.mib $(MIBDIR)/
 	@touch $(MIBDIR)/.ciscosb-device
 
 $(MIBDIR)/.yamaha-rt:
