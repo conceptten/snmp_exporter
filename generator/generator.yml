@@ -135,6 +135,19 @@ modules:
       cempMemPoolName:
         type: DisplayString
 
+  ciscosb_device:
+    walk:
+      - CISCOSB-rndMng::rlCpuUtilDuringLastSecond
+      - CISCOSB-rndMng::rlCpuUtilDuringLastMinute
+      - CISCOSB-rndMng::rlCpuUtilDuringLast5Minutes
+    overrides:
+      rlCpuUtilDuringLastSecond:
+        name: cpmCPUTotal1secRev
+      rlCpuUtilDuringLastMinute:
+        name: cpmCPUTotal1minRev
+      rlCpuUtilDuringLast5Minutes:
+        name: cpmCPUTotal5minRev
+
   cisco_fc_fe:
     walk:
       - CISCO-FC-FE-MIB::fcIfInvalidCrcs

@@ -1,0 +1,400 @@
+CISCOSB-IPTRACKING-MIB DEFINITIONS ::= BEGIN
+
+-- Title: CISCOSB LOCALIZATION ROS
+--                      This Private MIB supports the IP device tracking feature
+-- Version:             1.0
+-- Date:                27 May 2024
+IMPORTS
+    OBJECT-TYPE, MODULE-IDENTITY, IpAddress                     FROM SNMPv2-SMI
+    VlanIndex                                                   FROM Q-BRIDGE-MIB
+    TruthValue, MacAddress, TEXTUAL-CONVENTION,
+    DisplayString, RowStatus                                    FROM SNMPv2-TC
+    InterfaceIndex, InterfaceIndexOrZero                        FROM IF-MIB
+    InetAddressType, InetAddress                                FROM INET-ADDRESS-MIB
+    switch001                                                    FROM CISCOSB-MIB;
+
+rlIpTracking MODULE-IDENTITY
+    LAST-UPDATED "202405270000Z"
+                ORGANIZATION "Cisco Systems, Inc."
+                CONTACT-INFO
+                "Postal: 170 West Tasman Drive
+                San Jose , CA 95134-1706
+                USA
+
+                
+                Website:  Cisco Small Business Support Community <http://www.cisco.com/go/smallbizsupport>"
+
+    DESCRIPTION
+        "The private MIB module definition for IP Device Tracking in CISCOSB devices."
+    REVISION "202405270000Z"
+    DESCRIPTION
+        "Initial revision."
+    ::= { switch001 251 }
+
+RlIpTrackingSourceApp ::= TEXTUAL-CONVENTION
+    STATUS  current
+    DESCRIPTION
+        "Specifies source applications."
+    SYNTAX  INTEGER {
+         arp(1),
+         dhcp(2),
+         static(3),
+         debug(4)
+}
+
+RlIpTrackingInterfaceClientsFeatures ::= TEXTUAL-CONVENTION
+	STATUS  current
+    DESCRIPTION
+        "The reason for enabling IP-tracking on the interface."
+    SYNTAX  BITS {
+         dot1x(0)
+}
+
+-- Global settings --
+rlIpTrackingEnabled OBJECT-TYPE
+    SYNTAX      TruthValue
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Enable or disable the IP Device Tracking feature."
+    ::= { rlIpTracking 1 }
+
+rlIpTrackingProbeCount OBJECT-TYPE
+    SYNTAX      INTEGER (1..255)
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Set the global value of the number of ARP probes sent before removing an entry from the IPDT table."
+    ::= { rlIpTracking 2 }
+
+rlIpTrackingProbeInterval OBJECT-TYPE
+    SYNTAX      INTEGER (30..1814400)
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Set the global value of the interval between ARP probes sent by the device."
+    ::= { rlIpTracking 3 }
+
+rlIpTrackingProbeDelay OBJECT-TYPE
+    SYNTAX      INTEGER (0..120)
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Define the delay before sending an ARP probe to an inactive IPDT entry."
+    ::= { rlIpTracking 4 }
+
+-- Probe Auto Source --
+rlIpTrackingProbeAutoSourceTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF RlIpTrackingProbeAutoSourceEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "A table for the probe auto source address and mask"
+    ::= { rlIpTracking 5 }
+
+rlIpTrackingProbeAutoSourceEntry OBJECT-TYPE
+    SYNTAX      RlIpTrackingProbeAutoSourceEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "Table entry"
+    INDEX       { rlIpTrackingProbeAutoSourceEntryIndex }
+    ::= { rlIpTrackingProbeAutoSourceTable 1 }
+
+RlIpTrackingProbeAutoSourceEntry::= SEQUENCE {
+        rlIpTrackingProbeAutoSourceEntryIndex      INTEGER,
+        rlIpTrackingProbeAutoSourceInetType        InetAddressType,
+        rlIpTrackingProbeAutoSourceInetAddress     InetAddress,
+        rlIpTrackingProbeAutoSourceInetMaskType    InetAddressType,
+        rlIpTrackingProbeAutoSourceInetMask        InetAddress,
+        rlIpTrackingProbeAutoSourceStatus          RowStatus
+    }
+
+rlIpTrackingProbeAutoSourceEntryIndex OBJECT-TYPE
+    SYNTAX      INTEGER {
+		static(1)
+	}
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "Entry index"
+    ::= { rlIpTrackingProbeAutoSourceEntry 1 }
+
+rlIpTrackingProbeAutoSourceInetType OBJECT-TYPE
+    SYNTAX      InetAddressType
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Inet address type (IPv4, IPv6)"
+    ::= { rlIpTrackingProbeAutoSourceEntry 2 }
+
+rlIpTrackingProbeAutoSourceInetAddress OBJECT-TYPE
+    SYNTAX      InetAddress
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Inet address"
+    ::= { rlIpTrackingProbeAutoSourceEntry 3 }
+
+rlIpTrackingProbeAutoSourceInetMaskType OBJECT-TYPE
+    SYNTAX      InetAddressType
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Inet mask address type (IPv4, IPv6)"
+    ::= { rlIpTrackingProbeAutoSourceEntry 4 }
+
+rlIpTrackingProbeAutoSourceInetMask OBJECT-TYPE
+    SYNTAX      InetAddress
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Inet mask address"
+    ::= { rlIpTrackingProbeAutoSourceEntry 5 }
+
+rlIpTrackingProbeAutoSourceStatus OBJECT-TYPE
+   SYNTAX RowStatus
+   MAX-ACCESS read-write
+   STATUS current
+   DESCRIPTION       "Entry status"
+    ::= { rlIpTrackingProbeAutoSourceEntry 6 }
+
+-- Per interface settings --
+rlIpTrackingInterfaceTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF RlIpTrackingInterfaceEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "A table that contains all existing interfaces."
+    ::= { rlIpTracking 6 }
+
+rlIpTrackingInterfaceEntry OBJECT-TYPE
+    SYNTAX      RlIpTrackingInterfaceEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "An interface."
+    INDEX       { rlIpTrackingInterfaceIfIndex }
+    ::= { rlIpTrackingInterfaceTable 1 }
+
+RlIpTrackingInterfaceEntry::= SEQUENCE {
+        rlIpTrackingInterfaceIfIndex                    InterfaceIndex,
+        rlIpTrackingInterfaceEnabled                    TruthValue,
+        rlIpTrackingInterfaceMaxDevice                  INTEGER (0..65535),
+        rlIpTrackingInterfaceProbeCount                 INTEGER (-1 | 1..255),
+        rlIpTrackingInterfaceProbeCountIsUserDefined    TruthValue,
+        rlIpTrackingInterfaceProbeInterval              INTEGER (-1 | 30..1814400),
+        rlIpTrackingInterfaceProbeIntervalIsUserDefined TruthValue,
+        rlIpTrackingInterfaceClientsFeatures            RlIpTrackingInterfaceClientsFeatures
+    }
+
+rlIpTrackingInterfaceIfIndex OBJECT-TYPE
+    SYNTAX      InterfaceIndex
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "Interface Index."
+    ::= { rlIpTrackingInterfaceEntry 1 }
+
+rlIpTrackingInterfaceEnabled OBJECT-TYPE
+    SYNTAX      TruthValue
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Enable or disable the IP Device Tracking feature on this interface."
+    ::= { rlIpTrackingInterfaceEntry 2 }
+
+rlIpTrackingInterfaceMaxDevice OBJECT-TYPE
+    SYNTAX      INTEGER (0..65535)
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Define the maximum number of hosts on the interface that can be learned by the IPDT table."
+    ::= { rlIpTrackingInterfaceEntry 3 }
+
+rlIpTrackingInterfaceProbeCount OBJECT-TYPE
+    SYNTAX      INTEGER (-1 | 1..255)
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Set the interface level value of the number of ARP probes sent before removing an entry from the IPDT table.
+         value of -1 indicates no interface level value so the value will be took globally."
+    ::= { rlIpTrackingInterfaceEntry 4 }
+
+rlIpTrackingInterfaceProbeCountIsUserDefined OBJECT-TYPE
+    SYNTAX      TruthValue
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "Is user defined  probe count"
+    ::= { rlIpTrackingInterfaceEntry 5 }
+
+rlIpTrackingInterfaceProbeInterval OBJECT-TYPE
+    SYNTAX      INTEGER (-1 | 30..1814400)
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION
+        "Set the interface level value of the interval between ARP probes sent by the device.
+         value of -1 indicates no interface level value so the value will be took globally."
+    ::= { rlIpTrackingInterfaceEntry 6 }
+
+rlIpTrackingInterfaceProbeIntervalIsUserDefined OBJECT-TYPE
+    SYNTAX      TruthValue
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION
+        "Is user defined probe interval"
+    ::= { rlIpTrackingInterfaceEntry 7 }
+
+rlIpTrackingInterfaceClientsFeatures OBJECT-TYPE
+    SYNTAX      RlIpTrackingInterfaceClientsFeatures
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Show the reason for enabling IP-tracking on the interface"
+    ::= { rlIpTrackingInterfaceEntry 8 }
+
+-- Ip Mapping --
+rlIpTrackingIpMappingTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF RlIpTrackingIpMappingEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "A table for the mapped entries"
+    ::= { rlIpTracking 7 }
+
+rlIpTrackingIpMappingEntry OBJECT-TYPE
+    SYNTAX      RlIpTrackingIpMappingEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "Table entry"
+    INDEX       { rlIpTrackingIpMappingIfIndex,
+                  rlIpTrackingIpMappingMacAddress,
+                  rlIpTrackingIpMappingInetType,
+                  rlIpTrackingIpMappingInetAddress}
+    ::= { rlIpTrackingIpMappingTable 1 }
+
+RlIpTrackingIpMappingEntry::= SEQUENCE {
+        rlIpTrackingIpMappingIfIndex         InterfaceIndex,
+        rlIpTrackingIpMappingMacAddress      MacAddress,
+        rlIpTrackingIpMappingInetType        InetAddressType,
+        rlIpTrackingIpMappingInetAddress     InetAddress,
+        rlIpTrackingIpMappingVlanId          VlanIndex,
+        rlIpTrackingIpMappingProbeTimeOut    INTEGER,
+        rlIpTrackingIpMappingEntryState      TruthValue,
+        rlIpTrackingIpMappingSourceApp       RlIpTrackingSourceApp
+    }
+
+rlIpTrackingIpMappingIfIndex OBJECT-TYPE
+    SYNTAX      InterfaceIndex
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "show interface ID"
+    ::= { rlIpTrackingIpMappingEntry 1 }
+
+rlIpTrackingIpMappingMacAddress OBJECT-TYPE
+    SYNTAX      MacAddress
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "show MAC address"
+    ::= { rlIpTrackingIpMappingEntry 2 }
+
+rlIpTrackingIpMappingInetType OBJECT-TYPE
+    SYNTAX      InetAddressType
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "show inet address type (IPv4, IPv6)"
+    ::= { rlIpTrackingIpMappingEntry 3 }
+
+rlIpTrackingIpMappingInetAddress OBJECT-TYPE
+    SYNTAX      InetAddress
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "show inet address"
+    ::= { rlIpTrackingIpMappingEntry 4 }
+
+rlIpTrackingIpMappingVlanId OBJECT-TYPE
+    SYNTAX      VlanIndex
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "show vlan ID"
+    ::= { rlIpTrackingIpMappingEntry 5 }
+
+rlIpTrackingIpMappingProbeTimeOut OBJECT-TYPE
+    SYNTAX      INTEGER
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The probe-timeout for this entry"
+    ::= { rlIpTrackingIpMappingEntry 6 }
+
+rlIpTrackingIpMappingEntryState OBJECT-TYPE
+    SYNTAX      TruthValue
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "The state of this entry (Active / Inactive)"
+    ::= { rlIpTrackingIpMappingEntry 7 }
+
+rlIpTrackingIpMappingSourceApp OBJECT-TYPE
+    SYNTAX      RlIpTrackingSourceApp
+    MAX-ACCESS  read-only
+    STATUS      current
+    DESCRIPTION "Show source application"
+    ::= { rlIpTrackingIpMappingEntry 8 }
+
+-- Clear database --
+rlIpTrackingClearTable OBJECT-TYPE
+    SYNTAX      SEQUENCE OF RlIpTrackingClearEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+        "A table for the clear the mapped entries"
+    ::= { rlIpTracking 8 }
+
+rlIpTrackingClearEntry OBJECT-TYPE
+    SYNTAX      RlIpTrackingClearEntry
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION "Table entry"
+    INDEX       { rlIpTrackingClearEntryIndex }
+    ::= { rlIpTrackingClearTable 1 }
+
+RlIpTrackingClearEntry::= SEQUENCE {
+        rlIpTrackingClearEntryIndex      INTEGER,
+        rlIpTrackingClearIfIndex         InterfaceIndexOrZero,
+        rlIpTrackingClearMacAddress      MacAddress,
+        rlIpTrackingClearInetType        InetAddressType,
+        rlIpTrackingClearInetAddress     InetAddress
+}
+
+rlIpTrackingClearEntryIndex OBJECT-TYPE
+	SYNTAX      INTEGER {
+		static(1)
+	}
+	MAX-ACCESS  not-accessible
+	STATUS current
+	DESCRIPTION
+	"The index in the table."
+	::= { rlIpTrackingClearEntry 1 }
+
+rlIpTrackingClearIfIndex OBJECT-TYPE
+    SYNTAX      InterfaceIndexOrZero
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "interface ID"
+    ::= { rlIpTrackingClearEntry 2 }
+
+rlIpTrackingClearMacAddress OBJECT-TYPE
+    SYNTAX      MacAddress
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "MAC address"
+    ::= { rlIpTrackingClearEntry 3 }
+
+rlIpTrackingClearInetType OBJECT-TYPE
+    SYNTAX      InetAddressType
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "inet address type (IPv4, IPv6)"
+    ::= { rlIpTrackingClearEntry 4 }
+
+rlIpTrackingClearInetAddress OBJECT-TYPE
+    SYNTAX      InetAddress
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "inet address"
+    ::= { rlIpTrackingClearEntry 5 }
+
+END

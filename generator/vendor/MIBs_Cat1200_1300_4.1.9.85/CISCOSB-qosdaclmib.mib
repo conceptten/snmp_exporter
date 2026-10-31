@@ -1,0 +1,317 @@
+CISCOSB-QOS-DACL-MIB DEFINITIONS ::= BEGIN
+
+-- Version:    1.00
+-- Date:       0 May 2024
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE,Counter32,
+    Gauge32, Unsigned32, IpAddress, TimeTicks   FROM SNMPv2-SMI
+    InterfaceIndex,InterfaceIndexOrZero         FROM IF-MIB
+    TruthValue, RowStatus, RowPointer,
+    TEXTUAL-CONVENTION,DisplayString,MacAddress FROM SNMPv2-TC
+    InetAddressType, InetAddress                FROM INET-ADDRESS-MIB
+    Percents,switch001                                 FROM CISCOSB-MIB;
+
+
+rlQosDynamicAclMib MODULE-IDENTITY
+        LAST-UPDATED "202405010000Z"
+                ORGANIZATION "Cisco Systems, Inc."
+                CONTACT-INFO
+                "Postal: 170 West Tasman Drive
+                San Jose , CA 95134-1706
+                USA
+
+                
+                Website:  Cisco Small Business Support Community <http://www.cisco.com/go/smallbizsupport>"
+
+        DESCRIPTION
+                "The private MIB module definition for Quality Of Service Dynamic ACL
+                 in CISCOSB devices."
+        REVISION "202405010000Z"
+        DESCRIPTION
+                 "Initial version."
+        ::= { switch001 249 }
+
+DynamicAclType ::= TEXTUAL-CONVENTION
+    STATUS  current
+    DESCRIPTION
+        "Specifies Dynamic ACL types."
+    SYNTAX  INTEGER {
+         filterid(1),
+         downloadable(2),
+         redirect(3),
+         default(4),
+         opendir(5)
+}
+
+DynamicAclUsageType ::= TEXTUAL-CONVENTION
+    STATUS  current
+    DESCRIPTION
+        "Specifies Dynamic ACL usage types."
+    SYNTAX  INTEGER {
+         policy(1),
+         redirect(2)
+}
+
+--
+-- rlQosDynamicAclTable
+--
+
+rlQosDynamicAclTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF RlQosDynamicAclEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "This table specifies Dynamic ACL table information."
+    ::= { rlQosDynamicAclMib 1 }
+
+rlQosDynamicAclEntry OBJECT-TYPE
+    SYNTAX     RlQosDynamicAclEntry
+    MAX-ACCESS not-accessible
+    STATUS     current
+    DESCRIPTION
+        "Each entry in this table maintain the information for
+         Dynamic ACL."
+    INDEX { rlQosDynamicAclIndex }
+    ::= { rlQosDynamicAclTable 1 }
+
+
+RlQosDynamicAclEntry ::= SEQUENCE {
+    rlQosDynamicAclIndex                INTEGER,
+    rlQosDynamicAclType                 DynamicAclType
+}
+
+rlQosDynamicAclIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "Index to rlQosAclIndex from rlQosAclTable."
+    ::= { rlQosDynamicAclEntry 1 }
+
+rlQosDynamicAclType OBJECT-TYPE
+    SYNTAX DynamicAclType
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Dynamic ACL Type."
+    ::= { rlQosDynamicAclEntry 2 }
+
+--
+-- rlQosDynamicAclClientTable
+--
+
+rlQosDynamicAclClientTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF RlQosDynamicAclClientEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "This table specifies Dynamic ACL clients table information."
+    ::= { rlQosDynamicAclMib 2 }
+
+rlQosDynamicAclClientEntry OBJECT-TYPE
+    SYNTAX     RlQosDynamicAclClientEntry
+    MAX-ACCESS not-accessible
+    STATUS     current
+    DESCRIPTION
+        "Each entry in this table maintain the information for
+         Dynamic ACL client."
+    INDEX { rlQosDynamicAclClientIfindex,
+            rlQosDynamicAclClientMacAddress,
+            rlQosDynamicAclClientInetAddressType,
+            rlQosDynamicAclClientInetAddress,
+            rlQosDynamicAclClientAclNumber }
+    ::= { rlQosDynamicAclClientTable 1 }
+
+
+RlQosDynamicAclClientEntry ::= SEQUENCE {
+    rlQosDynamicAclClientIfindex              InterfaceIndex,
+    rlQosDynamicAclClientMacAddress           MacAddress,
+    rlQosDynamicAclClientInetAddressType      InetAddressType,
+    rlQosDynamicAclClientInetAddress          InetAddress,
+    rlQosDynamicAclClientAclNumber            INTEGER,
+    rlQosDynamicAclClientAclIndex             INTEGER,
+    rlQosDynamicAclClientAclOriginIndex       INTEGER,
+    rlQosDynamicAclClientUsageType            DynamicAclUsageType
+}
+
+rlQosDynamicAclClientIfindex OBJECT-TYPE
+    SYNTAX  InterfaceIndex
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Interface Index on which ACL is applied."
+    ::= { rlQosDynamicAclClientEntry 1 }
+
+rlQosDynamicAclClientMacAddress OBJECT-TYPE
+    SYNTAX      MacAddress
+    MAX-ACCESS  not-accessible
+    STATUS      current
+    DESCRIPTION
+            "The ACL related MAC address."
+    ::= { rlQosDynamicAclClientEntry 2 }
+
+rlQosDynamicAclClientInetAddressType OBJECT-TYPE
+   SYNTAX  InetAddressType
+   MAX-ACCESS not-accessible
+   STATUS current
+   DESCRIPTION
+       "The ACL related Inet address type IPv4 or IPv6."
+   ::= { rlQosDynamicAclClientEntry 3}
+
+rlQosDynamicAclClientInetAddress OBJECT-TYPE
+   SYNTAX     InetAddress
+   MAX-ACCESS not-accessible
+   STATUS current
+   DESCRIPTION
+       "The ACL related Inet address."
+   ::= { rlQosDynamicAclClientEntry 4 }
+
+rlQosDynamicAclClientAclNumber OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "the ACL number of below rlQosDynamicAclClientAclIndex on this client."
+    ::= { rlQosDynamicAclClientEntry 5 }
+
+rlQosDynamicAclClientAclIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Index to rlQosAclIndex from rlQosAclTable."
+    ::= { rlQosDynamicAclClientEntry 6 }
+
+rlQosDynamicAclClientAclOriginIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Index of the original rlQosDynamicAclClientAclIndex."
+    ::= { rlQosDynamicAclClientEntry 7 }
+
+rlQosDynamicAclClientUsageType OBJECT-TYPE
+    SYNTAX DynamicAclUsageType
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Dynamic ACL bind type as policy or redirect."
+    ::= { rlQosDynamicAclClientEntry 8 }
+--
+-- rlQosIfDynamicAclTable
+--
+rlQosIfDynamicAclTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF RlQosIfDynamicAclEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "This table specifies Dynamic ACL per interface table information."
+    ::= { rlQosDynamicAclMib 3 }
+
+rlQosIfDynamicAclEntry OBJECT-TYPE
+    SYNTAX     RlQosIfDynamicAclEntry
+    MAX-ACCESS not-accessible
+    STATUS     current
+    DESCRIPTION
+        "Each entry in this table maintain the information for
+         interface with dynamic ACLs."
+    INDEX { rlQosIfDynamicAclIfindex }
+    ::= { rlQosIfDynamicAclTable 1 }
+
+RlQosIfDynamicAclEntry ::= SEQUENCE {
+    rlQosIfDynamicAclIfindex                InterfaceIndex,
+    rlQosIfDynamicAclDefaultAclIndex        INTEGER,
+    rlQosIfDynamicAclNumberOfRegularClients INTEGER,
+    rlQosIfDynamicAclNumberOfAclClients     INTEGER
+}
+
+rlQosIfDynamicAclIfindex OBJECT-TYPE
+    SYNTAX  InterfaceIndex
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Interface Index on which ACL is applied."
+    ::= { rlQosIfDynamicAclEntry 1 }
+
+rlQosIfDynamicAclDefaultAclIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Default-Port attached ACL index to rlQosIfDynamicAclIfindex."
+    ::= { rlQosIfDynamicAclEntry 2 }
+
+rlQosIfDynamicAclNumberOfRegularClients OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Number of clients with no ACLs which are related to rlQosIfDynamicAclIfindex."
+    ::= { rlQosIfDynamicAclEntry 3 }
+
+rlQosIfDynamicAclNumberOfAclClients OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Number of clients with ACLs which are related to rlQosIfDynamicAclIfindex."
+    ::= { rlQosIfDynamicAclEntry 4 }
+
+--
+-- rlQosDynamicAclClonedTable
+--
+
+rlQosDynamicAclClonedTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF RlQosDynamicAclClonedEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "This table specifies Dynamic Cloned ACL table information."
+    ::= { rlQosDynamicAclMib 4 }
+
+rlQosDynamicAclClonedEntry OBJECT-TYPE
+    SYNTAX     RlQosDynamicAclClonedEntry
+    MAX-ACCESS not-accessible
+    STATUS     current
+    DESCRIPTION
+        "Each entry in this table maintain the information for
+         Dynamic Cloned ACL."
+    INDEX { rlQosDynamicAclOriginIndex,
+            rlQosDynamicAclClonedIndex}
+    ::= { rlQosDynamicAclClonedTable 1 }
+
+
+RlQosDynamicAclClonedEntry ::= SEQUENCE {
+    rlQosDynamicAclOriginIndex          INTEGER,
+    rlQosDynamicAclClonedIndex          INTEGER,
+    rlQosDynamicAclClonedType           DynamicAclType
+}
+
+rlQosDynamicAclOriginIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "Index of the original rlQosDynamicAclIndex."
+    ::= { rlQosDynamicAclClonedEntry 1 }
+
+rlQosDynamicAclClonedIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+        "Index of cloned ACL from original rlQosDynamicAclIndex."
+    ::= { rlQosDynamicAclClonedEntry 2 }
+
+rlQosDynamicAclClonedType OBJECT-TYPE
+    SYNTAX DynamicAclType
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Dynamic Cloned ACL Type."
+    ::= { rlQosDynamicAclClonedEntry 3 }
+
+
+END
+

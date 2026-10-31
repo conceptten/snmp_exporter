@@ -4398,6 +4398,24 @@ modules:
         type: DisplayString
       - labels: []
         labelname: bsnAPDot3MacAddress
+  ciscosb_device:
+    get:
+    - 1.3.6.1.4.1.9.6.1.101.1.7.0
+    - 1.3.6.1.4.1.9.6.1.101.1.8.0
+    - 1.3.6.1.4.1.9.6.1.101.1.9.0
+    metrics:
+    - name: cpmCPUTotal1secRev
+      oid: 1.3.6.1.4.1.9.6.1.101.1.7
+      type: gauge
+      help: Percentage of the device CPU utilization during last second - 1.3.6.1.4.1.9.6.1.101.1.7
+    - name: cpmCPUTotal1minRev
+      oid: 1.3.6.1.4.1.9.6.1.101.1.8
+      type: gauge
+      help: Percentage of the device CPU utilization during last minute - 1.3.6.1.4.1.9.6.1.101.1.8
+    - name: cpmCPUTotal5minRev
+      oid: 1.3.6.1.4.1.9.6.1.101.1.9
+      type: gauge
+      help: Percentage of the device CPU utilization during the last 5 minutes - 1.3.6.1.4.1.9.6.1.101.1.9
   cyberpower:
     walk:
     - 1.3.6.1.4.1.3808.1.1.1

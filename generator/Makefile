@@ -12,6 +12,7 @@
 # limitations under the License.
 
 MIBDIR   := mibs
+VENDORDIR := vendor
 MIB_PATH := 'mibs'
 
 CURL_OPTS ?= -L -sS --retry 3 --retry-delay 3 --fail
@@ -82,6 +83,9 @@ YAMAHA_URL        := https://www.rtpro.yamaha.co.jp/RT/docs/mib/
 CYBERPOWER_VERSION := 2.11
 CYBERPOWER_URL     := https://dl4jz3rbrsfum.cloudfront.net/software/CyberPower_MIB_v$(CYBERPOWER_VERSION).MIB.zip
 
+# vendor dir
+CISCOSB_VERSION := MIBs_Cat1200_1300_4.1.9.85
+
 EAP_VERSION := 1.0
 EAP_URL     := http://static.tp-link.com/EAP_Private_Mibs_$(EAP_VERSION).zip
 
@@ -98,6 +102,7 @@ clean:
 	rm -rvf \
 		$(MIBDIR)/* \
 		$(MIBDIR)/.cisco-device \
+		$(MIBDIR)/.ciscosb-device \
 		$(MIBDIR)/.cisco_v2 \
 		$(MIBDIR)/.cisco_imc \
 		$(MIBDIR)/.dell \
@@ -193,6 +198,7 @@ mibs: \
   $(MIBDIR)/powercom \
   $(MIBDIR)/.cisco_imc \
   $(MIBDIR)/.cisco-device \
+  $(MIBDIR)/.ciscosb-device \
   $(MIBDIR)/FROGFOOT-RESOURCES-MIB \
   $(MIBDIR)/UPS-MIB \
   $(MIBDIR)/.dlink-mibs \
@@ -615,6 +621,12 @@ $(MIBDIR)/.cisco-device:
 	@curl $(CURL_OPTS) -o $(MIBDIR)/CISCO-IMAGE-MIB $(CISCO_URL)/CISCO-IMAGE-MIB.my
 	@curl $(CURL_OPTS) -o $(MIBDIR)/CISCO-ENHANCED-IMAGE-MIB $(CISCO_URL)/CISCO-ENHANCED-IMAGE-MIB.my
 	@touch $(MIBDIR)/.cisco-device
+
+$(MIBDIR)/.ciscosb-device:
+	@echo ">> Copy CiscoSB device mibs"
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-mib.mib $(MIBDIR)/
+	@cp $(VENDORDIR)/$(CISCOSB_VERSION)/CISCOSB-mng.mib $(MIBDIR)/
+	@touch $(MIBDIR)/.ciscosb-device
 
 $(MIBDIR)/.yamaha-rt:
 	@echo ">> Downloading Yamaha RT Series MIBs"
