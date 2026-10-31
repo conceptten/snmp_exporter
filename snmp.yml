@@ -13,6 +13,1790 @@ auths:
     priv_protocol: DES
     version: 2
 modules:
+  apcats:
+    walk:
+    - 1.3.6.1.4.1.318.1.1.8.1
+    - 1.3.6.1.4.1.318.1.1.8.4
+    - 1.3.6.1.4.1.318.1.1.8.5
+    metrics:
+    - name: atsIdentHardwareRev
+      oid: 1.3.6.1.4.1.318.1.1.8.1.1
+      type: DisplayString
+      help: The hardware revision of the Automatic Transfer Switch - 1.3.6.1.4.1.318.1.1.8.1.1
+    - name: atsIdentFirmwareRev
+      oid: 1.3.6.1.4.1.318.1.1.8.1.2
+      type: DisplayString
+      help: A string identifying the Automatic Transfer Switch firmware revision.
+        - 1.3.6.1.4.1.318.1.1.8.1.2
+    - name: atsIdentFirmwareDate
+      oid: 1.3.6.1.4.1.318.1.1.8.1.3
+      type: DisplayString
+      help: The date of release for this Automatic Transfer Switch firmware revision.
+        - 1.3.6.1.4.1.318.1.1.8.1.3
+    - name: atsIdentDateOfManufacture
+      oid: 1.3.6.1.4.1.318.1.1.8.1.4
+      type: DisplayString
+      help: The date when the Automatic Transfer Switch was manufactured in mm/dd/yyyy
+        format - 1.3.6.1.4.1.318.1.1.8.1.4
+    - name: atsIdentModelNumber
+      oid: 1.3.6.1.4.1.318.1.1.8.1.5
+      type: DisplayString
+      help: A string identifying the model number of the Automatic Transfer Switch
+        - 1.3.6.1.4.1.318.1.1.8.1.5
+    - name: atsIdentSerialNumber
+      oid: 1.3.6.1.4.1.318.1.1.8.1.6
+      type: DisplayString
+      help: A string identifying the serial number of the Automatic Transfer Switch
+        - 1.3.6.1.4.1.318.1.1.8.1.6
+    - name: atsIdentNominalLineVoltage
+      oid: 1.3.6.1.4.1.318.1.1.8.1.7
+      type: gauge
+      help: RMS Utility Voltage measured in Volts. - 1.3.6.1.4.1.318.1.1.8.1.7
+    - name: atsIdentNominalLineFrequency
+      oid: 1.3.6.1.4.1.318.1.1.8.1.8
+      type: gauge
+      help: Utility Power Frequency measured in Hertz. - 1.3.6.1.4.1.318.1.1.8.1.8
+    - name: atsIdentDeviceRating
+      oid: 1.3.6.1.4.1.318.1.1.8.1.9
+      type: gauge
+      help: This gives the device rating in Amps - 1.3.6.1.4.1.318.1.1.8.1.9
+    - name: atsIdentDeviceName
+      oid: 1.3.6.1.4.1.318.1.1.8.1.10
+      type: DisplayString
+      help: A user-defined string identifying the ATS - 1.3.6.1.4.1.318.1.1.8.1.10
+    - name: atsIdentDeviceLocation
+      oid: 1.3.6.1.4.1.318.1.1.8.1.11
+      type: DisplayString
+      help: A user-defined string identifying the location of ATS - 1.3.6.1.4.1.318.1.1.8.1.11
+    - name: atsIdentContact
+      oid: 1.3.6.1.4.1.318.1.1.8.1.12
+      type: DisplayString
+      help: A user-defined string identifying the person to contact regarding the
+        ATS - 1.3.6.1.4.1.318.1.1.8.1.12
+    - name: atsIdentBootMonitorRev
+      oid: 1.3.6.1.4.1.318.1.1.8.1.13
+      type: DisplayString
+      help: The ATS Boot Monitor version - 1.3.6.1.4.1.318.1.1.8.1.13
+    - name: atsIdentLongDescription
+      oid: 1.3.6.1.4.1.318.1.1.8.1.14
+      type: DisplayString
+      help: The ATS Long Description name - 1.3.6.1.4.1.318.1.1.8.1.14
+    - name: atsIdentNMCSerialNumber
+      oid: 1.3.6.1.4.1.318.1.1.8.1.15
+      type: DisplayString
+      help: The ATS Network Management Card (NMC) serial number - 1.3.6.1.4.1.318.1.1.8.1.15
+    - name: atsIdentAppBuildDate
+      oid: 1.3.6.1.4.1.318.1.1.8.1.16
+      type: DisplayString
+      help: The ATS Application build date - 1.3.6.1.4.1.318.1.1.8.1.16
+    - name: atsIdentAOSBuildDate
+      oid: 1.3.6.1.4.1.318.1.1.8.1.17
+      type: DisplayString
+      help: The ATS AOS build date - 1.3.6.1.4.1.318.1.1.8.1.17
+    - name: atsIdentBootMonBuildDate
+      oid: 1.3.6.1.4.1.318.1.1.8.1.18
+      type: DisplayString
+      help: The ATS Boot Monitor build date - 1.3.6.1.4.1.318.1.1.8.1.18
+    - name: atsConfigProductName
+      oid: 1.3.6.1.4.1.318.1.1.8.4.1
+      type: DisplayString
+      help: A configurable character string. - 1.3.6.1.4.1.318.1.1.8.4.1
+    - name: atsConfigPreferredSource
+      oid: 1.3.6.1.4.1.318.1.1.8.4.2
+      type: EnumAsInfo
+      help: This variable returns the preferred source of power when both sources
+        are OK. - 1.3.6.1.4.1.318.1.1.8.4.2
+      enum_values:
+        1: sourceA
+        2: sourceB
+        3: none
+    - name: atsConfigFrontPanelLockout
+      oid: 1.3.6.1.4.1.318.1.1.8.4.3
+      type: EnumAsInfo
+      help: Setting this variable to disableFrontPanel(1), prevents source preference
+        configuration of the Automatic Transfer Switch via the Front Panel - 1.3.6.1.4.1.318.1.1.8.4.3
+      enum_values:
+        1: disableFrontPanel
+        2: enableFrontPanel
+    - name: atsConfigVoltageSensitivity
+      oid: 1.3.6.1.4.1.318.1.1.8.4.4
+      type: EnumAsInfo
+      help: 'This variable defines the sensitivity to changes in voltage: high(1)
+        for best protection, low(2) for frequent small line voltage changes. - 1.3.6.1.4.1.318.1.1.8.4.4'
+      enum_values:
+        1: high
+        2: low
+    - name: atsConfigTransferVoltageRange
+      oid: 1.3.6.1.4.1.318.1.1.8.4.5
+      type: EnumAsInfo
+      help: This variable defines the range of acceptable voltage from a power source
+        - 1.3.6.1.4.1.318.1.1.8.4.5
+      enum_values:
+        1: wide
+        2: medium
+        3: narrow
+    - name: atsConfigCurrentLimit
+      oid: 1.3.6.1.4.1.318.1.1.8.4.6
+      type: gauge
+      help: The threshold (in Amps) at which an Over Current Alarm will be generated
+        - 1.3.6.1.4.1.318.1.1.8.4.6
+    - name: atsConfigLineVRMS
+      oid: 1.3.6.1.4.1.318.1.1.8.4.8
+      type: gauge
+      help: To configure the input RMS voltage. - 1.3.6.1.4.1.318.1.1.8.4.8
+    - name: atsConfigLineVRMSNarrowLimit
+      oid: 1.3.6.1.4.1.318.1.1.8.4.9
+      type: gauge
+      help: To configure the Line VRMS Narrow Limit. - 1.3.6.1.4.1.318.1.1.8.4.9
+    - name: atsConfigLineVRMSMediumLimit
+      oid: 1.3.6.1.4.1.318.1.1.8.4.10
+      type: gauge
+      help: To configure the Line VRMS Medium Limit. - 1.3.6.1.4.1.318.1.1.8.4.10
+    - name: atsConfigLineVRMSWideLimit
+      oid: 1.3.6.1.4.1.318.1.1.8.4.11
+      type: gauge
+      help: To configure the Line VRMS Wide Limit. - 1.3.6.1.4.1.318.1.1.8.4.11
+    - name: atsConfigFrequencyDeviation
+      oid: 1.3.6.1.4.1.318.1.1.8.4.12
+      type: EnumAsInfo
+      help: To configure the frequency deviation - 1.3.6.1.4.1.318.1.1.8.4.12
+      enum_values:
+        1: one
+        2: two
+        3: three
+        5: five
+        10: ten
+    - name: atsConfigBankTableSize
+      oid: 1.3.6.1.4.1.318.1.1.8.4.13
+      type: gauge
+      help: The size of the bank table. - 1.3.6.1.4.1.318.1.1.8.4.13
+    - name: atsConfigBankTableIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.1
+      type: gauge
+      help: An index to the bank table entry. - 1.3.6.1.4.1.318.1.1.8.4.14.1.1
+      indexes:
+      - labelname: atsConfigBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigBankTableIndex
+        labelname: atsConfigBank
+        oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsConfigBankTableIndex
+    - name: atsConfigBank
+      oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.2
+      type: EnumAsInfo
+      help: The bank number of an ATS - 1.3.6.1.4.1.318.1.1.8.4.14.1.2
+      indexes:
+      - labelname: atsConfigBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigBankTableIndex
+        labelname: atsConfigBank
+        oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsConfigBankTableIndex
+      enum_values:
+        1: total
+        2: bank1
+        3: bank2
+    - name: atsConfigBankLowLoadThreshold
+      oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.3
+      type: gauge
+      help: A threshold that indicates the current drawn is nearing a low consumption
+        condition - 1.3.6.1.4.1.318.1.1.8.4.14.1.3
+      indexes:
+      - labelname: atsConfigBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigBankTableIndex
+        labelname: atsConfigBank
+        oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsConfigBankTableIndex
+    - name: atsConfigBankNearOverLoadThreshold
+      oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.4
+      type: gauge
+      help: A threshold that indicates the current drawn is nearing an overload condition
+        - 1.3.6.1.4.1.318.1.1.8.4.14.1.4
+      indexes:
+      - labelname: atsConfigBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigBankTableIndex
+        labelname: atsConfigBank
+        oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsConfigBankTableIndex
+    - name: atsConfigBankOverLoadThreshold
+      oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.5
+      type: gauge
+      help: A threshold that indicates the current drawn has entered an overload condition
+        - 1.3.6.1.4.1.318.1.1.8.4.14.1.5
+      indexes:
+      - labelname: atsConfigBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigBankTableIndex
+        labelname: atsConfigBank
+        oid: 1.3.6.1.4.1.318.1.1.8.4.14.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsConfigBankTableIndex
+    - name: atsConfigPhaseTableSize
+      oid: 1.3.6.1.4.1.318.1.1.8.4.15
+      type: gauge
+      help: The size of the phase table. - 1.3.6.1.4.1.318.1.1.8.4.15
+    - name: atsConfigPhaseTableIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.1
+      type: gauge
+      help: The index to the phase table entry. - 1.3.6.1.4.1.318.1.1.8.4.16.1.1
+      indexes:
+      - labelname: atsConfigPhaseTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigPhaseTableIndex
+        labelname: atsConfigPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels: []
+        labelname: atsConfigPhaseTableIndex
+    - name: atsConfigPhase
+      oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.2
+      type: EnumAsInfo
+      help: The phase number of an ATS - 1.3.6.1.4.1.318.1.1.8.4.16.1.2
+      indexes:
+      - labelname: atsConfigPhaseTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigPhaseTableIndex
+        labelname: atsConfigPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels: []
+        labelname: atsConfigPhaseTableIndex
+      enum_values:
+        1: phase1
+        2: phase2
+        3: phase3
+    - name: atsConfigPhaseLowLoadThreshold
+      oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.3
+      type: gauge
+      help: A threshold that indicates the current drawn is nearing a low consumption
+        condition - 1.3.6.1.4.1.318.1.1.8.4.16.1.3
+      indexes:
+      - labelname: atsConfigPhaseTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigPhaseTableIndex
+        labelname: atsConfigPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels: []
+        labelname: atsConfigPhaseTableIndex
+    - name: atsConfigPhaseNearOverLoadThreshold
+      oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.4
+      type: gauge
+      help: A threshold that indicates the current drawn is nearing an overload condition
+        - 1.3.6.1.4.1.318.1.1.8.4.16.1.4
+      indexes:
+      - labelname: atsConfigPhaseTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigPhaseTableIndex
+        labelname: atsConfigPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels: []
+        labelname: atsConfigPhaseTableIndex
+    - name: atsConfigPhaseOverLoadThreshold
+      oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.5
+      type: gauge
+      help: A threshold that indicates the current drawn has entered an overload condition
+        - 1.3.6.1.4.1.318.1.1.8.4.16.1.5
+      indexes:
+      - labelname: atsConfigPhaseTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsConfigPhaseTableIndex
+        labelname: atsConfigPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.4.16.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels: []
+        labelname: atsConfigPhaseTableIndex
+    - name: atsConfigDeviceLocation
+      oid: 1.3.6.1.4.1.318.1.1.8.4.17
+      type: DisplayString
+      help: A user-defined string identifying the location of the ATS - 1.3.6.1.4.1.318.1.1.8.4.17
+    - name: atsConfigContact
+      oid: 1.3.6.1.4.1.318.1.1.8.4.18
+      type: DisplayString
+      help: A user-defined string identifying the person to contact regarding the
+        ATS - 1.3.6.1.4.1.318.1.1.8.4.18
+    - name: atsStatusCommStatus
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.1
+      type: EnumAsStateSet
+      help: This variable returns the current communication status of the Automatic
+        Transfer Switch. - 1.3.6.1.4.1.318.1.1.8.5.1.1
+      enum_values:
+        1: atsNeverDiscovered
+        2: atsCommEstablished
+        3: atsCommLost
+    - name: atsStatusSelectedSource
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.2
+      type: EnumAsStateSet
+      help: This variable returns the current source of power. - 1.3.6.1.4.1.318.1.1.8.5.1.2
+      enum_values:
+        1: sourceA
+        2: sourceB
+    - name: atsStatusRedundancyState
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.3
+      type: EnumAsStateSet
+      help: This variable returns the current redundancy state of the ATS - 1.3.6.1.4.1.318.1.1.8.5.1.3
+      enum_values:
+        1: atsRedundancyLost
+        2: atsFullyRedundant
+    - name: atsStatusOverCurrentState
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.4
+      type: EnumAsStateSet
+      help: This variable returns the output current state of the ATS - 1.3.6.1.4.1.318.1.1.8.5.1.4
+      enum_values:
+        1: atsOverCurrent
+        2: atsCurrentOK
+    - name: atsStatus5VPowerSupply
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.5
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS 5V power supply - 1.3.6.1.4.1.318.1.1.8.5.1.5
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatus24VPowerSupply
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.6
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS 24V power supply for
+        Source A - 1.3.6.1.4.1.318.1.1.8.5.1.6
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatus24VSourceBPowerSupply
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.7
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS 24V power supply for
+        Source B - 1.3.6.1.4.1.318.1.1.8.5.1.7
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatusPlus12VPowerSupply
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.8
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS 12V power supply -
+        1.3.6.1.4.1.318.1.1.8.5.1.8
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatusMinus12VPowerSupply
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.9
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS -12V power supply -
+        1.3.6.1.4.1.318.1.1.8.5.1.9
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatusSwitchStatus
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.10
+      type: EnumAsStateSet
+      help: This variable returns the status of the ATS. - 1.3.6.1.4.1.318.1.1.8.5.1.10
+      enum_values:
+        1: fail
+        2: ok
+    - name: atsStatusFrontPanel
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.11
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS front panel - 1.3.6.1.4.1.318.1.1.8.5.1.11
+      enum_values:
+        1: locked
+        2: unlocked
+    - name: atsStatusSourceAStatus
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.12
+      type: EnumAsStateSet
+      help: This variable returns the status of the Source A. - 1.3.6.1.4.1.318.1.1.8.5.1.12
+      enum_values:
+        1: fail
+        2: ok
+    - name: atsStatusSourceBStatus
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.13
+      type: EnumAsStateSet
+      help: This variable returns the status of the Source B. - 1.3.6.1.4.1.318.1.1.8.5.1.13
+      enum_values:
+        1: fail
+        2: ok
+    - name: atsStatusPhaseSyncStatus
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.14
+      type: EnumAsStateSet
+      help: This variable returns the status of the phase synch. - 1.3.6.1.4.1.318.1.1.8.5.1.14
+      enum_values:
+        1: inSync
+        2: outOfSync
+    - name: atsStatusVoltageOutStatus
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.15
+      type: EnumAsStateSet
+      help: This variable returns the output voltage status. - 1.3.6.1.4.1.318.1.1.8.5.1.15
+      enum_values:
+        1: fail
+        2: ok
+    - name: atsStatusHardwareStatus
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.16
+      type: EnumAsStateSet
+      help: This variable returns the status of display board hardware. - 1.3.6.1.4.1.318.1.1.8.5.1.16
+      enum_values:
+        1: fail
+        2: ok
+    - name: atsStatus3dot3VPowerSupply
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.17
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS 3.3V supply - 1.3.6.1.4.1.318.1.1.8.5.1.17
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatus1Dot0VPowerSupply
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.18
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS 1.0V supply - 1.3.6.1.4.1.318.1.1.8.5.1.18
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatusVBoostSourceA
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.19
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS Source A Boost 48V
+        supply - 1.3.6.1.4.1.318.1.1.8.5.1.19
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatusVBoostSourceB
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.20
+      type: EnumAsStateSet
+      help: This variable returns the present state of the ATS Source B Boost 48V
+        supply - 1.3.6.1.4.1.318.1.1.8.5.1.20
+      enum_values:
+        1: atsPowerSupplyFailure
+        2: atsPowerSupplyOK
+    - name: atsStatusFuseSourceA
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.21
+      type: EnumAsStateSet
+      help: This variable returns the Souce A Fuse State - 1.3.6.1.4.1.318.1.1.8.5.1.21
+      enum_values:
+        1: atsFuseStatusClose
+        2: atsFuseStatusOpen
+    - name: atsStatusFuseSourceB
+      oid: 1.3.6.1.4.1.318.1.1.8.5.1.22
+      type: EnumAsStateSet
+      help: This variable returns the Souce B Fuse State - 1.3.6.1.4.1.318.1.1.8.5.1.22
+      enum_values:
+        1: atsFuseStatusClose
+        2: atsFuseStatusOpen
+    - name: atsNumInputs
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.1
+      type: gauge
+      help: The number of input feeds to this device - 1.3.6.1.4.1.318.1.1.8.5.3.1
+    - name: atsInputTableIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.1
+      type: gauge
+      help: The input identifier. - 1.3.6.1.4.1.318.1.1.8.5.3.2.1.1
+      indexes:
+      - labelname: atsInputTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputTableIndex
+    - name: atsNumInputPhases
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.2
+      type: gauge
+      help: The number of input phases utilized in this device - 1.3.6.1.4.1.318.1.1.8.5.3.2.1.2
+      indexes:
+      - labelname: atsInputTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputTableIndex
+    - name: atsInputVoltageOrientation
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.3
+      type: EnumAsInfo
+      help: 'The input voltage orientation: 1: unknown for this Source 2: singlePhase
+        - phase 1 voltage is between Phase 1 and Neutral - 1.3.6.1.4.1.318.1.1.8.5.3.2.1.3'
+      indexes:
+      - labelname: atsInputTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputTableIndex
+      enum_values:
+        1: unknown
+        2: singlePhase
+        3: splitPhase
+        4: threePhasePhaseToNeutral
+        5: threePhasePhaseToPhase
+    - name: atsInputFrequency
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.4
+      type: gauge
+      help: The input frequency in Hertz, or -1 if it's unsupported by this Source.
+        - 1.3.6.1.4.1.318.1.1.8.5.3.2.1.4
+      indexes:
+      - labelname: atsInputTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputTableIndex
+    - name: atsInputType
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.5
+      type: EnumAsInfo
+      help: The input type. - 1.3.6.1.4.1.318.1.1.8.5.3.2.1.5
+      indexes:
+      - labelname: atsInputTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputTableIndex
+      enum_values:
+        1: unknown
+        2: main
+        3: bypass
+    - name: atsInputName
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+      type: DisplayString
+      help: A name given to a particular input. - 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+      indexes:
+      - labelname: atsInputTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputTableIndex
+    - name: atsInputPhaseTableIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.1
+      type: gauge
+      help: The input identifier. - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.1
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputPhaseIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.2
+      type: gauge
+      help: The input phase identifier. - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.2
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputVoltage
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.3
+      type: gauge
+      help: The input voltage in VAC, or -1 if it's unsupported by this Source. -
+        1.3.6.1.4.1.318.1.1.8.5.3.3.1.3
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputMaxVoltage
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.4
+      type: gauge
+      help: The maximum input voltage in VAC measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.4
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputMinVoltage
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.5
+      type: gauge
+      help: The minimum input voltage in VAC measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.5
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.6
+      type: gauge
+      help: The input current in amperes, or -1 if it's unsupported by this Source.
+        - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.6
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputMaxCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.7
+      type: gauge
+      help: The maximum input current in amperes measured since the last time this
+        variable was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.7
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputMinCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.8
+      type: gauge
+      help: The minimum input current in amperes measured since the last time this
+        variable was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.8
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.9
+      type: gauge
+      help: The input power in Watts, or -1 if it's unsupported by this Source. -
+        1.3.6.1.4.1.318.1.1.8.5.3.3.1.9
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputMaxPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.10
+      type: gauge
+      help: The maximum input power in Watts measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.10
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsInputMinPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.3.3.1.11
+      type: gauge
+      help: The minimum input power in Watts measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.3.3.1.11
+      indexes:
+      - labelname: atsInputPhaseTableIndex
+        type: gauge
+      - labelname: atsInputPhaseIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsInputPhaseTableIndex
+        labelname: atsInputName
+        oid: 1.3.6.1.4.1.318.1.1.8.5.3.2.1.6
+        type: DisplayString
+      - labels: []
+        labelname: atsInputPhaseTableIndex
+    - name: atsNumOutputs
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.1
+      type: gauge
+      help: The number of output feeds to this device - 1.3.6.1.4.1.318.1.1.8.5.4.1
+    - name: atsOutputTableIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.2.1.1
+      type: gauge
+      help: The output identifier. - 1.3.6.1.4.1.318.1.1.8.5.4.2.1.1
+      indexes:
+      - labelname: atsOutputTableIndex
+        type: gauge
+    - name: atsNumOutputPhases
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.2.1.2
+      type: gauge
+      help: The number of output phases utilized in this device - 1.3.6.1.4.1.318.1.1.8.5.4.2.1.2
+      indexes:
+      - labelname: atsOutputTableIndex
+        type: gauge
+    - name: atsOutputVoltageOrientation
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.2.1.3
+      type: EnumAsInfo
+      help: 'The output voltage orientation: 1: unknown for this ATS 2: singlePhase
+        - phase 1 voltage is between Phase 1 and Neutral - 1.3.6.1.4.1.318.1.1.8.5.4.2.1.3'
+      indexes:
+      - labelname: atsOutputTableIndex
+        type: gauge
+      enum_values:
+        1: unknown
+        2: singlePhase
+        3: splitPhase
+        4: threePhasePhaseToNeutral
+        5: threePhasePhaseToPhase
+    - name: atsOutputFrequency
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.2.1.4
+      type: gauge
+      help: The output frequency in Hertz, or -1 if it's unsupported by this ATS.
+        - 1.3.6.1.4.1.318.1.1.8.5.4.2.1.4
+      indexes:
+      - labelname: atsOutputTableIndex
+        type: gauge
+    - name: atsOutputPhaseTableIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.1
+      type: gauge
+      help: The output identifier. - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.1
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputPhaseIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.2
+      type: gauge
+      help: Description of each output phase utilized in this device and one for neutral.
+        - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.2
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+      enum_values:
+        1: phase1
+        2: phase2
+        3: phase3
+        4: neutral
+    - name: atsOutputVoltage
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.3
+      type: gauge
+      help: The output voltage in VAC, or -1 if it's unsupported by this ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.3
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.4
+      type: gauge
+      help: The output current in Amperes drawn by the load on the ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.4
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+      scale: 0.1
+    - name: atsOutputMaxCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.5
+      type: gauge
+      help: The maximum output current in Amperes measured since the last reset (atsStatusResetMaxMinValues).
+        - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.5
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+      scale: 0.1
+    - name: atsOutputMinCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.6
+      type: gauge
+      help: The minimum output current in Amperes measured since the last reset (atsStatusResetMaxMinValues).
+        - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.6
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+      scale: 0.1
+    - name: atsOutputLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.7
+      type: gauge
+      help: The output load in VA, or -1 if it's unsupported by this ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.7
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMaxLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.8
+      type: gauge
+      help: The maximum output load in VA measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.8
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMinLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.9
+      type: gauge
+      help: The minimum output load in VA measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.9
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputPercentLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.10
+      type: gauge
+      help: The percentage of the ATS load capacity in VA at redundancy @ (n + x)
+        presently being used on this output phase, or -1 if it's unsupported by this
+        ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.10
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMaxPercentLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.11
+      type: gauge
+      help: The maximum percentage of the ATS load capacity in VA measured at redundancy
+        @ (n + x) presently being used on this output phase since the last time this
+        variable was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.11
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMinPercentLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.12
+      type: gauge
+      help: The minimum percentage of the ATS load capacity in VA measured at redundancy
+        @ (n + x) presently being used on this output phase since the last time this
+        variable was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.12
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.13
+      type: gauge
+      help: The output apparent power in VA, or -1 if it's unsupported by this ATS.
+        - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.13
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMaxPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.14
+      type: gauge
+      help: The maximum output power in VAs measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.14
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMinPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.15
+      type: gauge
+      help: The minimum output power in VA measured since the last time this variable
+        was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.15
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputPercentPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.16
+      type: gauge
+      help: The percentage of the ATSpower capacity in VA at redundancy @ (n + x)
+        presently being used on this output phase, or -1 if it's unsupported by this
+        ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.16
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMaxPercentPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.17
+      type: gauge
+      help: The maximum percentage of the ATSpower capacity in VA measured at redundancy
+        @ (n + x) presently being used on this output phase since the last time this
+        variable was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.17
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputMinPercentPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.18
+      type: gauge
+      help: The minimum percentage of the ATSpower capacity in VA measured at redundancy
+        @ (n + x) presently being used on this output phase since the last time this
+        variable was read or reset (atsStatusResetMaxMinValues) - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.18
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+    - name: atsOutputPhaseState
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.3.1.19
+      type: EnumAsStateSet
+      help: Getting this OID will return the phase load state - 1.3.6.1.4.1.318.1.1.8.5.4.3.1.19
+      indexes:
+      - labelname: atsOutputPhaseTableIndex
+        type: gauge
+      - labelname: atsOutputPhaseIndex
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+          4: neutral
+      enum_values:
+        1: normal
+        2: lowload
+        3: nearoverload
+        4: overload
+    - name: atsOutputBankTableSize
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.4
+      type: gauge
+      help: The size of the bank table. - 1.3.6.1.4.1.318.1.1.8.5.4.4
+    - name: atsOutputBankTableIndex
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.1
+      type: gauge
+      help: The index to the bank table entry. - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.1
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputPhase
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+      type: EnumAsInfo
+      help: The phase number of an ATS - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+      enum_values:
+        1: phase1
+        2: phase2
+        3: phase3
+    - name: atsOutputBank
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+      type: EnumAsInfo
+      help: The bank number of an ATS - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+      enum_values:
+        1: total
+        2: bank1
+        3: bank2
+    - name: atsOutputBankCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.4
+      type: gauge
+      help: The bank output current in Amperes. - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.4
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+      scale: 0.1
+    - name: atsOutputBankState
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.5
+      type: EnumAsStateSet
+      help: Getting this OID will return the bank load state - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.5
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+      enum_values:
+        1: normal
+        2: lowload
+        3: nearoverload
+        4: overload
+    - name: atsOutputBankOutputVoltage
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.6
+      type: gauge
+      help: The output voltage in VAC, or -1 if it's unsupported by this ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.6
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMaxCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.7
+      type: gauge
+      help: The maximum bank output current in Amperes measured since the last reset
+        (atsStatusResetMaxMinValues). - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.7
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+      scale: 0.1
+    - name: atsOutputBankMinCurrent
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.8
+      type: gauge
+      help: The minimum bank output current in Amperes measured since the last reset
+        (atsStatusResetMaxMinValues). - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.8
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+      scale: 0.1
+    - name: atsOutputBankLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.9
+      type: gauge
+      help: The output load, on the bank represented by OID atsOutputBank, in VA,
+        or -1 if it's unsupported by this ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.9
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMaxLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.10
+      type: gauge
+      help: The maximum output load, on the bank represented by OID atsOutputBank,
+        in VA measured since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.10
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMinLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.11
+      type: gauge
+      help: The minimum output load, on the bank represented by OID atsOutputBank,
+        in VA measured since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.11
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankPercentLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.12
+      type: gauge
+      help: The percentage of the ATS load capacity in VA at redundancy @ (n + x)
+        presently being used on this bank, represented by OID atsOutputBank - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.12
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMaxPercentLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.13
+      type: gauge
+      help: The maximum percentage of the ATS load capacity in VA measured at redundancy
+        @ (n + x) presently being used on this bank, represented by OID atsOutputBank,
+        since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.13
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMinPercentLoad
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.14
+      type: gauge
+      help: The minimum percentage of the ATS load capacity in VA measured at redundancy
+        @ (n + x) presently being used on this bank, represented by OID atsOutputBank,
+        since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.14
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.15
+      type: gauge
+      help: The output apparent power in VA on the bank represented by OID atsOutputBank
+        or -1 if it's unsupported by this ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.15
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMaxPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.16
+      type: gauge
+      help: The maximum output power in VA measured on the bank represented by OID
+        atsOutputBank since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.16
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMinPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.17
+      type: gauge
+      help: The minimum output power in VA measured on the bank represented by OID
+        atsOutputBank since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.17
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankPercentPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.18
+      type: gauge
+      help: The percentage of the ATSpower capacity in Watts at redundancy @ (n +
+        x) presently being used on this bank, represented by OID atsOutputBank, or
+        -1 if it's unsupported by this ATS. - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.18
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMaxPercentPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.19
+      type: gauge
+      help: The maximum percentage of the ATSpower capacity in VA measured at redundancy
+        @ (n + x) presently being used on this bank, represented by OID atsOutputBank,
+        since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.19
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
+    - name: atsOutputBankMinPercentPower
+      oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.20
+      type: gauge
+      help: The minimum percentage of the ATSpower capacity in VA measured at redundancy
+        @ (n + x) presently being used on this bank, represented by OID atsOutputBank
+        since the last time this variable was read or reset (atsStatusResetMaxMinValues)
+        - 1.3.6.1.4.1.318.1.1.8.5.4.5.1.20
+      indexes:
+      - labelname: atsOutputBankTableIndex
+        type: gauge
+      lookups:
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputPhase
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.2
+        type: EnumAsInfo
+        enum_values:
+          1: phase1
+          2: phase2
+          3: phase3
+      - labels:
+        - atsOutputBankTableIndex
+        labelname: atsOutputBank
+        oid: 1.3.6.1.4.1.318.1.1.8.5.4.5.1.3
+        type: EnumAsInfo
+        enum_values:
+          1: total
+          2: bank1
+          3: bank2
+      - labels: []
+        labelname: atsOutputBankTableIndex
   apcups:
     walk:
     - 1.3.6.1.4.1.318.1.1.1.12
@@ -884,6 +2668,10 @@ modules:
       oid: 1.3.6.1.4.1.318.1.1.1.2.3.17
       type: gauge
       help: The current minimum cell voltage in mVDC across all batteries. - 1.3.6.1.4.1.318.1.1.1.2.3.17
+    - name: upsHighPrecBatteryStateOfHealth
+      oid: 1.3.6.1.4.1.318.1.1.1.2.3.18
+      type: gauge
+      help: The state of health of the battery expressed in tenths of percent - 1.3.6.1.4.1.318.1.1.1.2.3.18
     - name: upsBatteryNumberOfCabinets
       oid: 1.3.6.1.4.1.318.1.1.1.2.4
       type: gauge
@@ -2378,7 +4166,7 @@ modules:
       help: The IP version of this row. - 1.3.6.1.4.1.30065.3.1.1.1.1.1
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2394,7 +4182,7 @@ modules:
         those received in error - 1.3.6.1.4.1.30065.3.1.1.1.1.3
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2406,7 +4194,7 @@ modules:
         those received in error - 1.3.6.1.4.1.30065.3.1.1.1.1.4
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2418,7 +4206,7 @@ modules:
         including those received in error - 1.3.6.1.4.1.30065.3.1.1.1.1.5
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2430,7 +4218,7 @@ modules:
         including those received in error - 1.3.6.1.4.1.30065.3.1.1.1.1.6
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2444,7 +4232,7 @@ modules:
         - 1.3.6.1.4.1.30065.3.1.1.1.1.7
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2456,7 +4244,7 @@ modules:
         could be found to transmit them to their destination - 1.3.6.1.4.1.30065.3.1.1.1.1.8
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2469,7 +4257,7 @@ modules:
         be received at this entity - 1.3.6.1.4.1.30065.3.1.1.1.1.9
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2481,7 +4269,7 @@ modules:
         software but discarded because of an unknown or unsupported protocol - 1.3.6.1.4.1.30065.3.1.1.1.1.10
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2493,7 +4281,7 @@ modules:
         frame didn't carry enough data - 1.3.6.1.4.1.30065.3.1.1.1.1.11
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2506,7 +4294,7 @@ modules:
         to forward them to that final destination - 1.3.6.1.4.1.30065.3.1.1.1.1.12
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2519,7 +4307,7 @@ modules:
         to forward them to that final destination - 1.3.6.1.4.1.30065.3.1.1.1.1.13
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2531,7 +4319,7 @@ modules:
         interface - 1.3.6.1.4.1.30065.3.1.1.1.1.14
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2542,7 +4330,7 @@ modules:
       help: The number of IP datagrams successfully reassembled - 1.3.6.1.4.1.30065.3.1.1.1.1.15
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2554,7 +4342,7 @@ modules:
         whatever reason: timed out, errors, etc.) - 1.3.6.1.4.1.30065.3.1.1.1.1.16'
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2567,7 +4355,7 @@ modules:
         (e.g., for lack of buffer space) - 1.3.6.1.4.1.30065.3.1.1.1.1.17
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2579,7 +4367,7 @@ modules:
         (including ICMP) - 1.3.6.1.4.1.30065.3.1.1.1.1.18
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2591,7 +4379,7 @@ modules:
         (including ICMP) - 1.3.6.1.4.1.30065.3.1.1.1.1.19
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2603,7 +4391,7 @@ modules:
         ICMP) supplied to IP in requests for transmission - 1.3.6.1.4.1.30065.3.1.1.1.1.20
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2615,7 +4403,7 @@ modules:
         ICMP) supplied to IP in requests for transmission - 1.3.6.1.4.1.30065.3.1.1.1.1.21
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2627,7 +4415,7 @@ modules:
         could be found to transmit them to their destination - 1.3.6.1.4.1.30065.3.1.1.1.1.22
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2640,7 +4428,7 @@ modules:
         in software - 1.3.6.1.4.1.30065.3.1.1.1.1.23
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2653,7 +4441,7 @@ modules:
         in software - 1.3.6.1.4.1.30065.3.1.1.1.1.24
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2666,7 +4454,7 @@ modules:
         software (e.g., for lack of buffer space) - 1.3.6.1.4.1.30065.3.1.1.1.1.25
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2678,7 +4466,7 @@ modules:
         be transmitted - 1.3.6.1.4.1.30065.3.1.1.1.1.26
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2689,7 +4477,7 @@ modules:
       help: The number of IP datagrams that have been successfully fragmented - 1.3.6.1.4.1.30065.3.1.1.1.1.27
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2701,7 +4489,7 @@ modules:
         to be fragmented but could not be - 1.3.6.1.4.1.30065.3.1.1.1.1.28
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2713,7 +4501,7 @@ modules:
         result of IP fragmentation - 1.3.6.1.4.1.30065.3.1.1.1.1.29
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2725,7 +4513,7 @@ modules:
         to the lower layers for transmission - 1.3.6.1.4.1.30065.3.1.1.1.1.30
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2737,7 +4525,7 @@ modules:
         to the lower layers for transmission - 1.3.6.1.4.1.30065.3.1.1.1.1.31
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2749,7 +4537,7 @@ modules:
         lower layers for transmission - 1.3.6.1.4.1.30065.3.1.1.1.1.32
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2761,7 +4549,7 @@ modules:
         lower layers for transmission - 1.3.6.1.4.1.30065.3.1.1.1.1.33
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2772,7 +4560,7 @@ modules:
       help: The number of IP multicast datagrams received by software - 1.3.6.1.4.1.30065.3.1.1.1.1.34
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2783,7 +4571,7 @@ modules:
       help: The number of IP multicast datagrams received by software - 1.3.6.1.4.1.30065.3.1.1.1.1.35
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2795,7 +4583,7 @@ modules:
         - 1.3.6.1.4.1.30065.3.1.1.1.1.36
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2807,7 +4595,7 @@ modules:
         - 1.3.6.1.4.1.30065.3.1.1.1.1.37
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2818,7 +4606,7 @@ modules:
       help: The number of IP multicast datagrams transmitted by software - 1.3.6.1.4.1.30065.3.1.1.1.1.38
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2829,7 +4617,7 @@ modules:
       help: The number of IP multicast datagrams transmitted by software - 1.3.6.1.4.1.30065.3.1.1.1.1.39
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2841,7 +4629,7 @@ modules:
         - 1.3.6.1.4.1.30065.3.1.1.1.1.40
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2853,7 +4641,7 @@ modules:
         - 1.3.6.1.4.1.30065.3.1.1.1.1.41
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2864,7 +4652,7 @@ modules:
       help: The number of IP broadcast datagrams received by software - 1.3.6.1.4.1.30065.3.1.1.1.1.42
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2875,7 +4663,7 @@ modules:
       help: The number of IP broadcast datagrams received by software - 1.3.6.1.4.1.30065.3.1.1.1.1.43
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2886,7 +4674,7 @@ modules:
       help: The number of IP broadcast datagrams transmitted by software - 1.3.6.1.4.1.30065.3.1.1.1.1.44
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2897,7 +4685,7 @@ modules:
       help: The number of IP broadcast datagrams transmitted by software - 1.3.6.1.4.1.30065.3.1.1.1.1.45
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2909,7 +4697,7 @@ modules:
         more of this entry's counters suffered a discontinuity - 1.3.6.1.4.1.30065.3.1.1.1.1.46
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2920,7 +4708,7 @@ modules:
       help: The minimum reasonable polling interval for this entry - 1.3.6.1.4.1.30065.3.1.1.1.1.47
       indexes:
       - labelname: aristaSwFwdIpStatsIPVersion
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -2989,12 +4777,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -3027,12 +4847,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -3042,7 +4894,22 @@ modules:
         - cempMemPoolIndex
         labelname: cempMemPoolType
         oid: 1.3.6.1.4.1.9.9.221.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: processorMemory
+          3: ioMemory
+          4: pciMemory
+          5: fastMemory
+          6: multibusMemory
+          7: interruptStackMemory
+          8: processStackMemory
+          9: localExceptionMemory
+          10: virtualMemory
+          11: reservedMemory
+          12: imageMemory
+          13: asicMemory
+          14: posixMemory
       - labels:
         - cempMemPoolIndex
         labelname: cempMemPoolName
@@ -3077,12 +4944,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -3092,7 +4991,22 @@ modules:
         - cempMemPoolIndex
         labelname: cempMemPoolType
         oid: 1.3.6.1.4.1.9.9.221.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: processorMemory
+          3: ioMemory
+          4: pciMemory
+          5: fastMemory
+          6: multibusMemory
+          7: interruptStackMemory
+          8: processStackMemory
+          9: localExceptionMemory
+          10: virtualMemory
+          11: reservedMemory
+          12: imageMemory
+          13: asicMemory
+          14: posixMemory
       - labels:
         - cempMemPoolIndex
         labelname: cempMemPoolName
@@ -3113,12 +5027,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -3128,7 +5074,22 @@ modules:
         - cempMemPoolIndex
         labelname: cempMemPoolType
         oid: 1.3.6.1.4.1.9.9.221.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: processorMemory
+          3: ioMemory
+          4: pciMemory
+          5: fastMemory
+          6: multibusMemory
+          7: interruptStackMemory
+          8: processStackMemory
+          9: localExceptionMemory
+          10: virtualMemory
+          11: reservedMemory
+          12: imageMemory
+          13: asicMemory
+          14: posixMemory
       - labels:
         - cempMemPoolIndex
         labelname: cempMemPoolName
@@ -3149,12 +5110,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -3164,7 +5157,22 @@ modules:
         - cempMemPoolIndex
         labelname: cempMemPoolType
         oid: 1.3.6.1.4.1.9.9.221.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: processorMemory
+          3: ioMemory
+          4: pciMemory
+          5: fastMemory
+          6: multibusMemory
+          7: interruptStackMemory
+          8: processStackMemory
+          9: localExceptionMemory
+          10: virtualMemory
+          11: reservedMemory
+          12: imageMemory
+          13: asicMemory
+          14: posixMemory
       - labels:
         - cempMemPoolIndex
         labelname: cempMemPoolName
@@ -3272,12 +5280,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -3296,12 +5336,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -3320,12 +5392,44 @@ modules:
         - entPhysicalIndex
         labelname: entSensorScale
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.2
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: yocto
+          2: zepto
+          3: atto
+          4: femto
+          5: pico
+          6: nano
+          7: micro
+          8: milli
+          9: units
+          10: kilo
+          11: mega
+          12: giga
+          13: tera
+          14: exa
+          15: peta
+          16: zetta
+          17: yotta
       - labels:
         - entPhysicalIndex
         labelname: entSensorType
         oid: 1.3.6.1.4.1.9.9.91.1.1.1.1.1
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: voltsAC
+          4: voltsDC
+          5: amperes
+          6: watts
+          7: hertz
+          8: celsius
+          9: percentRH
+          10: rpm
+          11: cmm
+          12: truthvalue
+          13: specialEnum
       - labels:
         - entPhysicalIndex
         labelname: entPhysicalName
@@ -5705,7 +7809,7 @@ modules:
       help: The index to the ATS bank entry. - 1.3.6.1.4.1.3808.1.1.5.5.1.4.1.1
       indexes:
       - labelname: atsLoadDevBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5723,7 +7827,7 @@ modules:
         the ATS can provide - 1.3.6.1.4.1.3808.1.1.5.5.1.4.1.2
       indexes:
       - labelname: atsLoadDevBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5790,7 +7894,7 @@ modules:
       help: The index to ATS bank entry. - 1.3.6.1.4.1.3808.1.1.5.5.2.4.1.1
       indexes:
       - labelname: atsLoadStatusBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5807,7 +7911,7 @@ modules:
       help: Getting this OID will return the phase number. - 1.3.6.1.4.1.3808.1.1.5.5.2.4.1.2
       indexes:
       - labelname: atsLoadStatusBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5826,7 +7930,7 @@ modules:
       help: The output current in 0.1 amperes drawn by the load on the ATS - 1.3.6.1.4.1.3808.1.1.5.5.2.4.1.3
       indexes:
       - labelname: atsLoadStatusBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5838,7 +7942,7 @@ modules:
       help: Getting this OID will return the bank load state. - 1.3.6.1.4.1.3808.1.1.5.5.2.4.1.4
       indexes:
       - labelname: atsLoadStatusBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5855,7 +7959,7 @@ modules:
       help: The output power in Watts. - 1.3.6.1.4.1.3808.1.1.5.5.2.4.1.5
       indexes:
       - labelname: atsLoadStatusBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5868,7 +7972,7 @@ modules:
         0.1 kilowatt-hours. - 1.3.6.1.4.1.3808.1.1.5.5.2.4.1.6
       indexes:
       - labelname: atsLoadStatusBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5881,7 +7985,7 @@ modules:
         reset - 1.3.6.1.4.1.3808.1.1.5.5.2.4.1.7
       indexes:
       - labelname: atsLoadStatusBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5958,7 +8062,7 @@ modules:
       help: The index to the ATS bank entry. - 1.3.6.1.4.1.3808.1.1.5.5.3.4.1.1
       indexes:
       - labelname: atsLoadCfgBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5976,7 +8080,7 @@ modules:
         a low consumption condition - 1.3.6.1.4.1.3808.1.1.5.5.3.4.1.2
       indexes:
       - labelname: atsLoadCfgBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -5989,7 +8093,7 @@ modules:
         an overload condition - 1.3.6.1.4.1.3808.1.1.5.5.3.4.1.3
       indexes:
       - labelname: atsLoadCfgBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -6002,7 +8106,7 @@ modules:
         an overload condition - 1.3.6.1.4.1.3808.1.1.5.5.3.4.1.4
       indexes:
       - labelname: atsLoadCfgBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -6015,7 +8119,7 @@ modules:
         is possible and additional outlets are requested to be turned on - 1.3.6.1.4.1.3808.1.1.5.5.3.4.1.5
       indexes:
       - labelname: atsLoadCfgBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -6032,7 +8136,7 @@ modules:
         be reset to zero - 1.3.6.1.4.1.3808.1.1.5.5.3.4.1.6
       indexes:
       - labelname: atsLoadCfgBankTableIndex
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: total
           2: bank1
@@ -8692,7 +10796,7 @@ modules:
         25: multiSystemChassis
     - name: chassisName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.10.1.7
-      type: OctetString
+      type: DisplayString
       help: 0300.0010.0001.0007 This attribute defines the user-assigned name of the
         system chassis. - 1.3.6.1.4.1.674.10892.5.4.300.10.1.7
       indexes:
@@ -8700,7 +10804,7 @@ modules:
         type: gauge
     - name: chassisManufacturerName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.10.1.8
-      type: OctetString
+      type: DisplayString
       help: 0300.0010.0001.0008 This attribute defines the name of the manufacturer
         of the system chassis. - 1.3.6.1.4.1.674.10892.5.4.300.10.1.8
       indexes:
@@ -8708,7 +10812,7 @@ modules:
         type: gauge
     - name: chassisModelTypeName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.10.1.9
-      type: OctetString
+      type: DisplayString
       help: 0300.0010.0001.0009 This attribute defines the system model type of the
         system chassis. - 1.3.6.1.4.1.674.10892.5.4.300.10.1.9
       indexes:
@@ -8763,7 +10867,7 @@ modules:
         8: storageClass
     - name: chassisSystemName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.10.1.15
-      type: OctetString
+      type: DisplayString
       help: 0300.0010.0001.0015 This attribute defines the host name of the system
         chassis. - 1.3.6.1.4.1.674.10892.5.4.300.10.1.15
       indexes:
@@ -8981,7 +11085,7 @@ modules:
         type: gauge
     - name: chassisSystemRevisionName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.10.1.48
-      type: OctetString
+      type: DisplayString
       help: 0300.0010.0001.0048 This attribute defines the revision name of the system,
         if applicable. - 1.3.6.1.4.1.674.10892.5.4.300.10.1.48
       indexes:
@@ -8989,7 +11093,7 @@ modules:
         type: gauge
     - name: chassisExpressServiceCodeName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.10.1.49
-      type: OctetString
+      type: DisplayString
       help: 0300.0010.0001.0049 This attribute defines the Express Service Code of
         the system chassis. - 1.3.6.1.4.1.674.10892.5.4.300.10.1.49
       indexes:
@@ -9175,7 +11279,7 @@ modules:
         type: gauge
     - name: systemBIOSVersionName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.50.1.8
-      type: OctetString
+      type: DisplayString
       help: 0300.0050.0001.0008 This attribute defines the version name of the system
         BIOS. - 1.3.6.1.4.1.674.10892.5.4.300.50.1.8
       indexes:
@@ -9185,7 +11289,7 @@ modules:
         type: gauge
     - name: systemBIOSManufacturerName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.50.1.11
-      type: OctetString
+      type: DisplayString
       help: 0300.0050.0001.0011 This attribute defines the name of the manufacturer
         of the system BIOS. - 1.3.6.1.4.1.674.10892.5.4.300.50.1.11
       indexes:
@@ -9288,7 +11392,7 @@ modules:
         23: iDRAC9
     - name: firmwareTypeName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.60.1.8
-      type: OctetString
+      type: DisplayString
       help: 0300.0060.0001.0008 This attribute defines the type name of the firmware.
         - 1.3.6.1.4.1.674.10892.5.4.300.60.1.8
       indexes:
@@ -9308,7 +11412,7 @@ modules:
         type: gauge
     - name: firmwareVersionName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.60.1.11
-      type: OctetString
+      type: DisplayString
       help: 0300.0060.0001.0011 This attribute defines the version of the firmware.
         - 1.3.6.1.4.1.674.10892.5.4.300.60.1.11
       indexes:
@@ -9413,7 +11517,7 @@ modules:
         2: chassisBreachDetectionWhenPowerOFF
     - name: intrusionLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.300.70.1.8
-      type: OctetString
+      type: DisplayString
       help: 0300.0070.0001.0008 This attribute defines the location of the intrusion
         sensor. - 1.3.6.1.4.1.674.10892.5.4.300.70.1.8
       indexes:
@@ -9497,7 +11601,7 @@ modules:
         type: gauge
     - name: lcLogFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.300.90.1.7
-      type: OctetString
+      type: DisplayString
       help: 0300.0090.0001.0007 Fully qualified device descriptor (FQDD) of the device
         associated with the event associated with the LC log record. - 1.3.6.1.4.1.674.10892.5.4.300.90.1.7
       indexes:
@@ -9635,7 +11739,7 @@ modules:
         type: gauge
     - name: powerUnitName
       oid: 1.3.6.1.4.1.674.10892.5.4.600.10.1.7
-      type: OctetString
+      type: DisplayString
       help: 0600.0010.0001.0007 This attribute defines the name of the power unit.
         - 1.3.6.1.4.1.674.10892.5.4.600.10.1.7
       indexes:
@@ -9769,7 +11873,7 @@ modules:
         11: powerSupplyTypeIsVRM
     - name: powerSupplyLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.600.12.1.8
-      type: OctetString
+      type: DisplayString
       help: 0600.0012.0001.0008 This attribute defines the location of the power supply.
         - 1.3.6.1.4.1.674.10892.5.4.600.12.1.8
       indexes:
@@ -9851,7 +11955,7 @@ modules:
         type: gauge
     - name: powerSupplyFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.600.12.1.15
-      type: OctetString
+      type: DisplayString
       help: 0600.0012.0001.0015 Fully qualified device descriptor (FQDD) of the power
         supply. - 1.3.6.1.4.1.674.10892.5.4.600.12.1.15
       indexes:
@@ -9982,7 +12086,7 @@ modules:
         19: voltageProbeTypeIsMemoryStatus
     - name: voltageProbeLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.600.20.1.8
-      type: OctetString
+      type: DisplayString
       help: 0600.0020.0001.0008 This attribute defines the location name of the voltage
         probe. - 1.3.6.1.4.1.674.10892.5.4.600.20.1.8
       indexes:
@@ -10192,7 +12296,7 @@ modules:
         26: amperageProbeTypeIsSystemWatts
     - name: amperageProbeLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.600.30.1.8
-      type: OctetString
+      type: DisplayString
       help: 0600.0030.0001.0008 This attribute defines the location of the amperage
         probe. - 1.3.6.1.4.1.674.10892.5.4.600.30.1.8
       indexes:
@@ -10371,7 +12475,7 @@ modules:
         4: presenceDetected
     - name: systemBatteryLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.600.50.1.7
-      type: OctetString
+      type: DisplayString
       help: 0600.0050.0001.0007 This attribute defines the location of the battery.
         - 1.3.6.1.4.1.674.10892.5.4.600.50.1.7
       indexes:
@@ -10448,7 +12552,7 @@ modules:
         6: nonRecoverable
     - name: powerUsageEntityName
       oid: 1.3.6.1.4.1.674.10892.5.4.600.60.1.6
-      type: OctetString
+      type: DisplayString
       help: 0600.0060.0001.0006 This attribute defines the name of the entity associated
         with this power usage information. - 1.3.6.1.4.1.674.10892.5.4.600.60.1.6
       indexes:
@@ -10697,7 +12801,7 @@ modules:
         type: gauge
     - name: coolingUnitName
       oid: 1.3.6.1.4.1.674.10892.5.4.700.10.1.7
-      type: OctetString
+      type: DisplayString
       help: 0700.0010.0001.0007 This attribute defines the name of the cooling unit.
         - 1.3.6.1.4.1.674.10892.5.4.700.10.1.7
       indexes:
@@ -10827,7 +12931,7 @@ modules:
         11: coolingDeviceTypeIsPassiveCooling
     - name: coolingDeviceLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.700.12.1.8
-      type: OctetString
+      type: DisplayString
       help: 0700.0012.0001.0008 This attribute defines the location name of the cooling
         device. - 1.3.6.1.4.1.674.10892.5.4.700.12.1.8
       indexes:
@@ -10953,7 +13057,7 @@ modules:
         2: coolingDeviceIsBad
     - name: coolingDeviceFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.700.12.1.19
-      type: OctetString
+      type: DisplayString
       help: 0700.0012.0001.0019 Fully qualified device descriptor (FQDD) of the cooling
         device. - 1.3.6.1.4.1.674.10892.5.4.700.12.1.19
       indexes:
@@ -11059,7 +13163,7 @@ modules:
         16: temperatureProbeTypeIsDiscrete
     - name: temperatureProbeLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.700.20.1.8
-      type: OctetString
+      type: DisplayString
       help: 0700.0020.0001.0008 This attribute defines the location name of the temperature
         probe. - 1.3.6.1.4.1.674.10892.5.4.700.20.1.8
       indexes:
@@ -11241,7 +13345,7 @@ modules:
         6: deviceTypeIsAVideoProcessor
     - name: processorDeviceManufacturerName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.30.1.8
-      type: OctetString
+      type: DisplayString
       help: 1100.0030.0001.0008 This attribute defines the name of the manufacturer
         of the processor device. - 1.3.6.1.4.1.674.10892.5.4.1100.30.1.8
       indexes:
@@ -11496,7 +13600,7 @@ modules:
         type: gauge
     - name: processorDeviceVersionName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.30.1.16
-      type: OctetString
+      type: DisplayString
       help: 1100.0030.0001.0016 This attribute defines the version of the processor
         device - 1.3.6.1.4.1.674.10892.5.4.1100.30.1.16
       indexes:
@@ -11566,7 +13670,7 @@ modules:
         type: gauge
     - name: processorDeviceBrandName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.30.1.23
-      type: OctetString
+      type: DisplayString
       help: 1100.0030.0001.0023 This attribute defines the brand of the processor
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.30.1.23
       indexes:
@@ -11576,7 +13680,7 @@ modules:
         type: gauge
     - name: processorDeviceFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.30.1.26
-      type: OctetString
+      type: DisplayString
       help: 1100.0030.0001.0026 Fully qualified device descriptor (FQDD) of the processor
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.30.1.26
       indexes:
@@ -11671,7 +13775,7 @@ modules:
         1024: processorThrottled
     - name: processorDeviceStatusLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.32.1.7
-      type: OctetString
+      type: DisplayString
       help: 1100.0032.0001.0007 This attribute defines the location name of the processor
         device status probe. - 1.3.6.1.4.1.674.10892.5.4.1100.32.1.7
       indexes:
@@ -11782,7 +13886,7 @@ modules:
         26: deviceTypeIsDDR4
     - name: memoryDeviceLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.50.1.8
-      type: OctetString
+      type: DisplayString
       help: 1100.0050.0001.0008 This attribute defines the location of the memory
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.50.1.8
       indexes:
@@ -11792,7 +13896,7 @@ modules:
         type: gauge
     - name: memoryDeviceBankLocationName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.50.1.10
-      type: OctetString
+      type: DisplayString
       help: 1100.0050.0001.0010 This attribute defines the location of the bank for
         the memory device. - 1.3.6.1.4.1.674.10892.5.4.1100.50.1.10
       indexes:
@@ -11822,7 +13926,7 @@ modules:
         type: gauge
     - name: memoryDeviceManufacturerName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.50.1.21
-      type: OctetString
+      type: DisplayString
       help: 1100.0050.0001.0021 This attribute defines the manufacturer of the memory
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.50.1.21
       indexes:
@@ -11832,7 +13936,7 @@ modules:
         type: gauge
     - name: memoryDevicePartNumberName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.50.1.22
-      type: OctetString
+      type: DisplayString
       help: 1100.0050.0001.0022 This attribute defines the manufacturer's part number
         for the memory device. - 1.3.6.1.4.1.674.10892.5.4.1100.50.1.22
       indexes:
@@ -11842,7 +13946,7 @@ modules:
         type: gauge
     - name: memoryDeviceSerialNumberName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.50.1.23
-      type: OctetString
+      type: DisplayString
       help: 1100.0050.0001.0023 This attribute defines the serial number of the memory
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.50.1.23
       indexes:
@@ -11852,7 +13956,7 @@ modules:
         type: gauge
     - name: memoryDeviceFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.50.1.26
-      type: OctetString
+      type: DisplayString
       help: 1100.0050.0001.0026 Fully qualified device descriptor (FQDD) of the memory
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.50.1.26
       indexes:
@@ -12009,7 +14113,7 @@ modules:
         type: gauge
     - name: pCIDeviceManufacturerName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.80.1.8
-      type: OctetString
+      type: DisplayString
       help: 1100.0080.0001.0008 This attribute defines the name of the manufacturer
         of the PCI device. - 1.3.6.1.4.1.674.10892.5.4.1100.80.1.8
       indexes:
@@ -12019,7 +14123,7 @@ modules:
         type: gauge
     - name: pCIDeviceDescriptionName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.80.1.9
-      type: OctetString
+      type: DisplayString
       help: 1100.0080.0001.0009 This attribute defines the description of the PCI
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.80.1.9
       indexes:
@@ -12029,7 +14133,7 @@ modules:
         type: gauge
     - name: pCIDeviceFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.80.1.12
-      type: OctetString
+      type: DisplayString
       help: 1100.0080.0001.0012 Fully qualified device descriptor (FQDD) of the PCI
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.80.1.12
       indexes:
@@ -12095,7 +14199,7 @@ modules:
         13: hardwareNotReady
     - name: networkDeviceProductName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.90.1.6
-      type: OctetString
+      type: DisplayString
       help: 1100.0090.0001.0006 This attribute defines the product name of the network
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.90.1.6
       indexes:
@@ -12105,7 +14209,7 @@ modules:
         type: gauge
     - name: networkDeviceVendorName
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.90.1.7
-      type: OctetString
+      type: DisplayString
       help: 1100.0090.0001.0007 This attribute defines the name of the vendor of the
         network device. - 1.3.6.1.4.1.674.10892.5.4.1100.90.1.7
       indexes:
@@ -12115,7 +14219,7 @@ modules:
         type: gauge
     - name: networkDeviceCurrentMACAddress
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.90.1.15
-      type: OctetString
+      type: PhysAddress48
       help: 1100.0090.0001.0015 This attribute defines the current MAC address of
         the network device. - 1.3.6.1.4.1.674.10892.5.4.1100.90.1.15
       indexes:
@@ -12125,7 +14229,7 @@ modules:
         type: gauge
     - name: networkDevicePermanentMACAddress
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.90.1.16
-      type: OctetString
+      type: PhysAddress48
       help: 1100.0090.0001.0016 This attribute defines the permanent MAC address of
         the network device. - 1.3.6.1.4.1.674.10892.5.4.1100.90.1.16
       indexes:
@@ -12222,7 +14326,7 @@ modules:
         8: fcoeOffload
     - name: networkDeviceFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.1100.90.1.30
-      type: OctetString
+      type: DisplayString
       help: 1100.0090.0001.0030 Fully qualified device descriptor (FQDD) of the network
         device. - 1.3.6.1.4.1.674.10892.5.4.1100.90.1.30
       indexes:
@@ -12391,7 +14495,7 @@ modules:
         176: systemSlotIsPCIExpressGen2X16
     - name: systemSlotSlotExternalSlotName
       oid: 1.3.6.1.4.1.674.10892.5.4.1200.10.1.8
-      type: OctetString
+      type: DisplayString
       help: 1200.0010.0001.0008 This attribute defines the name of the external connector
         name of the system slot. - 1.3.6.1.4.1.674.10892.5.4.1200.10.1.8
       indexes:
@@ -12494,7 +14598,7 @@ modules:
         type: gauge
     - name: fruFQDD
       oid: 1.3.6.1.4.1.674.10892.5.4.2000.10.1.12
-      type: OctetString
+      type: DisplayString
       help: 2000.0010.0001.0012 Fully qualified device descriptor (FQDD) of the field
         replaceable unit. - 1.3.6.1.4.1.674.10892.5.4.2000.10.1.12
       indexes:
@@ -12773,7 +14877,7 @@ modules:
         type: gauge
     - name: controllerFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.130.1.1.78
-      type: OctetString
+      type: DisplayString
       help: The controller's Fully Qualified Device Descriptor (FQDD) as represented
         in Storage Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.130.1.1.78
       indexes:
@@ -13004,7 +15108,7 @@ modules:
         type: gauge
     - name: enclosureFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.130.3.1.47
-      type: OctetString
+      type: DisplayString
       help: The enclosure/backplane's Fully Qualified Device Descriptor (FQDD) as
         represented in Storage Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.130.3.1.47
       indexes:
@@ -13314,7 +15418,7 @@ modules:
         5: edsffe1DotL
     - name: physicalDiskFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.130.4.1.54
-      type: OctetString
+      type: DisplayString
       help: The physical disk's Fully Qualified Device Descriptor (FQDD) as represented
         in Storage Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.130.4.1.54
       indexes:
@@ -13437,7 +15541,7 @@ modules:
         6: nonRecoverable
     - name: enclosureFanFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.130.7.1.20
-      type: OctetString
+      type: DisplayString
       help: The fan's Fully Qualified Device Descriptor (FQDD) as represented in Storage
         Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.130.7.1.20
       indexes:
@@ -13501,7 +15605,7 @@ modules:
         6: nonRecoverable
     - name: enclosurePowerSupplyFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.130.9.1.15
-      type: OctetString
+      type: DisplayString
       help: The power supply unit's Fully Qualified Device Descriptor (FQDD) as represented
         in Storage Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.130.9.1.15
       indexes:
@@ -13599,7 +15703,7 @@ modules:
         6: nonRecoverable
     - name: enclosureTemperatureProbeFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.130.11.1.15
-      type: OctetString
+      type: DisplayString
       help: The temperature probe's Fully Qualified Device Descriptor (FQDD) as represented
         in Storage Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.130.11.1.15
       indexes:
@@ -13672,7 +15776,7 @@ modules:
         6: nonRecoverable
     - name: enclosureManagementModuleFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.130.13.1.15
-      type: OctetString
+      type: DisplayString
       help: The enclosure management module's Fully Qualified Device Descriptor (FQDD)
         as represented in Storage Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.130.13.1.15
       indexes:
@@ -13948,7 +16052,7 @@ modules:
         type: gauge
     - name: virtualDiskFQDD
       oid: 1.3.6.1.4.1.674.10892.5.5.1.20.140.1.1.35
-      type: OctetString
+      type: DisplayString
       help: The virtual disk's Fully Qualified Device Descriptor (FQDD) as represented
         in Storage Management. - 1.3.6.1.4.1.674.10892.5.5.1.20.140.1.1.35
       indexes:
@@ -14457,7 +16561,7 @@ modules:
         fixed_size: 1
     - name: drsPotentialPower
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.2
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0002 This attribute defines the power (in Watts) required
         by the chassis infrastructure, plus the sum of the maximum power requirements
         for all currently powered-on servers. - 1.3.6.1.4.1.674.10892.2.4.1.1.2
@@ -14465,13 +16569,9 @@ modules:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsIdlePower
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.3
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0003 This attribute defines the power (in Watts) required
         by the chassis infrastructure, plus the sum of the minimum power requirements
         for all currently powered-on servers. - 1.3.6.1.4.1.674.10892.2.4.1.1.3
@@ -14479,153 +16579,105 @@ modules:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsMaxPowerSpecification
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.4
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0004 This attribute defines the power limit (in Watts)
         at which server throttling will take place. - 1.3.6.1.4.1.674.10892.2.4.1.1.4
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsPowerSurplus
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.5
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0005 This attribute defines the power surplus (in Watts)
         remaining above the drsPotentialPower reading. - 1.3.6.1.4.1.674.10892.2.4.1.1.5
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsKWhCumulative
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.6
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0006 This attribute defines the cumulative chassis power
         usage (in KWh) since last reset. - 1.3.6.1.4.1.674.10892.2.4.1.1.6
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsKWhCumulativeTime
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.7
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0007 This attribute defines the timestamp of the most recent
         chassis power accumulator reset. - 1.3.6.1.4.1.674.10892.2.4.1.1.7
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsWattsPeakUsage
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.8
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0008 This attribute defines the chassis peak power usage
         (in Watts) since last reset. - 1.3.6.1.4.1.674.10892.2.4.1.1.8
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsWattsPeakTime
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.9
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0009 This attribute defines the timestamp of the most recent
         chassis peak power usage. - 1.3.6.1.4.1.674.10892.2.4.1.1.9
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsWattsMinUsage
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.10
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0010 This attribute defines the chassis mimimum power usage
         (in Watts) since last reset. - 1.3.6.1.4.1.674.10892.2.4.1.1.10
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsWattsMinTime
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.11
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0011 This attribute defines the timestamp of the most recent
         chassis minimum power usage. - 1.3.6.1.4.1.674.10892.2.4.1.1.11
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsWattsResetTime
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.12
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0012 This attribute defines the timestamp of the most recent
         reset of the chassis min/peak Watts readings. - 1.3.6.1.4.1.674.10892.2.4.1.1.12
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsWattsReading
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.13
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0013 This attribute defines the instantaneous chassis power
         usage (in Watts). - 1.3.6.1.4.1.674.10892.2.4.1.1.13
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsAmpsReading
       oid: 1.3.6.1.4.1.674.10892.2.4.1.1.14
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0001.0001.0014 This attribute defines the instantaneous chassis current
         usage (in Watts). - 1.3.6.1.4.1.674.10892.2.4.1.1.14
       indexes:
       - labelname: drsChassisIndex
         type: gauge
         fixed_size: 1
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsPSUChassisIndex
       oid: 1.3.6.1.4.1.674.10892.2.4.2.1.1
       type: gauge
@@ -14676,7 +16728,7 @@ modules:
         3: basic
     - name: drsPSUVoltsReading
       oid: 1.3.6.1.4.1.674.10892.2.4.2.1.5
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0002.0001.0005 This attribute defines the instantaneous PSU Voltage
         reading. - 1.3.6.1.4.1.674.10892.2.4.2.1.5
       indexes:
@@ -14685,13 +16737,9 @@ modules:
         fixed_size: 1
       - labelname: drsPSUIndex
         type: gauge
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsPSUAmpsReading
       oid: 1.3.6.1.4.1.674.10892.2.4.2.1.6
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0002.0001.0006 This attribute defines the instantaneous PSU Current
         reading. - 1.3.6.1.4.1.674.10892.2.4.2.1.6
       indexes:
@@ -14700,13 +16748,9 @@ modules:
         fixed_size: 1
       - labelname: drsPSUIndex
         type: gauge
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
     - name: drsPSUWattsReading
       oid: 1.3.6.1.4.1.674.10892.2.4.2.1.7
-      type: DisplayString
+      type: ParseFloatString
       help: 0004.0002.0001.0007 This attribute defines the instantaneous PSU Wattage
         reading. - 1.3.6.1.4.1.674.10892.2.4.2.1.7
       indexes:
@@ -14715,10 +16759,6 @@ modules:
         fixed_size: 1
       - labelname: drsPSUIndex
         type: gauge
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:(.*))$
   dlink:
     walk:
     - 1.3.6.1.4.1.171.12.1.1.6
@@ -23985,6 +26025,7 @@ modules:
         306: docsCableScte25d2MacOob
         307: lora
         308: lorawan
+        309: waysideOsc
     - name: ifMtu
       oid: 1.3.6.1.2.1.2.2.1.4
       type: gauge
@@ -24890,7 +26931,7 @@ modules:
     metrics:
     - name: pduMainLoadVoltage
       oid: 1.3.6.1.4.1.34550.20.2.1.1.1.13
-      type: DisplayString
+      type: ParseFloatString
       help: The voltage measured on this PDU in tenth of Volts - 1.3.6.1.4.1.34550.20.2.1.1.1.13
       indexes:
       - labelname: pduIndex
@@ -24906,13 +26947,9 @@ modules:
         labelname: pduLocation
         oid: 1.3.6.1.4.1.34550.20.2.1.1.1.7
         type: DisplayString
-      regex_extracts:
-        "":
-        - value: $1.$2
-          regex: ^(?:(.*)(.))$
     - name: pduMainLoadAmp
       oid: 1.3.6.1.4.1.34550.20.2.1.1.1.14
-      type: DisplayString
+      type: ParseFloatString
       help: The current load measured on this PDU in tenth of Amps - 1.3.6.1.4.1.34550.20.2.1.1.1.14
       indexes:
       - labelname: pduIndex
@@ -24928,10 +26965,6 @@ modules:
         labelname: pduLocation
         oid: 1.3.6.1.4.1.34550.20.2.1.1.1.7
         type: DisplayString
-      regex_extracts:
-        "":
-        - value: $1.$2
-          regex: ^(?:(.*)(.))$
     - name: pduMainActivePower
       oid: 1.3.6.1.4.1.34550.20.2.1.1.1.17
       type: DisplayString
@@ -25889,7 +27922,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -25908,7 +27941,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -25932,7 +27965,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -25952,7 +27985,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -25972,7 +28005,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -25990,7 +28023,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -26015,7 +28048,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -26034,7 +28067,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -26053,7 +28086,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -26072,7 +28105,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -26091,7 +28124,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -26110,7 +28143,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -26128,7 +28161,7 @@ modules:
       - labelname: vrrpv3OperationsVrId
         type: gauge
       - labelname: vrrpv3OperationsInetAddrType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           0: unknown
           1: ipv4
@@ -35413,7 +37446,7 @@ modules:
       help: The type of local peer identity - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.1
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35422,7 +37455,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35443,7 +37476,7 @@ modules:
       help: The value of the local peer identity - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.2
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35452,7 +37485,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35468,7 +37501,7 @@ modules:
       help: The type of remote peer identity - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.3
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35477,7 +37510,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35498,7 +37531,7 @@ modules:
       help: The value of the remote peer identity - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.4
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35507,7 +37540,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35523,7 +37556,7 @@ modules:
       help: The internal index of the local-remote peer association - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.5
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35532,7 +37565,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35548,7 +37581,7 @@ modules:
       help: The IP address of the local peer. - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.6
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35557,7 +37590,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35573,7 +37606,7 @@ modules:
       help: The IP address of the remote peer. - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.7
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35582,7 +37615,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35599,7 +37632,7 @@ modules:
         of a second. - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.8
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35608,7 +37641,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35625,7 +37658,7 @@ modules:
         pikeTunnelTable) for this peer association - 1.3.6.1.4.1.119.2.3.84.3.1.2.2.1.9
       indexes:
       - labelname: pikePeerLocalType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -35634,7 +37667,7 @@ modules:
       - labelname: pikePeerLocalValue
         type: DisplayString
       - labelname: pikePeerRemoteType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: idIpv4Addr
           2: idFqdn
@@ -39072,7 +41105,44 @@ modules:
         - prtMarkerSuppliesIndex
         labelname: prtMarkerSuppliesType
         oid: 1.3.6.1.2.1.43.11.1.1.5
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: toner
+          4: wasteToner
+          5: ink
+          6: inkCartridge
+          7: inkRibbon
+          8: wasteInk
+          9: opc
+          10: developer
+          11: fuserOil
+          12: solidWax
+          13: ribbonWax
+          14: wasteWax
+          15: fuser
+          16: coronaWire
+          17: fuserOilWick
+          18: cleanerUnit
+          19: fuserCleaningPad
+          20: transferUnit
+          21: tonerCartridge
+          22: fuserOiler
+          23: water
+          24: wasteWater
+          25: glueWaterAdditive
+          26: wastePaper
+          27: bindingSupply
+          28: bandingSupply
+          29: stitchingWire
+          30: shrinkWrap
+          31: paperWrap
+          32: staples
+          33: inserts
+          34: covers
+          35: matteToner
+          36: matteInk
       - labels:
         - hrDeviceIndex
         - prtMarkerSuppliesIndex
@@ -39132,7 +41202,44 @@ modules:
         - prtMarkerSuppliesIndex
         labelname: prtMarkerSuppliesType
         oid: 1.3.6.1.2.1.43.11.1.1.5
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: toner
+          4: wasteToner
+          5: ink
+          6: inkCartridge
+          7: inkRibbon
+          8: wasteInk
+          9: opc
+          10: developer
+          11: fuserOil
+          12: solidWax
+          13: ribbonWax
+          14: wasteWax
+          15: fuser
+          16: coronaWire
+          17: fuserOilWick
+          18: cleanerUnit
+          19: fuserCleaningPad
+          20: transferUnit
+          21: tonerCartridge
+          22: fuserOiler
+          23: water
+          24: wasteWater
+          25: glueWaterAdditive
+          26: wastePaper
+          27: bindingSupply
+          28: bandingSupply
+          29: stitchingWire
+          30: shrinkWrap
+          31: paperWrap
+          32: staples
+          33: inserts
+          34: covers
+          35: matteToner
+          36: matteInk
       - labels:
         - hrDeviceIndex
         - prtMarkerSuppliesIndex
@@ -39155,7 +41262,44 @@ modules:
         - prtMarkerSuppliesIndex
         labelname: prtMarkerSuppliesType
         oid: 1.3.6.1.2.1.43.11.1.1.5
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: toner
+          4: wasteToner
+          5: ink
+          6: inkCartridge
+          7: inkRibbon
+          8: wasteInk
+          9: opc
+          10: developer
+          11: fuserOil
+          12: solidWax
+          13: ribbonWax
+          14: wasteWax
+          15: fuser
+          16: coronaWire
+          17: fuserOilWick
+          18: cleanerUnit
+          19: fuserCleaningPad
+          20: transferUnit
+          21: tonerCartridge
+          22: fuserOiler
+          23: water
+          24: wasteWater
+          25: glueWaterAdditive
+          26: wastePaper
+          27: bindingSupply
+          28: bandingSupply
+          29: stitchingWire
+          30: shrinkWrap
+          31: paperWrap
+          32: staples
+          33: inserts
+          34: covers
+          35: matteToner
+          36: matteInk
       - labels:
         - hrDeviceIndex
         - prtMarkerSuppliesIndex
@@ -39178,7 +41322,44 @@ modules:
         - prtMarkerSuppliesIndex
         labelname: prtMarkerSuppliesType
         oid: 1.3.6.1.2.1.43.11.1.1.5
-        type: gauge
+        type: EnumAsInfo
+        enum_values:
+          1: other
+          2: unknown
+          3: toner
+          4: wasteToner
+          5: ink
+          6: inkCartridge
+          7: inkRibbon
+          8: wasteInk
+          9: opc
+          10: developer
+          11: fuserOil
+          12: solidWax
+          13: ribbonWax
+          14: wasteWax
+          15: fuser
+          16: coronaWire
+          17: fuserOilWick
+          18: cleanerUnit
+          19: fuserCleaningPad
+          20: transferUnit
+          21: tonerCartridge
+          22: fuserOiler
+          23: water
+          24: wasteWater
+          25: glueWaterAdditive
+          26: wastePaper
+          27: bindingSupply
+          28: bandingSupply
+          29: stitchingWire
+          30: shrinkWrap
+          31: paperWrap
+          32: staples
+          33: inserts
+          34: covers
+          35: matteToner
+          36: matteInk
       - labels:
         - hrDeviceIndex
         - prtMarkerSuppliesIndex
@@ -42015,7 +44196,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42115,7 +44296,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42253,7 +44434,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42350,7 +44531,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42447,7 +44628,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42546,7 +44727,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42648,7 +44829,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42747,7 +44928,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42845,7 +45026,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -42944,7 +45125,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43043,7 +45224,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43141,7 +45322,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43240,7 +45421,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43337,7 +45518,7 @@ modules:
       - labelname: pduId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43436,7 +45617,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43544,7 +45725,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43690,7 +45871,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43795,7 +45976,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -43900,7 +46081,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44007,7 +46188,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44117,7 +46298,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44224,7 +46405,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44330,7 +46511,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44437,7 +46618,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44544,7 +46725,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44650,7 +46831,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44757,7 +46938,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44862,7 +47043,7 @@ modules:
       - labelname: inletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -44969,7 +47150,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45079,7 +47260,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45227,7 +47408,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45334,7 +47515,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45441,7 +47622,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45550,7 +47731,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45662,7 +47843,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45771,7 +47952,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45879,7 +48060,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -45988,7 +48169,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46097,7 +48278,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46205,7 +48386,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46314,7 +48495,7 @@ modules:
       - labelname: inletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46419,7 +48600,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46521,7 +48702,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46661,7 +48842,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46760,7 +48941,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46859,7 +49040,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -46960,7 +49141,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47064,7 +49245,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47165,7 +49346,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47265,7 +49446,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47366,7 +49547,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47467,7 +49648,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47567,7 +49748,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47668,7 +49849,7 @@ modules:
       - labelname: overCurrentProtectorIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47767,7 +49948,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -47881,7 +50062,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48033,7 +50214,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48144,7 +50325,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48255,7 +50436,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48368,7 +50549,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48484,7 +50665,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48597,7 +50778,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48709,7 +50890,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48822,7 +51003,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -48935,7 +51116,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49047,7 +51228,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49160,7 +51341,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49271,7 +51452,7 @@ modules:
       - labelname: outletId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49384,7 +51565,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49500,7 +51681,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49654,7 +51835,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49767,7 +51948,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49880,7 +52061,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -49995,7 +52176,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -50113,7 +52294,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -50228,7 +52409,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -50342,7 +52523,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -50457,7 +52638,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -50572,7 +52753,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -50686,7 +52867,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -50801,7 +52982,7 @@ modules:
       - labelname: outletPoleIndex
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51119,7 +53300,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51221,7 +53402,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51361,7 +53542,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51460,7 +53641,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51559,7 +53740,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51660,7 +53841,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51764,7 +53945,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51865,7 +54046,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -51965,7 +54146,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52066,7 +54247,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52167,7 +54348,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52267,7 +54448,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52368,7 +54549,7 @@ modules:
       - labelname: transferSwitchId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52467,7 +54648,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52569,7 +54750,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52709,7 +54890,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52808,7 +54989,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -52907,7 +55088,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53008,7 +55189,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53112,7 +55293,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53213,7 +55394,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53313,7 +55494,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53414,7 +55595,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53515,7 +55696,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53615,7 +55796,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53716,7 +55897,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -53815,7 +55996,7 @@ modules:
       - labelname: circuitId
         type: gauge
       - labelname: sensorType
-        type: gauge
+        type: EnumAsInfo
         enum_values:
           1: rmsCurrent
           2: peakCurrent
@@ -59517,6 +61698,18 @@ modules:
       oid: 1.3.6.1.4.1.6574.1.6
       type: gauge
       help: Synology system controller number Controller A(0) Controller B(1) - 1.3.6.1.4.1.6574.1.6
+    - name: cpuUtilization
+      oid: 1.3.6.1.4.1.6574.1.7.1
+      type: gauge
+      help: Synology CPU utilization - 1.3.6.1.4.1.6574.1.7.1
+    - name: memUtilization
+      oid: 1.3.6.1.4.1.6574.1.7.2
+      type: gauge
+      help: Synology memory utilization - 1.3.6.1.4.1.6574.1.7.2
+    - name: thermalStatus
+      oid: 1.3.6.1.4.1.6574.1.8
+      type: gauge
+      help: Synology thermal status - 1.3.6.1.4.1.6574.1.8
     - name: storageIOIndex
       oid: 1.3.6.1.4.1.6574.101.1.1.1
       type: gauge
@@ -59916,14 +62109,14 @@ modules:
         type: gauge
     - name: iSCSILUNUUID
       oid: 1.3.6.1.4.1.6574.104.1.1.2
-      type: OctetString
+      type: DisplayString
       help: LUN uuid - 1.3.6.1.4.1.6574.104.1.1.2
       indexes:
       - labelname: iSCSILUNInfoIndex
         type: gauge
     - name: iSCSILUNName
       oid: 1.3.6.1.4.1.6574.104.1.1.3
-      type: OctetString
+      type: DisplayString
       help: LUN name - 1.3.6.1.4.1.6574.104.1.1.3
       indexes:
       - labelname: iSCSILUNInfoIndex
@@ -61055,7 +63248,7 @@ modules:
     metrics:
     - name: ddmStatusTemperature
       oid: 1.3.6.1.4.1.11863.6.96.1.7.1.1.2
-      type: DisplayString
+      type: ParseFloatString
       help: This object indicates the temperature of the port. - 1.3.6.1.4.1.11863.6.96.1.7.1.1.2
       indexes:
       - labelname: ifIndex
@@ -61071,13 +63264,9 @@ modules:
         labelname: ifName
         oid: 1.3.6.1.2.1.31.1.1.1.1
         type: DisplayString
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:^(\d+\.\d+).*)$
     - name: ddmStatusVoltage
       oid: 1.3.6.1.4.1.11863.6.96.1.7.1.1.3
-      type: DisplayString
+      type: ParseFloatString
       help: This object indicates the voltage of the port. - 1.3.6.1.4.1.11863.6.96.1.7.1.1.3
       indexes:
       - labelname: ifIndex
@@ -61093,13 +63282,9 @@ modules:
         labelname: ifName
         oid: 1.3.6.1.2.1.31.1.1.1.1
         type: DisplayString
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:^(\d+\.\d+).*)$
     - name: ddmStatusBiasCurrent
       oid: 1.3.6.1.4.1.11863.6.96.1.7.1.1.4
-      type: DisplayString
+      type: ParseFloatString
       help: This object indicates the bias current of the port. - 1.3.6.1.4.1.11863.6.96.1.7.1.1.4
       indexes:
       - labelname: ifIndex
@@ -61115,13 +63300,9 @@ modules:
         labelname: ifName
         oid: 1.3.6.1.2.1.31.1.1.1.1
         type: DisplayString
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:^(\d+\.\d+).*)$
     - name: ddmStatusTxPow
       oid: 1.3.6.1.4.1.11863.6.96.1.7.1.1.5
-      type: DisplayString
+      type: ParseFloatString
       help: This object indicates the tx power of the port. - 1.3.6.1.4.1.11863.6.96.1.7.1.1.5
       indexes:
       - labelname: ifIndex
@@ -61137,13 +63318,9 @@ modules:
         labelname: ifName
         oid: 1.3.6.1.2.1.31.1.1.1.1
         type: DisplayString
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:^(\d+\.\d+).*)$
     - name: ddmStatusRxPow
       oid: 1.3.6.1.4.1.11863.6.96.1.7.1.1.6
-      type: DisplayString
+      type: ParseFloatString
       help: This object indicates the rx power of the port. - 1.3.6.1.4.1.11863.6.96.1.7.1.1.6
       indexes:
       - labelname: ifIndex
@@ -61159,10 +63336,6 @@ modules:
         labelname: ifName
         oid: 1.3.6.1.2.1.31.1.1.1.1
         type: DisplayString
-      regex_extracts:
-        "":
-        - value: $1
-          regex: ^(?:^(\d+\.\d+).*)$
     - name: ddmStatusLossSignal
       oid: 1.3.6.1.4.1.11863.6.96.1.7.1.1.8
       type: DisplayString

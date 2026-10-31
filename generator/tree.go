@@ -42,7 +42,8 @@ func walkNode(n *Node, f func(n *Node)) {
 	}
 }
 
-// Transform the tree.
+// prepareTree transform the tree in-place. It also returns a map of map from
+// names and oids to nodes.
 func prepareTree(nodes *Node, logger *slog.Logger) map[string]*Node {
 	// Build a map from names and oids to nodes.
 	nameToNode := map[string]*Node{}
@@ -108,43 +109,41 @@ func prepareTree(nodes *Node, logger *slog.Logger) map[string]*Node {
 	walkNode(nodes, func(n *Node) {
 		// Set type on MAC addresses and strings.
 		// RFC 2579
-		if n.Hint == "1x:" {
+		if n.Hint == "1x:" && (n.FixedSize == 0 || n.FixedSize == 6) {
 			n.Type = "PhysAddress48"
 		}
 		if displayStringRe.MatchString(n.Hint) {
 			n.Type = "DisplayString"
 		}
 
-		// Some MIBs refer to RFC1213 for this, which is too
-		// old to have the right hint set.
-		if n.TextualConvention == "DisplayString" {
+		switch n.TextualConvention {
+		case "DisplayString":
+			// Some MIBs refer to RFC1213 for this, which is too
+			// old to have the right hint set.
 			n.Type = "DisplayString"
-		}
-		if n.TextualConvention == "PhysAddress" {
+		case "String64", "StringType", "FQDDString":
+			// Vendor MIBs (e.g. Dell iDRAC) define these as printable text
+			// without a DisplayString DISPLAY-HINT.
+			n.Type = "DisplayString"
+		case "PhysAddress", "MACAddress":
 			n.Type = "PhysAddress48"
-		}
-
-		// Promote Opaque Float/Double textual convention to type.
-		if n.TextualConvention == "Float" || n.TextualConvention == "Double" {
+		case "Float", "Double":
+			// Promote Opaque Float/Double textual convention to type.
 			n.Type = n.TextualConvention
-		}
-
-		// Convert RFC 2579 DateAndTime textual convention to type.
-		if n.TextualConvention == "DateAndTime" {
+		case "DateAndTime":
+			// Convert RFC 2579 DateAndTime textual convention to type.
 			n.Type = "DateAndTime"
-		}
-		if n.TextualConvention == "ParseDateAndTime" {
+		case "ParseDateAndTime":
 			n.Type = "ParseDateAndTime"
-		}
-		if n.TextualConvention == "NTPTimeStamp" {
+		case "NTPTimeStamp":
 			n.Type = "NTPTimeStamp"
-		}
-		// Convert RFC 4001 InetAddress types textual convention to type.
-		if n.TextualConvention == "InetAddressIPv4" || n.TextualConvention == "InetAddressIPv6" || n.TextualConvention == "InetAddress" {
+		case "ParseFloatString":
+			n.Type = "ParseFloatString"
+		case "InetAddressIPv4", "InetAddressIPv6", "InetAddress":
+			// Convert RFC 4001 InetAddress types textual convention to type.
 			n.Type = n.TextualConvention
-		}
-		// Convert LLDP-MIB LldpPortId type textual convention to type.
-		if n.TextualConvention == "LldpPortId" {
+		case "LldpPortId":
+			// Convert LLDP-MIB LldpPortId type textual convention to type.
 			n.Type = n.TextualConvention
 		}
 	})
@@ -172,6 +171,8 @@ func metricType(t string) (string, bool) {
 	case "DateAndTime":
 		return t, true
 	case "ParseDateAndTime":
+		return t, true
+	case "ParseFloatString":
 		return t, true
 	case "NTPTimeStamp":
 		return t, true
@@ -347,7 +348,11 @@ func generateConfigModule(cfg *ModuleConfig, node *Node, nameToNode map[string]*
 
 	// Find all the usable metrics.
 	for _, metricNode := range metrics {
+		var indexErr error
 		walkNode(metricNode, func(n *Node) {
+			if indexErr != nil {
+				return
+			}
 			t, ok := metricType(n.Type)
 			if !ok {
 				return // Unsupported type.
@@ -392,6 +397,15 @@ func generateConfigModule(cfg *ModuleConfig, node *Node, nameToNode map[string]*
 					index.Implied = true
 				}
 				index.EnumValues = indexNode.EnumValues
+				if len(index.EnumValues) > 0 && index.Type != "EnumAsStateSet" && indexNode.Type != "gauge" {
+					index.Type = "EnumAsInfo"
+				}
+
+				// The collector can only render certain types as index labels.
+				if !config.RenderableIndexTypes[index.Type] {
+					indexErr = fmt.Errorf("cannot use index '%s' of type %s on metric '%s'", i, index.Type, n.Label)
+					return
+				}
 
 				// Convert (InetAddressType,InetAddress) to (InetAddress)
 				if subtype, ok := combinedTypes[index.Type]; ok {
@@ -411,6 +425,9 @@ func generateConfigModule(cfg *ModuleConfig, node *Node, nameToNode map[string]*
 			}
 			out.Metrics = append(out.Metrics, metric)
 		})
+		if indexErr != nil {
+			return nil, indexErr
+		}
 	}
 
 	// Build an map of all oid targeted by a filter to access it easily later.
@@ -455,10 +472,14 @@ func generateConfigModule(cfg *ModuleConfig, node *Node, nameToNode map[string]*
 				if !ok {
 					return nil, fmt.Errorf("unknown index type %s for %s", indexNode.Type, lookup.Lookup)
 				}
+				if len(indexNode.EnumValues) > 0 && typ != "EnumAsStateSet" && indexNode.Type != "gauge" {
+					typ = "EnumAsInfo"
+				}
 				l := &config.Lookup{
-					Labelname: sanitizeLabelName(indexNode.Label),
-					Type:      typ,
-					Oid:       indexNode.Oid,
+					Labelname:  sanitizeLabelName(indexNode.Label),
+					Type:       typ,
+					Oid:        indexNode.Oid,
+					EnumValues: indexNode.EnumValues,
 				}
 				// Handle display_hint for lookup
 				if lookup.DisplayHint != "" {
@@ -481,7 +502,10 @@ func generateConfigModule(cfg *ModuleConfig, node *Node, nameToNode map[string]*
 				// If lookup label is used as source index in another lookup,
 				// we need to add this new label as another index.
 				if slices.Contains(requiredAsIndex, l.Labelname) {
-					idx := &config.Index{Labelname: l.Labelname, Type: l.Type}
+					if !config.RenderableIndexTypes[l.Type] {
+						return nil, fmt.Errorf("cannot use lookup '%s' of type %s as an index", lookup.Lookup, l.Type)
+					}
+					idx := &config.Index{Labelname: l.Labelname, Type: l.Type, EnumValues: indexNode.EnumValues}
 					metric.Indexes = append(metric.Indexes, idx)
 				}
 

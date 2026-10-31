@@ -181,6 +181,7 @@ modules:
                              #   OctetString: A bit string, rendered as 0xff34.
                              #   DateAndTime: An RFC 2579 DateAndTime byte sequence. If the device has no time zone data, UTC is used.
                              #   ParseDateAndTime: Parse a DisplayString and return the timestamp. See datetime_pattern config option
+                             #   ParseFloatString: Parse the value as a DisplayString and return the float64 value.
                              #   NTPTimeStamp: Parse the NTP timestamp (RFC-1305, March 1992, Section 3.1) and return Unix timestamp as float.
                              #   DisplayString: An ASCII or UTF-8 string.
                              #   PhysAddress48: A 48 bit MAC address, rendered as 00:01:02:03:04:ff.
@@ -234,7 +235,38 @@ to represent these strings in Prometheus. They can be "info" metrics, or they ca
 "state sets". SNMP does not specify which should be used, and it's up to the use case
 of the data. Some users may also prefer the raw integer value, rather than the string.
 
-In order to set enum integer to string mapping, you must use one of the two overrides.
+#### Enum indexes and lookups
+
+When an SNMP column with MIB enum values is used as a table **index** or **lookup**,
+the generator defaults to `EnumAsInfo` and the exporter emits human-readable strings
+in **label values** instead of numeric strings. For example:
+
+```
+# Before (numeric label)
+cempMemPoolUsed{cempMemPoolType="3", ...}
+
+# After (human-readable label)
+cempMemPoolUsed{cempMemPoolType="ioMemory", ...}
+```
+
+This applies when regenerating any module, not only the default `snmp.yml`. Plain
+integer indexes (such as `ifIndex`) and string lookups (such as `ifDescr`) are
+unchanged. Unknown enum values fall back to the decimal string (e.g. `"99"`).
+
+To keep numeric label values, override the column with `type: gauge`:
+
+```yaml
+modules:
+  cisco_device:
+    overrides:
+      cempMemPoolType:
+        type: gauge
+```
+
+#### Enum metric columns
+
+For enum columns exported as their own metrics (not just as indexes or lookups), use
+one of the two overrides to control how the sample is represented:
 
 `EnumAsInfo` should be used for properties that provide inventory-like data. For example
 a device type, the name of a colour etc. It is important that this value is constant.
@@ -292,23 +324,15 @@ PhysAddress48, InetAddressIPv4, etc.) ignore this setting.
 
 ## Where to get MIBs
 
-Some of these are quite sluggish, so use wget to download.
+Many vendor MIBs are already included via the
+[prometheus-community/snmp](https://github.com/prometheus-community/snmp)
+repository. Run `make mibs` in the generator directory to download all
+supported MIBs automatically.
 
-Put the extracted mibs in a location NetSNMP can read them from. `$HOME/.snmp/mibs` is one option.
-
-* Cisco: https://cfnng.cisco.com/mibs or https://github.com/cisco/cisco-mibs
-* APC: https://download.schneider-electric.com/files?p_File_Name=powernet432.mib
-* Servertech: ftp://ftp.servertech.com/Pub/SNMP/sentry3/Sentry3.mib
-* Palo Alto PanOS 7.0 enterprise MIBs: https://www.paloaltonetworks.com/content/dam/pan/en_US/assets/zip/technical-documentation/snmp-mib-modules/PAN-MIB-MODULES-7.0.zip
-* Arista Networks: https://www.arista.com/assets/data/docs/MIBS/ARISTA-ENTITY-SENSOR-MIB.txt
-                   https://www.arista.com/assets/data/docs/MIBS/ARISTA-SW-IP-FORWARDING-MIB.txt
-                   https://www.arista.com/assets/data/docs/MIBS/ARISTA-SMI-MIB.txt
-* Synology: https://global.download.synology.com/download/Document/Software/DeveloperGuide/Firmware/DSM/All/enu/Synology_MIB_File.zip
-* MikroTik: http://download2.mikrotik.com/Mikrotik.mib
-* UCD-SNMP-MIB (Net-SNMP): http://www.net-snmp.org/docs/mibs/UCD-SNMP-MIB.txt
-* Ubiquiti Networks: http://dl.ubnt-ut.com/snmp/UBNT-MIB
-                     http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB
-                     https://dl.ubnt.com/firmwares/airos-ubnt-mib/ubnt-mib.zip
+For MIBs not yet covered, check the vendor's support or developer portal
+directly. Vendor MIBs contributed to `prometheus-community/snmp` are
+preferred over direct vendor links as they are maintained and versioned
+centrally.
 
 https://github.com/librenms/librenms/tree/master/mibs can also be a good source of MIBs.
 

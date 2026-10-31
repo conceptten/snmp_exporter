@@ -16,6 +16,7 @@ package main
 import (
 	"reflect"
 	"regexp"
+	"strings"
 	"testing"
 
 	"github.com/prometheus/common/promslog"
@@ -126,6 +127,16 @@ func TestTreePrepare(t *testing.T) {
 			in:  &Node{Oid: "1", Label: "mac", Hint: "1x:"},
 			out: &Node{Oid: "1", Label: "mac", Hint: "1x:", Type: "PhysAddress48"},
 		},
+		// MAC Address type set on six-byte fixed-size string.
+		{
+			in:  &Node{Oid: "1", Label: "mac6", Hint: "1x:", FixedSize: 6, Type: "OCTETSTR"},
+			out: &Node{Oid: "1", Label: "mac6", Hint: "1x:", FixedSize: 6, Type: "PhysAddress48"},
+		},
+		// Fixed-size string other than six bytes keeps its type.
+		{
+			in:  &Node{Oid: "1", Label: "serial8", Hint: "1x:", FixedSize: 8, Type: "OCTETSTR"},
+			out: &Node{Oid: "1", Label: "serial8", Hint: "1x:", FixedSize: 8, Type: "OCTETSTR"},
+		},
 		// Short ASCII string.
 		{
 			in:  &Node{Oid: "1", Label: "ascii", Hint: "32a"},
@@ -136,10 +147,30 @@ func TestTreePrepare(t *testing.T) {
 			in:  &Node{Oid: "1", Label: "ascii", TextualConvention: "DisplayString"},
 			out: &Node{Oid: "1", Label: "ascii", TextualConvention: "DisplayString", Type: "DisplayString"},
 		},
+		// Vendor String64 TC (e.g. Dell MIBs) → DisplayString for readable labels.
+		{
+			in:  &Node{Oid: "1", Label: "vendorStr", Type: "OCTETSTR", TextualConvention: "String64"},
+			out: &Node{Oid: "1", Label: "vendorStr", Type: "DisplayString", TextualConvention: "String64"},
+		},
+		// Dell also uses StringType the same way.
+		{
+			in:  &Node{Oid: "1", Label: "vendorStr2", Type: "OCTETSTR", TextualConvention: "StringType"},
+			out: &Node{Oid: "1", Label: "vendorStr2", Type: "DisplayString", TextualConvention: "StringType"},
+		},
+		// Dell FQDDString is printable text, same as String64.
+		{
+			in:  &Node{Oid: "1", Label: "fqdd", Type: "OCTETSTR", TextualConvention: "FQDDString"},
+			out: &Node{Oid: "1", Label: "fqdd", Type: "DisplayString", TextualConvention: "FQDDString"},
+		},
 		// PhysAddress referencing RFC1213.
 		{
 			in:  &Node{Oid: "1", Label: "mac", TextualConvention: "PhysAddress"},
 			out: &Node{Oid: "1", Label: "mac", TextualConvention: "PhysAddress", Type: "PhysAddress48"},
+		},
+		// Dell MACAddress TC has no 1x: hint; treat it as a 48-bit phys address.
+		{
+			in:  &Node{Oid: "1", Label: "dellmac", Type: "OCTETSTR", TextualConvention: "MACAddress"},
+			out: &Node{Oid: "1", Label: "dellmac", Type: "PhysAddress48", TextualConvention: "MACAddress"},
 		},
 		// UTF-8 string.
 		{
@@ -169,6 +200,11 @@ func TestTreePrepare(t *testing.T) {
 		{
 			in:  &Node{Oid: "1", Type: "DisplayString", TextualConvention: "ParseDateAndTime"},
 			out: &Node{Oid: "1", Type: "ParseDateAndTime", TextualConvention: "ParseDateAndTime"},
+		},
+		// ParseFloatString
+		{
+			in:  &Node{Oid: "1", Type: "DisplayString", TextualConvention: "ParseFloatString"},
+			out: &Node{Oid: "1", Type: "ParseFloatString", TextualConvention: "ParseFloatString"},
 		},
 		// RFC 4100 InetAddress conventions.
 		{
@@ -392,6 +428,7 @@ func TestGenerateConfigModule(t *testing.T) {
 					{Oid: "1.204", Access: "ACCESS_READONLY", Label: "InetAddressIPv6", Type: "OCTETSTR", TextualConvention: "InetAddressIPv6"},
 					{Oid: "1.205", Access: "ACCESS_READONLY", Label: "ParseDateAndTime", Type: "DisplayString", TextualConvention: "ParseDateAndTime"},
 					{Oid: "1.206", Access: "ACCESS_READONLY", Label: "NTPTimeStamp", Type: "NTPTimeStamp", TextualConvention: "NTPTimeStamp"},
+					{Oid: "1.207", Access: "ACCESS_READONLY", Label: "ParseFloatString", Type: "ParseFloatString", TextualConvention: "ParseFloatString"},
 				},
 			},
 			cfg: &ModuleConfig{
@@ -525,6 +562,12 @@ func TestGenerateConfigModule(t *testing.T) {
 						Oid:  "1.206",
 						Type: "NTPTimeStamp",
 						Help: " - 1.206",
+					},
+					{
+						Name: "ParseFloatString",
+						Oid:  "1.207",
+						Type: "ParseFloatString",
+						Help: " - 1.207",
 					},
 				},
 			},
@@ -807,18 +850,6 @@ func TestGenerateConfigModule(t *testing.T) {
 						},
 					},
 					{
-						Oid: "1.2", Label: "bitstring",
-						Children: []*Node{
-							{
-								Oid: "1.2.1", Label: "bitstringEntry", Indexes: []string{"bitstringIndex"},
-								Children: []*Node{
-									{Oid: "1.2.1.1", Access: "ACCESS_READONLY", Label: "bitstringIndex", Type: "BITSTRING"},
-									{Oid: "1.2.1.2", Access: "ACCESS_READONLY", Label: "bitstringFoo", Type: "INTEGER"},
-								},
-							},
-						},
-					},
-					{
 						Oid: "1.3", Label: "ipaddr",
 						Children: []*Node{
 							{
@@ -902,6 +933,18 @@ func TestGenerateConfigModule(t *testing.T) {
 							},
 						},
 					},
+					{
+						Oid: "1.10", Label: "sizedHex",
+						Children: []*Node{
+							{
+								Oid: "1.10.1", Label: "sizedHexEntry", Indexes: []string{"sizedHexIndex"},
+								Children: []*Node{
+									{Oid: "1.10.1.1", Access: "ACCESS_READONLY", Label: "sizedHexIndex", Type: "OCTETSTR", Hint: "1x:", FixedSize: 8},
+									{Oid: "1.10.1.2", Access: "ACCESS_READONLY", Label: "sizedHexFoo", Type: "INTEGER"},
+								},
+							},
+						},
+					},
 				},
 			},
 			cfg: &ModuleConfig{
@@ -931,30 +974,6 @@ func TestGenerateConfigModule(t *testing.T) {
 							{
 								Labelname: "octetIndex",
 								Type:      "OctetString",
-							},
-						},
-					},
-					{
-						Name: "bitstringIndex",
-						Oid:  "1.2.1.1",
-						Help: " - 1.2.1.1",
-						Type: "Bits",
-						Indexes: []*config.Index{
-							{
-								Labelname: "bitstringIndex",
-								Type:      "Bits",
-							},
-						},
-					},
-					{
-						Name: "bitstringFoo",
-						Oid:  "1.2.1.2",
-						Help: " - 1.2.1.2",
-						Type: "gauge",
-						Indexes: []*config.Index{
-							{
-								Labelname: "bitstringIndex",
-								Type:      "Bits",
 							},
 						},
 					},
@@ -1127,6 +1146,32 @@ func TestGenerateConfigModule(t *testing.T) {
 							{
 								Labelname: "ipv6Index",
 								Type:      "InetAddressIPv6",
+							},
+						},
+					},
+					{
+						Name: "sizedHexIndex",
+						Oid:  "1.10.1.1",
+						Help: " - 1.10.1.1",
+						Type: "OctetString",
+						Indexes: []*config.Index{
+							{
+								Labelname: "sizedHexIndex",
+								Type:      "OctetString",
+								FixedSize: 8,
+							},
+						},
+					},
+					{
+						Name: "sizedHexFoo",
+						Oid:  "1.10.1.2",
+						Help: " - 1.10.1.2",
+						Type: "gauge",
+						Indexes: []*config.Index{
+							{
+								Labelname: "sizedHexIndex",
+								Type:      "OctetString",
+								FixedSize: 8,
 							},
 						},
 					},
@@ -2359,5 +2404,72 @@ func TestGenerateConfigModule(t *testing.T) {
 			out, _ = yaml.Marshal(c.out)
 			t.Errorf("Wanted: %s", out)
 		}
+	}
+}
+
+func TestGenerateConfigModuleIndexType(t *testing.T) {
+	node := &Node{
+		Oid: "1", Label: "root",
+		Children: []*Node{
+			{
+				Oid: "1.1", Label: "table",
+				Children: []*Node{
+					{
+						Oid: "1.1.1", Label: "tableEntry", Indexes: []string{"tableIndex"},
+						Children: []*Node{
+							{Oid: "1.1.1.1", Access: "ACCESS_READONLY", Label: "tableIndex", Type: "DisplayString", TextualConvention: "DateAndTime"},
+							{Oid: "1.1.1.2", Access: "ACCESS_READONLY", Label: "tableFoo", Type: "INTEGER"},
+						},
+					},
+				},
+			},
+		},
+	}
+	cfg := &ModuleConfig{Walk: []string{"1"}}
+	nameToNode := prepareTree(node, promslog.NewNopLogger())
+	_, err := generateConfigModule(cfg, node, nameToNode, promslog.NewNopLogger())
+	if err == nil {
+		t.Fatal("Expected error for non-renderable index type, got nil")
+	}
+	if !strings.Contains(err.Error(), "cannot use index 'tableIndex' of type DateAndTime") {
+		t.Fatalf("Unexpected error: %s", err)
+	}
+}
+
+// A chained lookup whose intermediate label becomes an index must be a type
+// the collector can render, otherwise config generation fails.
+func TestGenerateConfigModuleChainedLookupIndexType(t *testing.T) {
+	node := &Node{
+		Oid: "1", Label: "root",
+		Children: []*Node{
+			{
+				Oid: "1.1", Label: "table",
+				Children: []*Node{
+					{
+						Oid: "1.1.1", Label: "tableEntry", Indexes: []string{"tableIndex"},
+						Children: []*Node{
+							{Oid: "1.1.1.1", Access: "ACCESS_READONLY", Label: "tableIndex", Type: "INTEGER"},
+							{Oid: "1.1.1.2", Access: "ACCESS_READONLY", Label: "tableTime", Type: "OCTETSTR", TextualConvention: "DateAndTime"},
+							{Oid: "1.1.1.3", Access: "ACCESS_READONLY", Label: "tableName", Type: "OCTETSTR", TextualConvention: "DisplayString"},
+						},
+					},
+				},
+			},
+		},
+	}
+	cfg := &ModuleConfig{
+		Walk: []string{"1"},
+		Lookups: []*Lookup{
+			{SourceIndexes: []string{"tableIndex"}, Lookup: "tableTime"},
+			{SourceIndexes: []string{"tableTime"}, Lookup: "tableName"},
+		},
+	}
+	nameToNode := prepareTree(node, promslog.NewNopLogger())
+	_, err := generateConfigModule(cfg, node, nameToNode, promslog.NewNopLogger())
+	if err == nil {
+		t.Fatal("Expected error for chained lookup index with non-renderable type, got nil")
+	}
+	if !strings.Contains(err.Error(), "cannot use lookup") {
+		t.Fatalf("Expected 'cannot use lookup' error, got: %s", err)
 	}
 }

@@ -32,8 +32,7 @@ SNMP is structured in OID trees, described by MIBs. OID subtrees have the same
 order across different locations in the tree. The order under
 `1.3.6.1.2.1.2.2.1.1` (`ifIndex`) is the same as in `1.3.6.1.2.1.2.2.1.2`
 (`ifDescr`), `1.3.6.1.2.1.31.1.1.1.10` (`ifHCOutOctets`), etc. The numbers are
-OIDs, the names in parentheses are the names from a MIB, in this case
-[IF-MIB](http://www.oidview.com/mibs/0/IF-MIB.html).
+OIDs, the names in parentheses are the names from a MIB.
 
 ## Mapping
 
@@ -67,6 +66,10 @@ releases](https://github.com/prometheus/snmp_exporter/releases) page and need no
 special installation.
 
 We also provide a sample [systemd unit file](examples/systemd/snmp_exporter.service).
+
+Practical SNMP setup samples (local workstation, network devices, SNMPv2c/v3
+auth, and notes on HTTP proxies such as Zscaler) are under
+[examples/sample-configs](examples/sample-configs).
 
 ## Running
 
@@ -222,6 +225,19 @@ If you need to generate your own configuration from MIBs, you can use the
 
 Use the generator if you need to customize which objects are walked or use
 non-public MIBs.
+
+### Getting more MIBs
+
+The generator ships with a curated set of open MIBs. For vendor MIBs not
+included here, the
+[prometheus-community/snmp](https://github.com/prometheus-community/snmp)
+repository maintains a growing collection of MIBs and ready-to-use generator
+configs contributed by the community. Clone or download MIBs from that
+repository and place them in the generator's `mibs/` directory, then
+regenerate `snmp.yml` with `make generate`.
+
+If you have vendor MIBs or generator configs for devices not yet represented
+there, consider contributing them upstream to grow the shared library.
 
 ## Large counter value handling
 

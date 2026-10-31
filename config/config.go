@@ -140,6 +140,10 @@ type Module struct {
 
 func (c *Module) UnmarshalYAML(unmarshal func(any) error) error {
 	*c = DefaultModule
+	if c.WalkParams.Retries != nil {
+		retries := *c.WalkParams.Retries
+		c.WalkParams.Retries = &retries
+	}
 	type plain Module
 	return unmarshal((*plain)(c))
 }
@@ -246,6 +250,24 @@ type Metric struct {
 	DisplayHint     string                     `yaml:"display_hint,omitempty"`
 }
 
+// RenderableIndexTypes are the Index types the collector can render as label
+// values (the switch in indexOidsAsString); any other type panics there.
+var RenderableIndexTypes = map[string]bool{
+	"Integer32":              true,
+	"Integer":                true,
+	"gauge":                  true,
+	"counter":                true,
+	"PhysAddress48":          true,
+	"OctetString":            true,
+	"DisplayString":          true,
+	"InetAddressIPv4":        true,
+	"InetAddressIPv6":        true,
+	"InetAddress":            true,
+	"InetAddressMissingSize": true,
+	"LldpPortId":             true,
+	"EnumAsInfo":             true,
+}
+
 type Index struct {
 	Labelname  string         `yaml:"labelname"`
 	Type       string         `yaml:"type"`
@@ -254,12 +276,24 @@ type Index struct {
 	EnumValues map[int]string `yaml:"enum_values,omitempty"`
 }
 
+func (c *Index) UnmarshalYAML(unmarshal func(any) error) error {
+	type plain Index
+	if err := unmarshal((*plain)(c)); err != nil {
+		return err
+	}
+	if !RenderableIndexTypes[c.Type] {
+		return fmt.Errorf("invalid index type %q", c.Type)
+	}
+	return nil
+}
+
 type Lookup struct {
-	Labels      []string `yaml:"labels"`
-	Labelname   string   `yaml:"labelname"`
-	Oid         string   `yaml:"oid,omitempty"`
-	Type        string   `yaml:"type,omitempty"`
-	DisplayHint string   `yaml:"display_hint,omitempty"`
+	Labels      []string       `yaml:"labels"`
+	Labelname   string         `yaml:"labelname"`
+	Oid         string         `yaml:"oid,omitempty"`
+	Type        string         `yaml:"type,omitempty"`
+	DisplayHint string         `yaml:"display_hint,omitempty"`
+	EnumValues  map[int]string `yaml:"enum_values,omitempty"`
 }
 
 // Secret is a string that must not be revealed on marshaling.
@@ -365,8 +399,8 @@ func (re *Regexp) UnmarshalYAML(unmarshal func(any) error) error {
 func substituteEnvVariables(value string) (string, error) {
 	missingEnv := ""
 	result := os.Expand(value, func(s string) string {
-		v := os.Getenv(s)
-		if v == "" && missingEnv == "" {
+		v, ok := os.LookupEnv(s)
+		if !ok && missingEnv == "" {
 			missingEnv = s
 		}
 		return v

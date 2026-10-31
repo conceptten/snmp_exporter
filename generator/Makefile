@@ -15,7 +15,7 @@ MIBDIR   := mibs
 MIB_PATH := 'mibs'
 SNMP_YML ?= '../snmp.yml'
 
-CURL_OPTS ?= -L -sS --retry 3 --retry-delay 3 --fail
+CURL_OPTS ?= -L -sS --retry 3 --retry-delay 3 --fail --retry-all-errors
 CURL_USER_AGENT ?= -H "user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 snmp_exporter/generator"
 
 REPO_TAG ?= $(shell git rev-parse --abbrev-ref HEAD)
@@ -32,15 +32,14 @@ ifeq ($(SELINUX_ENABLED),1)
   DOCKER_VOL_OPTS ?= :z
 endif
 
-APC_URL           := https://raw.githubusercontent.com/prometheus-community/snmp/refs/heads/main/apc/PowerNet-MIB
+APC_URL           := https://raw.githubusercontent.com/prometheus-community/snmp/main/apc/PowerNet-MIB
 ARISTA_URL        := https://www.arista.com/assets/data/docs/MIBS
 CISCO_URL         := https://raw.githubusercontent.com/cisco/cisco-mibs/f55dc443daff58dfc86a764047ded2248bb94e12/v2
 DELL_OM_URL       := https://dl.dell.com/FOLDER11196144M/1/Dell-OM-MIBS-11010_A00.zip
 DLINK_URL         := https://ftp.dlink.de/des/des-3200-18/driver_software/DES-3200-18_mib_revC_4-04_all_en_20130603.zip
+ELTEX_MIBS_URL    := https://raw.githubusercontent.com/prometheus-community/snmp/main/eltex
+DELL_NETWORK_MIBS_URL := https://raw.githubusercontent.com/prometheus-community/snmp/main/dell_network
 EATON_UPS_URL     := https://www.eaton.com/content/dam/eaton/products/backup-power-ups-surge-it-power-distribution/Firmware/connectivity/eaton-network-connectivity-mib-files.zip
-ELTEX_MES_URL     := https://api.prod.eltex-co.ru/storage/upload_center/files/42/mibs_10.4.3.4.zip
-# hint: https://eltex-co.com/download/?product=337 if you need to update the ELTEX_MES_URL
-DELL_NETWORK_URL  := https://supportkb.dell.com/attachment/ka02R000000I7TFQA0/Current_MIBs_pkb_en_US_1.zip
 HPE_URL           := https://downloads.hpe.com/pub/softlib2/software1/pubsw-linux/p1580676047/v229101/upd11.85mib.tar.gz
 IANA_CHARSET_URL  := https://www.iana.org/assignments/ianacharset-mib/ianacharset-mib
 IANA_IFTYPE_URL   := https://www.iana.org/assignments/ianaiftype-mib/ianaiftype-mib
@@ -203,7 +202,7 @@ mibs: \
 	$(MIBDIR)/.yamaha-rt
 
 $(MIBDIR)/apc-powernet-mib:
-	@echo ">> Downloading apc-powernet-mib" 
+	@echo ">> Downloading apc-powernet-mib"
 	@echo ">> if download fails please check https://www.se.com/at/de/search/?q=powernet+mib&submit+search+query=Search for the latest release"
 	@curl $(CURL_OPTS) -o $(MIBDIR)/apc-powernet-mib "$(APC_URL)"
 	# Workaround to make DisplayString available (#867)
@@ -426,6 +425,9 @@ $(MIBDIR)/.synology:
 	@curl $(CURL_OPTS) -o $(TMP) $(SYNOLOGY_URL)
 	@unzip -j -d $(MIBDIR) $(TMP)
 	@patch mibs/SYNOLOGY-SMART-MIB.txt mib-patches/SYNOLOGY-SMART-MIB.0.patch
+	# Add cpuUtilization, memUtilization and thermalStatus, documented in the MIB
+	# Guide but missing from the published MIB download.
+	@patch mibs/SYNOLOGY-SYSTEM-MIB.txt mib-patches/SYNOLOGY-SYSTEM-MIB.0.patch
 	@rm -v $(TMP)
 	@touch $(MIBDIR)/.synology
 
@@ -554,17 +556,18 @@ $(MIBDIR)/.cisco_imc:
 	@touch $(MIBDIR)/.cisco_imc
 
 $(MIBDIR)/.eltex-mes:
-	$(eval TMP := $(shell mktemp))
-	@echo ">> Downloading Eltex MES device mibs to $(TMP)"
-	@curl $(CURL_OPTS) $(CURL_USER_AGENT) -o $(TMP) $(ELTEX_MES_URL)
-	@unzip -j -d $(MIBDIR) $(TMP) fsiss.mib eltex/ELTEX-SMI-ACTUAL.mib eltex/ELTEX-MES-ISS-CPU-UTIL-MIB.mib eltex/ELTEX-MES-ISS-MIB.mib CISCO-QOS-PIB-MIB.mib
-	@rm -v $(TMP)
+	@echo ">> Downloading Eltex MES device mibs from prometheus-community/snmp"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/CISCO-QOS-PIB-MIB.mib "$(ELTEX_MIBS_URL)/CISCO-QOS-PIB-MIB.mib"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/ELTEX-MES-ISS-CPU-UTIL-MIB.mib "$(ELTEX_MIBS_URL)/ELTEX-MES-ISS-CPU-UTIL-MIB.mib"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/ELTEX-MES-ISS-MIB.mib "$(ELTEX_MIBS_URL)/ELTEX-MES-ISS-MIB.mib"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/ELTEX-SMI-ACTUAL.mib "$(ELTEX_MIBS_URL)/ELTEX-SMI-ACTUAL.mib"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/fsiss.mib "$(ELTEX_MIBS_URL)/fsiss.mib"
 	@touch $(MIBDIR)/.eltex-mes
 
 $(MIBDIR)/.juniper:
 	$(eval TMP := $(shell mktemp))
 	@echo ">> Downloading Juniper mibs to $(TMP)"
-	@curl $(CURL_OPTS) -o $(TMP) $(JUNIPER_URL) 
+	@curl $(CURL_OPTS) -o $(TMP) $(JUNIPER_URL)
 	@unzip -j -d $(MIBDIR) $(TMP) \
 		StandardMibs/mib-alarmmib.txt \
 		StandardMibs/mib-rfc2819a.txt \
@@ -580,15 +583,10 @@ $(MIBDIR)/.juniper:
 	@touch $(MIBDIR)/.juniper
 
 $(MIBDIR)/.dell-network:
-	$(eval TMP := $(shell mktemp))
-	@echo ">> Downloading Dell network mibs to $(TMP)"
-	@curl $(CURL_OPTS) -o $(TMP) $(DELL_NETWORK_URL)
-	@unzip -j -d $(MIBDIR)/dell $(TMP) DELL-NETWORKING-MIB-9.14.2.1.zip
-	@unzip -j -d $(MIBDIR) $(MIBDIR)/dell/DELL-NETWORKING-MIB-9.14.2.1.zip \
-		DELL-NETWORKING-CHASSIS-MIB.mib \
-		DELL-NETWORKING-TC.mib \
-		DELL-NETWORKING-SMI.mib
-	@rm -rfv $(TMP) $(MIBDIR)/dell
+	@echo ">> Downloading Dell network mibs"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/DELL-NETWORKING-CHASSIS-MIB.mib "$(DELL_NETWORK_MIBS_URL)/DELL-NETWORKING-CHASSIS-MIB.mib"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/DELL-NETWORKING-TC.mib "$(DELL_NETWORK_MIBS_URL)/DELL-NETWORKING-TC.mib"
+	@curl $(CURL_OPTS) -o $(MIBDIR)/DELL-NETWORKING-SMI.mib "$(DELL_NETWORK_MIBS_URL)/DELL-NETWORKING-SMI.mib"
 	@touch $(MIBDIR)/.dell-network
 
 # sed below fixes CISCO-FC-FE-MIB mib (ref: https://github.com/cisco/cisco-mibs/issues/136)
