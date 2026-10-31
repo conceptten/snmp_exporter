@@ -60,6 +60,16 @@ modules:
     walk:
       - 1.3.6.1.4.1.9.9.13
 
+# Cisco SB environment
+  ciscosb_env:
+    walk:
+      - CISCOSB-HWENVIROMENT::rlEnvPhysicalDescription
+      - CISCOSB-HWENVIROMENT::rlEnvFanData
+      - CISCOSB-HWENVIROMENT::rlEnvRedundantFanTable
+      - CISCOSB-HWENVIROMENT::rlEnvRedundantFanSupported
+      - CISCOSB-HWENVIROMENT::rlEnvSystemLed
+      - CISCOSB-DEVICEPARAMS-MIB::rndSoftwareFile
+
 # Cisco Wireless LAN Controller
   cisco_wlc:
     walk:
