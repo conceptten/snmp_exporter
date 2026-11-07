@@ -26,7 +26,7 @@ jobs:
       - name: Install snmp_exporter/generator dependencies
         id: snmp-deps
         run: sudo apt-get update && sudo apt-get -y install libsnmp-dev
-        if: github.repository == 'prometheus/snmp_exporter'
+        # if: github.repository == 'prometheus/snmp_exporter'
       - id: govulncheck
         uses: golang/govulncheck-action@032d45514ae346b1db93c04b0c90b841c370344f # master
         env:
